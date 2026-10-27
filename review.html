@@ -196,6 +196,7 @@ main{position:relative;z-index:1}
   function loadKey(f){try{return JSON.parse(localStorage.getItem('kata:'+f)||'null');}catch(e){return null;}}
 
   var openReps=[];
+  var starterReps=[];
   var shelfCount=0;
 
   /* the first five — fetched from the chapters so the text always matches the book */
@@ -209,7 +210,11 @@ main{position:relative;z-index:1}
       var doc=new DOMParser().parseFromString(html,'text/html');
       var chks=doc.querySelectorAll('.chk');
       var el=chks[item.i];
-      if(el){row.querySelector('.ftxt').textContent=txt(el.textContent);}
+      if(el){
+        var t=txt(el.textContent);
+        row.querySelector('.ftxt').textContent=t;
+        starterReps.push({ch:item.ch,text:t});
+      }
       row.querySelector('.why').textContent=item.why+' · ';
     }).catch(function(){row.querySelector('.ftxt').textContent='open chapter '+item.ch.n+' to read this rep';});
   });
@@ -266,7 +271,6 @@ main{position:relative;z-index:1}
           d.innerHTML='<span class="box"></span><span>'+txt(chks[i].textContent)+'</span>';
           twrap.appendChild(d);
         });
-        maybeRep();
       }else if(chks.length&&checks.length){
         var done=document.createElement('div');
         done.className='sub';
@@ -276,19 +280,22 @@ main{position:relative;z-index:1}
     }).catch(function(){});
   });
 
-  /* today's one rep — simple daily rotation over everything still open */
-  var repDone=false;
-  function maybeRep(){
-    if(repDone||!openReps.length)return;
-    repDone=true;
+  /* today's one rep — your open practice if you have any, the starter set if you're new */
+  function finalizeRep(){
+    var pool=openReps, starter=false;
+    if(!pool.length){pool=starterReps;starter=true;}
+    if(!pool.length)return;
     var day=Math.floor(Date.now()/86400000);
-    var pick=openReps[day%openReps.length];
+    var pick=pool[day%pool.length];
     var rep=document.getElementById('nextrep');
     rep.hidden=false;
-    document.getElementById('repitem').textContent='\u201c'+txt(pick.el.textContent)+'\u201d';
-    document.getElementById('repsrc').innerHTML='from <a href="'+pick.ch.f+'">chapter '+pick.ch.n+' \u00b7 '+pick.ch.t+'</a> \u2014 '+openReps.length+' reps open on this device';
+    document.getElementById('repitem').textContent='\u201c'+(pick.text||txt(pick.el.textContent))+'\u201d';
+    document.getElementById('repsrc').innerHTML='from <a href="'+pick.ch.f+'">chapter '+pick.ch.n+' \u00b7 '+pick.ch.t+'</a>'+(starter?'':' \u2014 '+openReps.length+' reps open on this device');
+    document.getElementById('repwhy').textContent=starter
+      ?'a starter rep \u2014 tick practice inside the chapters and your own daily rotation begins'
+      :'one of your open reps, rotated daily — you cannot practice seventy things; you can practice one.';
   }
-  setTimeout(maybeRep,1200);
+  setTimeout(finalizeRep,900);
 
   if(!shelfCount)document.getElementById('empty').hidden=false;
 
