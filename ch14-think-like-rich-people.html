@@ -94,7 +94,7 @@ main{position:relative;z-index:1}
 .quote{font-family:var(--f-display);font-style:italic;font-size:clamp(26px,3.2vw,32px);line-height:1.5;color:var(--ink);max-width:32ch;margin:60px auto;text-align:center;position:relative}
 .quote::before{content:'"';font-size:72px;color:var(--seal);position:absolute;top:-34px;left:50%;transform:translateX(-50%);opacity:.8}
 .quote .who{display:block;font-family:var(--f-ui);font-style:normal;font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-4);margin-top:18px}
-.markable{cursor:pointer;border-radius:2px;transition:background .4s;position:relative}
+.markable{cursor:pointer;border-radius:2px;transition:background .4s;position:relative;touch-action:manipulation}
 .markable:hover{background:rgba(200,55,45,.045)}
 .markable.marked{background:linear-gradient(180deg,transparent 62%,rgba(200,55,45,.17) 62%)}
 .markable.marked::after{content:'富';position:absolute;left:-30px;top:2px;font-family:var(--f-jp);color:var(--seal);font-size:15px;opacity:.85}
@@ -139,6 +139,11 @@ figure.fig.narrow{max-width:560px;margin-left:auto;margin-right:auto}
 .chk .txt{font-size:16.5px;color:var(--ink-2);transition:color .5s}
 .chk.done .txt{color:var(--ink-4);text-decoration:line-through;text-decoration-color:rgba(200,55,45,.5)}
 .endrow{display:flex;align-items:center;gap:20px;margin-top:52px}
+.interlude{margin:110px auto 0;max-width:56ch;text-align:center}
+.interlude .imark{font-family:var(--f-jp);color:var(--seal);font-size:13px;letter-spacing:.34em;margin-bottom:24px}
+.interlude p{font-family:var(--f-display);font-style:italic;font-size:20.5px;line-height:1.92;color:var(--ink-2);margin-bottom:1.15em}
+.interlude p b{color:var(--ink);font-weight:500;font-style:normal}
+.interlude .brush{max-width:190px;margin:0 auto 26px}
 .srcnote{margin-top:74px;padding-top:26px;border-top:1px solid var(--hair);font:400 13px/1.7 var(--f-ui);color:var(--ink-4)}
 .srcnote a{color:var(--ink-3)}
 .care{margin-top:26px;padding:18px 22px;border:1px solid var(--hair-2);border-radius:3px;background:rgba(255,255,255,.5);font:400 14px/1.7 var(--f-ui);color:var(--ink-3)}
@@ -579,9 +584,18 @@ figure.fig.narrow{max-width:560px;margin-left:auto;margin-right:auto}
       <p class="markable">— What is the biggest bottleneck in my life — and what would the rich person's version of me do about it this week?</p>
       <p class="markable">— And the book's final question: <b>if someone handed your ambition a crore and said "I'm okay if it dies — just aim for the moon" — what would you finally attempt?</b></p>
     </div>
+    <div class="interlude settle">
+      <svg class="brush" viewBox="0 0 900 26" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M6,14 C140,5 260,21 420,11 S680,9 780,16 894,11" filter="url(#rough2)"/></svg>
+      <div class="imark">間 · the pause after the book</div>
+      <p>Here is the third attempt, then — the one the bridge promised.</p>
+      <p>No scene, because it isn't finished. The swing doesn't get a paragraph yet; it gets a schedule, a first version shipped ugly, and a person across a table waiting to see if I mean it. The fear is spent. The terrible is mostly worked out of my hands. What remains is the only question the protocol cannot answer in advance: whether I love it — and that one resolves in the doing, or it doesn't, and either way it's mine now.</p>
+      <p>I won't tell you what the swing is. You've suspected as much through four of these pauses, and you're right: <b>the swing is a slot, not a biography.</b> Whatever you have been pricing since chapter one — the company, the message, the ask you haven't made — that one is yours. The scroll is finished, and no one is coming to hand you a crore and permission.</p>
+      <p>Unroll it again. That is what a kata is for.</p>
+      <svg class="brush" viewBox="0 0 900 26" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M8,12 C180,20 340,6 520,15 S760,20 892,10" filter="url(#rough)"/></svg>
+    </div>
     <div class="endrow">
       <div class="seal-stamp" style="width:58px;height:58px;font-size:26px" title="press to close the book">終</div>
-      <span class="fine">the end of The Kata Scroll · <a href="index.html" style="color:var(--ink-3)">return to the cover</a> — and begin again at chapter one, because a kata is a thing you repeat</span>
+      <span class="fine">the end of The Kata Scroll · <a href="index.html" style="color:var(--ink-3)">return to the cover</a> — and begin again at chapter one, because a kata is a thing you repeat — or <a href="review.html" style="color:var(--ink-3)">run your kata again</a></span>
     </div>
     <p class="srcnote">The Kata Scroll — chapter fourteen, the finale, rewritten from a complete read of the transcript of
     <a href="https://www.youtube.com/watch?v=8WgipmPSPKk" target="_blank" rel="noopener">Varun Mayya's "How to Think Like Rich People" (Kata 13)</a>,

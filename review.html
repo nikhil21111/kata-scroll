@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Run Your Kata Again — The Kata Scroll</title>
+<meta name="description" content="The book's review ritual — your ink marks, your unfinished practice, and where you left off, resurfaced from this device's memory. A kata is a thing you repeat.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="The Kata Scroll">
+<meta property="og:title" content="Run your kata again">
+<meta property="og:description" content="Your ink marks, your unfinished practice, and where you left off — resurfaced from this device's memory.">
+<meta property="og:image" content="https://i.ytimg.com/vi/8WgipmPSPKk/maxresdefault.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#fbfaf6">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Zen+Kaku+Gothic+New:wght@400;500&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#fbfaf6; --ink:#141311; --ink-2:#34312c; --ink-3:#66625a; --ink-4:#a19c92;
+  --hair:rgba(20,19,17,.12); --hair-2:rgba(20,19,17,.22); --seal:#c8372d;
+  --f-display:'Cormorant Garamond',Georgia,serif;
+  --f-ui:'Zen Kaku Gothic New',Inter,system-ui,sans-serif;
+  --f-jp:'Shippori Mincho','Noto Serif JP',serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink-2);font-family:var(--f-ui);font-size:17px;line-height:1.75;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:rgba(200,55,45,.22)}
+.paper-bg{position:fixed;inset:0;z-index:0;pointer-events:none}
+.paper-bg .mottle{position:absolute;inset:0;background:
+  radial-gradient(60% 50% at 18% 22%,rgba(214,206,190,.16),transparent 70%),
+  radial-gradient(50% 45% at 86% 78%,rgba(214,206,190,.14),transparent 70%),
+  radial-gradient(120% 100% at 50% 50%,transparent 62%,rgba(150,138,112,.10) 100%)}
+.paper-bg svg.grain{position:absolute;inset:0;width:100%;height:100%;mix-blend-mode:multiply;opacity:.9}
+main{position:relative;z-index:1}
+.wrap{max-width:760px;margin:0 auto;padding:88px 28px 26vh}
+.eyebrow{display:inline-flex;align-items:center;gap:16px;font:500 14px/1 var(--f-ui);letter-spacing:.3em;text-transform:uppercase;color:var(--ink-3)}
+.eyebrow::before{content:'';width:34px;height:2px;background:var(--seal)}
+.display{font-family:var(--f-display);font-weight:500;color:var(--ink);letter-spacing:-.012em;line-height:1.02}
+.display em{font-style:italic;color:var(--seal)}
+.lead{font:400 19px/1.8 var(--f-ui);color:var(--ink-3);max-width:56ch}
+.lead b{color:var(--ink);font-weight:500}
+.fine{font:400 14px/1.6 var(--f-ui);color:var(--ink-4)}
+.seal-stamp{display:inline-flex;align-items:center;justify-content:center;background:var(--seal);color:var(--paper);
+  font-family:var(--f-jp);font-weight:700;border-radius:5px;transform:rotate(-4deg);
+  box-shadow:inset 0 0 10px rgba(0,0,0,.28),0 1px 0 rgba(0,0,0,.08);user-select:none;cursor:pointer}
+.brush{display:block;width:100%;height:26px;overflow:visible}
+.brush path{stroke:var(--ink);stroke-width:5;fill:none;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.7s cubic-bezier(.6,0,.3,1)}
+.brush.seal-brush path{stroke:var(--seal)}
+.brush.revealed path{stroke-dashoffset:0}
+.settle{opacity:0;filter:blur(6px);transform:translateY(14px);transition:opacity 1.05s ease,filter 1.05s ease,transform 1.05s ease}
+.settle.revealed{opacity:1;filter:blur(0);transform:none}
+@media (prefers-reduced-motion:reduce){.settle{transition:none;opacity:1;filter:none;transform:none}.brush path{transition:none;stroke-dashoffset:0}}
+.cover{min-height:64vh;display:flex;flex-direction:column;justify-content:center;position:relative}
+.cover h1.display{font-size:clamp(44px,6vw,72px);margin:22px 0 26px}
+.meta-row{display:flex;align-items:center;gap:18px;margin-top:42px;flex-wrap:wrap}
+.revblock{margin-top:64px;padding-top:34px;border-top:1px solid var(--hair)}
+.revhead{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
+.revhead .num{font-family:var(--f-display);font-style:italic;font-size:22px;color:var(--seal)}
+.revhead a{font-family:var(--f-display);font-size:27px;color:var(--ink);text-decoration:none;line-height:1.2}
+.revhead a:hover{color:var(--seal)}
+.revhead .pos{font:400 13px/1 var(--f-ui);color:var(--ink-4);letter-spacing:.06em;margin-left:auto;white-space:nowrap}
+.sub{font:500 12px/1 var(--f-ui);letter-spacing:.24em;text-transform:uppercase;color:var(--seal);margin:26px 0 12px}
+.markline{font-family:var(--f-display);font-style:italic;font-size:19.5px;line-height:1.7;color:var(--ink-2);padding:10px 0 10px 26px;border-left:2px solid var(--hair-2);margin:12px 0;position:relative}
+.markline::before{content:'富';position:absolute;left:-12px;top:8px;font-family:var(--f-jp);color:var(--seal);font-size:13px;opacity:.85;background:var(--paper);padding:0 2px}
+.todo{display:flex;gap:14px;align-items:flex-start;padding:9px 6px;font-size:16px;color:var(--ink-2)}
+.todo .box{flex:none;width:20px;height:20px;border:2px solid rgba(20,19,17,.35);border-radius:2px;margin-top:3px}
+.empty{margin-top:64px;text-align:center}
+.empty .enso{width:120px;margin:0 auto 24px;opacity:.75}
+.empty p{font-family:var(--f-display);font-style:italic;font-size:21px;color:var(--ink-3);max-width:44ch;margin:0 auto 1em}
+.srcnote{margin-top:80px;padding-top:26px;border-top:1px solid var(--hair);font:400 13px/1.7 var(--f-ui);color:var(--ink-4)}
+.srcnote a{color:var(--ink-3)}
+@media (max-width:640px){.revhead .pos{margin-left:0}}
+</style>
+</head>
+<body>
+<div class="paper-bg" aria-hidden="true">
+  <div class="mottle"></div>
+  <svg class="grain" xmlns="http://www.w3.org/2000/svg">
+    <filter id="washi"><feTurbulence type="fractalNoise" baseFrequency="0.82" numOctaves="2" seed="11" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 0.56  0 0 0 0 0.52  0 0 0 0 0.44  0 0 0 0.055 0"/></filter>
+    <rect width="100%" height="100%" filter="url(#washi)"/>
+  </svg>
+</div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="rough"><feTurbulence type="fractalNoise" baseFrequency="0.045" numOctaves="3" seed="7" result="t"/>
+      <feDisplacementMap in="SourceGraphic" in2="t" scale="5"/></filter>
+    <filter id="rough2"><feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" seed="23" result="t"/>
+      <feDisplacementMap in="SourceGraphic" in2="t" scale="6"/></filter>
+  </defs>
+</svg>
+
+<main>
+<div class="wrap">
+
+  <header class="cover settle">
+    <p class="eyebrow">The Kata Scroll · the review ritual</p>
+    <h1 class="display">Run your<br><em>kata again</em></h1>
+    <p class="lead">Everything you marked in ink, every practice item still unticked, every chapter where you left off — <b>resurfaced from this device's memory.</b> A kata is a thing you repeat; this page is the repetition.</p>
+    <div class="meta-row">
+      <div class="seal-stamp" style="width:52px;height:52px;font-size:23px">型</div>
+      <span class="fine">kept on this device only — nothing is sent anywhere</span>
+      <svg class="brush seal-brush" style="flex:1;max-width:150px" viewBox="0 0 300 26" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M4,16 C60,8 130,22 190,12 S270,10 296,15" filter="url(#rough)"/></svg>
+    </div>
+  </header>
+
+  <div id="shelf"></div>
+
+  <div class="empty" id="empty" hidden>
+    <svg class="enso" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M150,42 C92,44 46,92 44,152 C42,214 92,258 152,258 C210,258 254,214 256,154 C258,102 222,62 176,50"
+        fill="none" stroke="#141311" stroke-width="17" stroke-linecap="round" filter="url(#rough2)" opacity=".8"/>
+    </svg>
+    <p>Nothing marked yet — the scroll remembers what you give it.</p>
+    <p>Double-tap a line that matters in any chapter, tick the practice you finish, and this page becomes your kata: the review that a study companion owes you.</p>
+    <p><a href="index.html" style="color:var(--ink-3)">begin at the cover</a></p>
+  </div>
+
+  <p class="srcnote">The Kata Scroll — the review page. Your ink marks, practice state, and reading position live only in this browser's storage; clearing site data returns the scroll to blank paper. <a href="index.html" style="color:var(--ink-3)">Return to the cover.</a></p>
+
+</div>
+</main>
+
+<script>
+(function(){
+  'use strict';
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('revealed');io.unobserve(e.target);}});
+  },{threshold:.12});
+  document.querySelectorAll('.settle, .brush').forEach(function(el){io.observe(el);});
+
+  var CHAPTERS=[
+    {f:'ch01-why-indians-dont-attempt.html',t:'Why Indians Don\u2019t Attempt',n:'01'},
+    {f:'ch02-career-advice-lost.html',t:'Career Advice for People Who Feel Lost',n:'02'},
+    {f:'ch03-social-pressure-depression.html',t:'Harsh Truths About India\u2019s Social Pressure',n:'03'},
+    {f:'ch04-get-hired-faster.html',t:'How to Get Hired Faster Than Everyone Else',n:'04'},
+    {f:'ch05-how-i-use-ai.html',t:'How I Use AI',n:'05'},
+    {f:'ch06-most-valuable-skill-after-ai.html',t:'The Most Valuable Skill After AI',n:'06'},
+    {f:'ch07-manage-projects-end-to-end.html',t:'How I Manage Projects End To End',n:'07'},
+    {f:'ch08-scaling-zero-funding.html',t:'Guide to Scaling A Startup with Zero Funding',n:'08'},
+    {f:'ch09-companies-break-after-50-people.html',t:'Why 90% of Companies Break After 50 People',n:'09'},
+    {f:'ch10-why-startups-unprofitable.html',t:'Why Indian Startups Are Unprofitable',n:'10'},
+    {f:'ch11-distribution-10x-luck.html',t:'How Distribution Can 10\u00d7 Your Luck, Career & Income',n:'11'},
+    {f:'ch12-simplifying-everything.html',t:'How Simplifying Everything Makes You Rich',n:'12'},
+    {f:'ch13-risk-like-rich-people.html',t:'How to Take Risk Like Rich People Do',n:'13'},
+    {f:'ch14-think-like-rich-people.html',t:'Think Like Rich People',n:'14'}
+  ];
+  var shelf=document.getElementById('shelf');
+  var any=false;
+
+  function txt(s){return s.replace(/\s+/g,' ').trim();}
+
+  CHAPTERS.forEach(function(ch){
+    var s=null;
+    try{s=JSON.parse(localStorage.getItem('kata:'+ch.f)||'null');}catch(e){}
+    if(!s)return;
+    var marks=s.marks||[],checks=s.checks||[],pos=s.pos||0;
+    if(!marks.length&&!checks.length&&pos<0.02)return;
+    any=true;
+
+    var block=document.createElement('section');
+    block.className='revblock settle';
+    var posline=pos>=0.98?'finished \u8aad':(pos>0.02?Math.round(pos*100)+'% in':'opened');
+    block.innerHTML=
+      '<div class="revhead"><span class="num">'+ch.n+'</span>'+
+      '<a href="'+ch.f+'">'+ch.t+'</a>'+
+      '<span class="pos">'+posline+'</span></div>'+
+      (marks.length?'<div class="sub">your ink — '+marks.length+' marked</div><div class="marks"></div>':'')+
+      '<div class="todos"></div>';
+    shelf.appendChild(block);
+
+    // chapter text is fetched from the offline cache; marks are stored as paragraph indexes
+    fetch(ch.f).then(function(r){return r.text();}).then(function(html){
+      var doc=new DOMParser().parseFromString(html,'text/html');
+      var paras=doc.querySelectorAll('.markable');
+      var chks=doc.querySelectorAll('.chk');
+      var mwrap=block.querySelector('.marks');
+      if(mwrap){
+        marks.forEach(function(i){
+          var p=paras[i];
+          if(!p)return;
+          var d=document.createElement('div');
+          d.className='markline';
+          d.textContent='\u201c'+txt(p.textContent)+'\u201d';
+          mwrap.appendChild(d);
+        });
+      }
+      var twrap=block.querySelector('.todos');
+      var open=[];
+      chks.forEach(function(el,i){if(checks.indexOf(i)===-1)open.push(el);});
+      if(open.length){
+        var sub=document.createElement('div');
+        sub.className='sub';
+        sub.textContent='practice still open \u2014 '+open.length;
+        block.insertBefore(sub,twrap);
+        open.forEach(function(el){
+          var d=document.createElement('div');
+          d.className='todo';
+          d.innerHTML='<span class="box"></span><span>'+txt(el.textContent)+'</span>';
+          twrap.appendChild(d);
+        });
+      }else if(chks.length&&checks.length){
+        var done=document.createElement('div');
+        done.className='sub';
+        done.textContent='practice complete \u2014 all '+chks.length+' ticked';
+        block.insertBefore(done,twrap);
+      }
+    }).catch(function(){/* offline without cache: counts remain, text unavailable */});
+  });
+
+  if(!any)document.getElementById('empty').hidden=false;
+
+  document.querySelectorAll('.seal-stamp').forEach(function(s){
+    s.addEventListener('click',function(){
+      s.style.transform='rotate(-4deg) scale(.9)';
+      setTimeout(function(){s.style.transform='';},160);
+    });
+  });
+  if('serviceWorker' in navigator&&location.protocol==='https:'){
+    addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});
+  }
+})();
+</script>
+</body>
+</html>

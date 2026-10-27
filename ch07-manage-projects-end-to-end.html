@@ -94,7 +94,7 @@ main{position:relative;z-index:1}
 .quote{font-family:var(--f-display);font-style:italic;font-size:clamp(26px,3.2vw,32px);line-height:1.5;color:var(--ink);max-width:32ch;margin:60px auto;text-align:center;position:relative}
 .quote::before{content:'"';font-size:72px;color:var(--seal);position:absolute;top:-34px;left:50%;transform:translateX(-50%);opacity:.8}
 .quote .who{display:block;font-family:var(--f-ui);font-style:normal;font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-4);margin-top:18px}
-.markable{cursor:pointer;border-radius:2px;transition:background .4s;position:relative}
+.markable{cursor:pointer;border-radius:2px;transition:background .4s;position:relative;touch-action:manipulation}
 .markable:hover{background:rgba(200,55,45,.045)}
 .markable.marked{background:linear-gradient(180deg,transparent 62%,rgba(200,55,45,.17) 62%)}
 .markable.marked::after{content:'富';position:absolute;left:-30px;top:2px;font-family:var(--f-jp);color:var(--seal);font-size:15px;opacity:.85}

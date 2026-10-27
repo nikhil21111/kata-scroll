@@ -94,7 +94,7 @@ main{position:relative;z-index:1}
 .quote{font-family:var(--f-display);font-style:italic;font-size:clamp(26px,3.2vw,32px);line-height:1.5;color:var(--ink);max-width:32ch;margin:60px auto;text-align:center;position:relative}
 .quote::before{content:'"';font-size:72px;color:var(--seal);position:absolute;top:-34px;left:50%;transform:translateX(-50%);opacity:.8}
 .quote .who{display:block;font-family:var(--f-ui);font-style:normal;font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-4);margin-top:18px}
-.markable{cursor:pointer;border-radius:2px;transition:background .4s;position:relative}
+.markable{cursor:pointer;border-radius:2px;transition:background .4s;position:relative;touch-action:manipulation}
 .markable:hover{background:rgba(200,55,45,.045)}
 .markable.marked{background:linear-gradient(180deg,transparent 62%,rgba(200,55,45,.17) 62%)}
 .markable.marked::after{content:'富';position:absolute;left:-30px;top:2px;font-family:var(--f-jp);color:var(--seal);font-size:15px;opacity:.85}
@@ -209,7 +209,7 @@ figure.fig.narrow{max-width:560px;margin-left:auto;margin-right:auto}
       <span class="fine">from Varun Mayya's Secret Kata 1 · read in full and expanded</span>
       <svg class="brush seal-brush" style="flex:1;max-width:160px" viewBox="0 0 300 26" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M4,16 C60,8 130,22 190,12 S270,10 296,15" filter="url(#rough)"/></svg>
     </div>
-    <div class="care"><b>A care note before you enter:</b> this chapter discusses depression and social pressure. It is a study companion, not medical advice — the original session was built on doctor- and licensed-therapist-validated research, and this book preserves that framing. If anything here sits close to your own experience, please talk to a professional. In this chapter's own language: that is not weakness — it is the exit hatch the animal was allowed.</div>
+    <div class="care"><b>A care note before you enter:</b> this chapter discusses depression and social pressure. It is a study companion, not medical advice — the original session was built on doctor- and licensed-therapist-validated research, and this book preserves that framing. If anything here sits close to your own experience, please talk to a professional. In this chapter's own language: that is not weakness — it is the exit hatch the animal was allowed. One more honest note: this is the session its teacher originally built for his own team and nearly shelved — it is carried here with that weight in mind.</div>
   </header>
 
   <nav class="toc settle" aria-label="in this chapter">
