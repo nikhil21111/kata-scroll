@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Run Your Kata Again — The Kata Scroll</title>
-<meta name="description" content="The book's review ritual — your ink marks, your unfinished practice, and where you left off, resurfaced from this device's memory. A kata is a thing you repeat.">
+<meta name="description" content="The book's review ritual — one next rep, a first-five starter set, your ink marks and unfinished practice, resurfaced from this device's memory. A kata is a thing you repeat.">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="The Kata Scroll">
 <meta property="og:title" content="Run your kata again">
-<meta property="og:description" content="Your ink marks, your unfinished practice, and where you left off — resurfaced from this device's memory.">
+<meta property="og:description" content="One next rep, the first five, your marks and unfinished practice — resurfaced from this device's memory.">
 <meta property="og:image" content="https://i.ytimg.com/vi/8WgipmPSPKk/maxresdefault.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#fbfaf6">
@@ -55,9 +55,25 @@ main{position:relative;z-index:1}
 .settle{opacity:0;filter:blur(6px);transform:translateY(14px);transition:opacity 1.05s ease,filter 1.05s ease,transform 1.05s ease}
 .settle.revealed{opacity:1;filter:blur(0);transform:none}
 @media (prefers-reduced-motion:reduce){.settle{transition:none;opacity:1;filter:none;transform:none}.brush path{transition:none;stroke-dashoffset:0}}
-.cover{min-height:64vh;display:flex;flex-direction:column;justify-content:center;position:relative}
+.cover{min-height:58vh;display:flex;flex-direction:column;justify-content:center;position:relative}
 .cover h1.display{font-size:clamp(44px,6vw,72px);margin:22px 0 26px}
 .meta-row{display:flex;align-items:center;gap:18px;margin-top:42px;flex-wrap:wrap}
+.rep{margin-top:74px;padding:34px 38px;border:1px solid var(--hair);border-radius:3px;background:rgba(255,255,255,.5)}
+.rep .rhead{font:500 12px/1 var(--f-ui);letter-spacing:.28em;text-transform:uppercase;color:var(--seal);margin-bottom:18px}
+.rep .ritem{font-family:var(--f-display);font-style:italic;font-size:24px;line-height:1.55;color:var(--ink);max-width:52ch}
+.rep .rsrc{margin-top:16px;font:400 13.5px/1.6 var(--f-ui);color:var(--ink-3)}
+.rep .rsrc a{color:var(--ink-3)}
+.rep .rwhy{margin-top:10px;font:400 13px/1.6 var(--f-ui);color:var(--ink-4)}
+.ff{margin-top:56px}
+.ff h2,.shelfhead{font-family:var(--f-display);font-weight:500;font-size:clamp(28px,3.4vw,38px);color:var(--ink);letter-spacing:-.01em;line-height:1.1}
+.ff h2 em{font-style:italic;color:var(--seal)}
+.ff .role{margin:10px 0 22px;font-style:italic}
+.ffitem{display:flex;gap:20px;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--hair)}
+.ffitem:first-of-type{border-top:1px solid var(--hair)}
+.ffitem .n{font-family:var(--f-display);font-style:italic;font-size:24px;color:var(--seal);min-width:30px}
+.ffitem .t{font-size:16px;color:var(--ink-2);line-height:1.7}
+.ffitem .t .why{display:block;font-size:13px;color:var(--ink-4);font-style:italic;margin-top:3px}
+.ffitem .t a{color:var(--ink-3)}
 .revblock{margin-top:64px;padding-top:34px;border-top:1px solid var(--hair)}
 .revhead{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
 .revhead .num{font-family:var(--f-display);font-style:italic;font-size:22px;color:var(--seal)}
@@ -74,7 +90,7 @@ main{position:relative;z-index:1}
 .empty p{font-family:var(--f-display);font-style:italic;font-size:21px;color:var(--ink-3);max-width:44ch;margin:0 auto 1em}
 .srcnote{margin-top:80px;padding-top:26px;border-top:1px solid var(--hair);font:400 13px/1.7 var(--f-ui);color:var(--ink-4)}
 .srcnote a{color:var(--ink-3)}
-@media (max-width:640px){.revhead .pos{margin-left:0}}
+@media (max-width:640px){.revhead .pos{margin-left:0}.rep{padding:26px 22px}}
 </style>
 </head>
 <body>
@@ -101,7 +117,7 @@ main{position:relative;z-index:1}
   <header class="cover settle">
     <p class="eyebrow">The Kata Scroll · the review ritual</p>
     <h1 class="display">Run your<br><em>kata again</em></h1>
-    <p class="lead">Everything you marked in ink, every practice item still unticked, every chapter where you left off — <b>resurfaced from this device's memory.</b> A kata is a thing you repeat; this page is the repetition.</p>
+    <p class="lead">The book teaches one thing at a time — so this page gives you <b>one rep at a time</b>: today's single practice item, a first-five starter set if you're beginning, and the full shelf of your ink marks and open practice beneath. A kata is a thing you repeat.</p>
     <div class="meta-row">
       <div class="seal-stamp" style="width:52px;height:52px;font-size:23px">型</div>
       <span class="fine">kept on this device only — nothing is sent anywhere</span>
@@ -109,7 +125,24 @@ main{position:relative;z-index:1}
     </div>
   </header>
 
-  <div id="shelf"></div>
+  <section class="rep settle" id="nextrep" hidden>
+    <div class="rhead">今日 · today's one rep</div>
+    <div class="ritem" id="repitem"></div>
+    <div class="rsrc" id="repsrc"></div>
+    <div class="rwhy" id="repwhy">one of your open reps, rotated daily — you cannot practice seventy things; you can practice one.</div>
+  </section>
+
+  <section class="ff settle" id="firstfive">
+    <h2>The <em>first five</em></h2>
+    <p class="fine role">if you only ever run five reps from this scroll — a starter arc, one per book</p>
+    <div id="fflist"></div>
+  </section>
+
+  <section class="settle" id="shelfwrap" style="margin-top:84px" hidden>
+    <h2 class="shelfhead">The shelf</h2>
+    <p class="fine role">your ink, your open practice, your place — the full inventory, chapter by chapter</p>
+    <div id="shelf"></div>
+  </section>
 
   <div class="empty" id="empty" hidden>
     <svg class="enso" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -117,7 +150,7 @@ main{position:relative;z-index:1}
         fill="none" stroke="#141311" stroke-width="17" stroke-linecap="round" filter="url(#rough2)" opacity=".8"/>
     </svg>
     <p>Nothing marked yet — the scroll remembers what you give it.</p>
-    <p>Double-tap a line that matters in any chapter, tick the practice you finish, and this page becomes your kata: the review that a study companion owes you.</p>
+    <p>Double-tap a line that matters in any chapter, tick the practice you finish, and this page becomes your kata.</p>
     <p><a href="index.html" style="color:var(--ink-3)">begin at the cover</a></p>
   </div>
 
@@ -150,18 +183,46 @@ main{position:relative;z-index:1}
     {f:'ch13-risk-like-rich-people.html',t:'How to Take Risk Like Rich People Do',n:'13'},
     {f:'ch14-think-like-rich-people.html',t:'Think Like Rich People',n:'14'}
   ];
-  var shelf=document.getElementById('shelf');
-  var any=false;
+
+  var FIRST_FIVE=[
+    {f:CHAPTERS[0].f, i:1, why:'the first swing — visible, measurable, this quarter', ch:CHAPTERS[0]},
+    {f:CHAPTERS[1].f, i:0, why:'the five-minute decision that unsticks everything else', ch:CHAPTERS[1]},
+    {f:CHAPTERS[3].f, i:0, why:'the one sentence that makes you hard to replace', ch:CHAPTERS[3]},
+    {f:CHAPTERS[12].f, i:1, why:'turn a wholesale bet into a cheap experiment', ch:CHAPTERS[12]},
+    {f:CHAPTERS[13].f, i:2, why:'find and price your biggest bottleneck', ch:CHAPTERS[13]}
+  ];
 
   function txt(s){return s.replace(/\s+/g,' ').trim();}
+  function loadKey(f){try{return JSON.parse(localStorage.getItem('kata:'+f)||'null');}catch(e){return null;}}
 
+  var openReps=[];
+  var shelfCount=0;
+
+  /* the first five — fetched from the chapters so the text always matches the book */
+  var ffList=document.getElementById('fflist');
+  FIRST_FIVE.forEach(function(item,idx){
+    var row=document.createElement('div');
+    row.className='ffitem';
+    row.innerHTML='<span class="n">'+(idx+1)+'</span><span class="t"><span class="ftxt">loading…</span><span class="why"></span>from <a href="'+item.f+'">chapter '+item.ch.n+' — '+item.t+'</a></span>';
+    ffList.appendChild(row);
+    fetch(item.f).then(function(r){return r.text();}).then(function(html){
+      var doc=new DOMParser().parseFromString(html,'text/html');
+      var chks=doc.querySelectorAll('.chk');
+      var el=chks[item.i];
+      if(el){row.querySelector('.ftxt').textContent=txt(el.textContent);}
+      row.querySelector('.why').textContent=item.why+' · ';
+    }).catch(function(){row.querySelector('.ftxt').textContent='open chapter '+item.ch.n+' to read this rep';});
+  });
+
+  /* the shelf — and the one rep, gathered while building it */
+  var shelf=document.getElementById('shelf');
   CHAPTERS.forEach(function(ch){
-    var s=null;
-    try{s=JSON.parse(localStorage.getItem('kata:'+ch.f)||'null');}catch(e){}
+    var s=loadKey(ch.f);
     if(!s)return;
     var marks=s.marks||[],checks=s.checks||[],pos=s.pos||0;
     if(!marks.length&&!checks.length&&pos<0.02)return;
-    any=true;
+    shelfCount++;
+    document.getElementById('shelfwrap').hidden=false;
 
     var block=document.createElement('section');
     block.className='revblock settle';
@@ -170,11 +231,10 @@ main{position:relative;z-index:1}
       '<div class="revhead"><span class="num">'+ch.n+'</span>'+
       '<a href="'+ch.f+'">'+ch.t+'</a>'+
       '<span class="pos">'+posline+'</span></div>'+
-      (marks.length?'<div class="sub">your ink — '+marks.length+' marked</div><div class="marks"></div>':'')+
+      (marks.length?'<div class="sub">your ink \u2014 '+marks.length+' marked</div><div class="marks"></div>':'')+
       '<div class="todos"></div>';
     shelf.appendChild(block);
 
-    // chapter text is fetched from the offline cache; marks are stored as paragraph indexes
     fetch(ch.f).then(function(r){return r.text();}).then(function(html){
       var doc=new DOMParser().parseFromString(html,'text/html');
       var paras=doc.querySelectorAll('.markable');
@@ -192,28 +252,45 @@ main{position:relative;z-index:1}
       }
       var twrap=block.querySelector('.todos');
       var open=[];
-      chks.forEach(function(el,i){if(checks.indexOf(i)===-1)open.push(el);});
+      chks.forEach(function(el,i){
+        if(checks.indexOf(i)===-1){open.push(i);openReps.push({ch:ch,i:i,el:el});}
+      });
       if(open.length){
         var sub=document.createElement('div');
         sub.className='sub';
-        sub.textContent='practice still open \u2014 '+open.length;
+        sub.textContent='open reps \u2014 '+open.length;
         block.insertBefore(sub,twrap);
-        open.forEach(function(el){
+        open.forEach(function(i){
           var d=document.createElement('div');
           d.className='todo';
-          d.innerHTML='<span class="box"></span><span>'+txt(el.textContent)+'</span>';
+          d.innerHTML='<span class="box"></span><span>'+txt(chks[i].textContent)+'</span>';
           twrap.appendChild(d);
         });
+        maybeRep();
       }else if(chks.length&&checks.length){
         var done=document.createElement('div');
         done.className='sub';
         done.textContent='practice complete \u2014 all '+chks.length+' ticked';
         block.insertBefore(done,twrap);
       }
-    }).catch(function(){/* offline without cache: counts remain, text unavailable */});
+    }).catch(function(){});
   });
 
-  if(!any)document.getElementById('empty').hidden=false;
+  /* today's one rep — simple daily rotation over everything still open */
+  var repDone=false;
+  function maybeRep(){
+    if(repDone||!openReps.length)return;
+    repDone=true;
+    var day=Math.floor(Date.now()/86400000);
+    var pick=openReps[day%openReps.length];
+    var rep=document.getElementById('nextrep');
+    rep.hidden=false;
+    document.getElementById('repitem').textContent='\u201c'+txt(pick.el.textContent)+'\u201d';
+    document.getElementById('repsrc').innerHTML='from <a href="'+pick.ch.f+'">chapter '+pick.ch.n+' \u00b7 '+pick.ch.t+'</a> \u2014 '+openReps.length+' reps open on this device';
+  }
+  setTimeout(maybeRep,1200);
+
+  if(!shelfCount)document.getElementById('empty').hidden=false;
 
   document.querySelectorAll('.seal-stamp').forEach(function(s){
     s.addEventListener('click',function(){

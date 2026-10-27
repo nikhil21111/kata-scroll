@@ -7,7 +7,7 @@ An interactive, story-driven book built from the public transcripts of Varun May
 ## What it is
 
 - **14 chapters + cover**, each a single self-contained HTML file — no build step, no dependencies, no tracking. Open any file anywhere.
-- **Every chapter was written from a complete read of its source transcript** — no skimming. Every named story, framework, and number from the session is preserved and expanded: story first, the meaning beneath it, then how to practice it.
+- **Every chapter was written from a complete read of its source transcript** — no skimming. Every named story, framework, and number from the session is preserved and expanded — with one exception, named in chapter twelve's own source note: the Bridge keeps a fraction of its session on purpose, the better to be quiet.
 - **The design** is Japanese inkwash (sumi-e): paper, ink, a vermilion seal. Chapters carry hand-coded SVG diagrams, flip cards that enact the teaching, ink-marking (double-tap any paragraph), and practice checklists. The book remembers your place, your marks, and your practice lists on your own device (localStorage) — nothing leaves the browser.
 - **It reads offline.** Install it from the browser (Add to Home Screen / install prompt) and the whole book is cached by a service worker.
 - **The form** is the emaki (絵巻), the Japanese narrative picture scroll — unrolled as it's read, story and teaching moving together on paper.

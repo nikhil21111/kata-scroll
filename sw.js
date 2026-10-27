@@ -1,7 +1,7 @@
 /* The Kata Scroll — the offline shelf
    Caches the book (chapters + cover + fonts + icons) so it reads without a network.
    Additive only: when served as plain files (no https), this never runs. */
-var CACHE = 'kata-scroll-v2';
+var CACHE = 'kata-scroll-v3';
 
 var ASSETS = [
   './',

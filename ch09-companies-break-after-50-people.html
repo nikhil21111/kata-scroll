@@ -610,6 +610,35 @@ figure.fig.narrow{max-width:560px;margin-left:auto;margin-right:auto}
   }
   if(document.readyState==='complete')restore();else addEventListener('load',restore);
   setTimeout(restore,900);
+  /* keyboard access — the scroll answers to Enter and Space too */
+  document.querySelectorAll('.rung .flipin,.chk,.tip').forEach(function(el){
+    el.setAttribute('tabindex','0');
+    el.setAttribute('role',el.classList.contains('chk')?'checkbox':'button');
+    if(el.classList.contains('chk'))el.setAttribute('aria-checked',el.classList.contains('done')?'true':'false');
+    el.addEventListener('keydown',function(ev){
+      if(ev.key!=='Enter'&&ev.key!==' ')return;
+      ev.preventDefault();
+      if(el.classList.contains('flipin')){
+        var r=el.closest('.rung');
+        if(r)r.classList.toggle('flip');
+      }else if(el.classList.contains('chk')){
+        el.classList.toggle('done');
+        el.setAttribute('aria-checked',el.classList.contains('done')?'true':'false');
+        snap();
+      }else if(el.classList.contains('tip')){
+        el.classList.toggle('open');
+      }
+    });
+  });
+  document.querySelectorAll('.markable').forEach(function(p){
+    p.setAttribute('tabindex','0');
+    p.addEventListener('keydown',function(ev){
+      if(ev.key!=='Enter')return;
+      ev.preventDefault();
+      p.classList.toggle('marked');
+      snap();
+    });
+  });
   if('serviceWorker' in navigator&&location.protocol==='https:'){
     addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});
   }
