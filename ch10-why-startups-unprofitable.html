@@ -1,0 +1,616 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 10 · Why Indian Startups Are Unprofitable — The Kata Scroll</title>
+<meta name="description" content="The attribution disease — Nike's 25-billion-dollar day, the ROAS death spiral, the buyer's real journey, shares as the true metric, and the three attributions behind every business. From Varun Mayya's Kata 6.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="The Kata Scroll">
+<meta property="og:title" content="Chapter 10 · Why Indian Startups Are Unprofitable">
+<meta property="og:description" content="The attribution disease — Nike's 25-billion-dollar day, the ROAS death spiral, the buyer's real journey, shares as the true metric, and the three attributions behind every business. From Varun Mayya's Kata 6.">
+<meta property="og:image" content="https://i.ytimg.com/vi/jEnxvZXzo0E/maxresdefault.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#fbfaf6">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Zen+Kaku+Gothic+New:wght@400;500&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* ═════════ THE KATA SCROLL · CHAPTER 04 · inkwash ═════════ */
+:root{
+  --paper:#fbfaf6; --ink:#141311; --ink-2:#34312c; --ink-3:#66625a; --ink-4:#a19c92;
+  --hair:rgba(20,19,17,.12); --hair-2:rgba(20,19,17,.22);
+  --seal:#c8372d;
+  --f-display:'Cormorant Garamond',Georgia,serif;
+  --f-ui:'Zen Kaku Gothic New',Inter,system-ui,sans-serif;
+  --f-jp:'Shippori Mincho','Noto Serif JP',serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink-2);font-family:var(--f-ui);font-size:17px;line-height:1.75;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:rgba(200,55,45,.22)}
+img{max-width:100%}
+.paper-bg{position:fixed;inset:0;z-index:0;pointer-events:none}
+.paper-bg .mottle{position:absolute;inset:0;background:
+  radial-gradient(60% 50% at 18% 22%,rgba(214,206,190,.16),transparent 70%),
+  radial-gradient(50% 45% at 86% 78%,rgba(214,206,190,.14),transparent 70%),
+  radial-gradient(120% 100% at 50% 50%,transparent 62%,rgba(150,138,112,.10) 100%)}
+.paper-bg svg.grain{position:absolute;inset:0;width:100%;height:100%;mix-blend-mode:multiply;opacity:.92}
+main{position:relative;z-index:1}
+.vert{writing-mode:vertical-rl;font:500 13px/1 var(--f-ui);letter-spacing:.42em;text-transform:uppercase;color:var(--ink-4)}
+.seal-stamp{display:inline-flex;align-items:center;justify-content:center;background:var(--seal);color:var(--paper);
+  font-family:var(--f-jp);font-weight:700;border-radius:5px;transform:rotate(-4deg);
+  box-shadow:inset 0 0 10px rgba(0,0,0,.28),0 1px 0 rgba(0,0,0,.08);user-select:none;cursor:pointer;transition:transform .18s ease}
+.seal-stamp:active{transform:rotate(-4deg) scale(.92)}
+.eyebrow{display:inline-flex;align-items:center;gap:16px;font:500 14px/1 var(--f-ui);letter-spacing:.3em;text-transform:uppercase;color:var(--ink-3)}
+.eyebrow::before{content:'';width:34px;height:2px;background:var(--seal)}
+.display{font-family:var(--f-display);font-weight:500;color:var(--ink);letter-spacing:-.012em;line-height:1.02}
+.display em{font-style:italic;color:var(--seal)}
+.lead{font:400 19px/1.8 var(--f-ui);color:var(--ink-3);max-width:52ch}
+.lead b{color:var(--ink);font-weight:500}
+.fine{font:400 14px/1.6 var(--f-ui);color:var(--ink-4);letter-spacing:.02em}
+.brush{display:block;width:100%;height:26px;overflow:visible}
+.brush path{stroke:var(--ink);stroke-width:5;fill:none;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.7s cubic-bezier(.6,0,.3,1)}
+.brush.seal-brush path{stroke:var(--seal)}
+.brush.revealed path{stroke-dashoffset:0}
+.mountain{display:block;width:min(300px,70%);height:64px;margin:34px auto;overflow:visible;opacity:.9}
+.mountain path{stroke:var(--ink-3);fill:none;stroke-width:3.4;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 2.4s ease}
+.mountain.revealed path{stroke-dashoffset:0}
+.settle{opacity:0;filter:blur(6px);transform:translateY(14px);transition:opacity 1.05s ease,filter 1.05s ease,transform 1.05s ease}
+.settle.revealed{opacity:1;filter:blur(0);transform:none}
+@media (prefers-reduced-motion:reduce){.settle{transition:none;opacity:1;filter:none;transform:none}.brush path,.mountain path{transition:none;stroke-dashoffset:0}}
+.scroll-wrap{max-width:840px;margin:0 auto;padding:96px 28px 42vh;position:relative}
+.chapter-rail{position:fixed;left:26px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;gap:18px;z-index:6}
+.chapter-rail .seal-stamp{width:52px;height:52px;font-size:24px}
+.chapter-rail .railline{width:3px;height:220px;background:var(--hair);border-radius:3px;position:relative;overflow:visible}
+.chapter-rail .raildrop{position:absolute;left:50%;top:0;width:13px;height:19px;background:var(--seal);border-radius:50% 50% 50% 50%/62% 62% 38% 38%;transform:translate(-50%,-2px);transition:top .22s linear}
+.cover{min-height:82vh;display:flex;flex-direction:column;justify-content:center;position:relative}
+.cover h1.display{font-size:clamp(46px,6.4vw,84px);margin:22px 0 26px}
+.cover .jp-side{position:absolute;right:-4px;top:10%;height:224px}
+.cover .meta-row{display:flex;align-items:center;gap:18px;margin-top:42px;flex-wrap:wrap}
+.enso-wrap{position:absolute;right:2%;top:6%;width:clamp(150px,20vw,240px);opacity:.8;pointer-events:none}
+.toc{margin:74px 0 30px;padding:34px 38px;background:rgba(255,255,255,.5);border:1px solid var(--hair);border-radius:3px}
+.toc h2{font:500 13px/1 var(--f-ui);letter-spacing:.3em;text-transform:uppercase;color:var(--ink-3);margin-bottom:20px}
+.toc ol{list-style:none;columns:2;column-gap:52px}
+.toc li{break-inside:avoid;margin-bottom:11px}
+.toc a{display:flex;gap:14px;align-items:baseline;text-decoration:none;color:var(--ink-2);font-size:15.5px;transition:color .3s}
+.toc a .n{font-family:var(--f-display);font-style:italic;color:var(--seal);min-width:26px}
+.toc a:hover{color:var(--seal)}
+.toc a:hover .n{color:var(--ink)}
+@media (max-width:640px){.toc ol{columns:1}}
+.sect{padding-top:66px;margin-top:58px;position:relative;scroll-margin-top:40px}
+.sect .washx{position:absolute;inset:-46px -70px;background:radial-gradient(42% 52% at 32% 42%,rgba(20,19,17,.05),transparent 72%);opacity:0;transform:scale(.95);transition:opacity 1.3s ease,transform 1.3s ease;pointer-events:none;border-radius:50%}
+.sect.revealed .washx{opacity:1;transform:scale(1)}
+.sect .kicker{display:flex;align-items:baseline;gap:16px;margin-bottom:18px}
+.sect .kicker .no{font-family:var(--f-display);font-style:italic;font-size:30px;color:var(--seal)}
+.sect h2.display{font-size:clamp(33px,3.9vw,50px);margin-bottom:22px;line-height:1.06}
+.story{font-family:var(--f-display);font-size:23px;line-height:1.85;color:var(--ink-2);max-width:64ch}
+.story p{margin-bottom:1.35em}
+.story p:first-of-type::first-letter{font-size:72px;line-height:.85;float:left;padding:8px 14px 0 0;color:var(--ink);font-style:italic}
+.story .aside{font-family:var(--f-ui);font-size:15.5px;color:var(--ink-3);border-left:2px solid var(--hair-2);padding:6px 0 6px 22px;margin:2em 0}
+.quote{font-family:var(--f-display);font-style:italic;font-size:clamp(26px,3.2vw,32px);line-height:1.5;color:var(--ink);max-width:32ch;margin:60px auto;text-align:center;position:relative}
+.quote::before{content:'"';font-size:72px;color:var(--seal);position:absolute;top:-34px;left:50%;transform:translateX(-50%);opacity:.8}
+.quote .who{display:block;font-family:var(--f-ui);font-style:normal;font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-4);margin-top:18px}
+.markable{cursor:pointer;border-radius:2px;transition:background .4s;position:relative}
+.markable:hover{background:rgba(200,55,45,.045)}
+.markable.marked{background:linear-gradient(180deg,transparent 62%,rgba(200,55,45,.17) 62%)}
+.markable.marked::after{content:'富';position:absolute;left:-30px;top:2px;font-family:var(--f-jp);color:var(--seal);font-size:15px;opacity:.85}
+.tip{border-bottom:2px dotted var(--seal);cursor:pointer;position:relative}
+.tip .tipbox{position:absolute;left:50%;bottom:135%;transform:translateX(-50%);width:238px;background:var(--ink);color:var(--paper);font:400 13.5px/1.55 var(--f-ui);padding:13px 15px;border-radius:4px;opacity:0;pointer-events:none;transition:opacity .3s;z-index:30}
+.tip:hover .tipbox,.tip.open .tipbox{opacity:1}
+.tip .tipbox b{color:#fff;font-weight:500}
+figure.fig{margin:54px 0;padding:16px;background:rgba(255,255,255,.55);border:1px solid var(--hair);border-radius:3px;box-shadow:0 1px 0 rgba(20,19,17,.02),0 34px 52px -44px rgba(20,19,17,.4)}
+figure.fig img{display:block;width:100%;border-radius:2px;filter:sepia(.14) saturate(.86) contrast(.97)}
+figure.fig figcaption{padding:14px 6px 4px;font:400 13.5px/1.6 var(--f-ui);color:var(--ink-4)}
+figure.fig figcaption b{color:var(--ink-3);font-weight:500}
+figure.fig.imgfail img{display:none}
+figure.fig.imgfail{padding:34px}
+figure.fig.imgfail figcaption::before{content:'▮ the image rested — ink remembers —';display:block;font-style:italic;margin-bottom:8px;color:var(--ink-4)}
+figure.fig.narrow{max-width:560px;margin-left:auto;margin-right:auto}
+.diag{margin:58px 0}
+.diag svg{display:block;width:100%;height:auto;overflow:visible}
+.diag figcaption{margin-top:14px;font:400 13.5px/1.6 var(--f-ui);color:var(--ink-4);text-align:center}
+.ladder{position:relative;margin:64px auto 22px;max-width:730px}
+.ladder .rail{position:absolute;left:25px;top:8px;bottom:8px;width:3px;background:linear-gradient(180deg,var(--ink-3),var(--ink));border-radius:3px}
+.rung{position:relative;padding-left:88px;margin-bottom:44px;perspective:1300px;min-height:236px}
+.rung .node{position:absolute;left:6px;top:14px;width:42px;height:42px;border-radius:50%;border:2.5px solid var(--ink-3);background:var(--paper);display:flex;align-items:center;justify-content:center;font-family:var(--f-jp);font-weight:700;font-size:18px;color:var(--ink-2);transition:all .5s ease;z-index:2}
+.rung.flip .node{border-color:var(--seal);color:var(--seal);transform:rotate(-6deg) scale(1.07)}
+.rung .flipin{position:relative;transform-style:preserve-3d;transition:transform .95s cubic-bezier(.58,0,.26,1)}
+.rung.flip .flipin{transform:rotateY(180deg)}
+.rung .face{backface-visibility:hidden;-webkit-backface-visibility:hidden;border:1px solid var(--hair);border-radius:4px;background:rgba(255,255,255,.58);box-shadow:0 1px 0 rgba(20,19,17,.02),0 30px 48px -42px rgba(20,19,17,.38);padding:30px 34px;cursor:pointer}
+.rung .face.front .amt{font-family:var(--f-display);font-size:38px;color:var(--ink);line-height:1.05}
+.rung .face.front .zt{font:500 13px/1 var(--f-ui);letter-spacing:.22em;text-transform:uppercase;color:var(--seal);margin:10px 0 14px}
+.rung .face.front .brief{font-size:16px;color:var(--ink-3);line-height:1.7;font-family:var(--f-ui)}
+.rung .face.front .flipnote{position:absolute;right:22px;bottom:14px;font:italic 400 13px/1 var(--f-display);color:var(--ink-4)}
+.rung .face.back{position:absolute;inset:0;transform:rotateY(180deg);background:var(--ink);border-color:var(--ink);overflow:auto}
+.rung .face.back h4{font:500 11px/1 var(--f-ui);letter-spacing:.28em;text-transform:uppercase;color:rgba(251,250,246,.48);margin:14px 0 7px}
+.rung .face.back p{font:400 14.5px/1.65 var(--f-ui);color:rgba(251,250,246,.9)}
+.rung .face.back .ret{margin-top:16px;font:italic 400 13px/1 var(--f-display);color:rgba(251,250,246,.55)}
+@media (prefers-reduced-motion:reduce){.rung .flipin{transition:none}.rung.flip .flipin{transform:none}.rung .face.back{position:relative;transform:none;display:none}.rung.flip .face.back{display:block}}
+.checks{margin-top:22px}
+.chk{display:flex;align-items:center;gap:18px;padding:13px 6px;cursor:pointer;user-select:none}
+.chk .box{flex:none;width:26px;height:26px;border:2px solid rgba(20,19,17,.4);border-radius:2px;position:relative}
+.chk .box svg{position:absolute;inset:-4px;width:30px;height:30px}
+.chk .box svg path{stroke:var(--seal);stroke-width:3.4;fill:none;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .5s ease}
+.chk.done .box svg path{stroke-dashoffset:0}
+.chk .txt{font-size:16.5px;color:var(--ink-2);transition:color .5s}
+.chk.done .txt{color:var(--ink-4);text-decoration:line-through;text-decoration-color:rgba(200,55,45,.5)}
+.endrow{display:flex;align-items:center;gap:20px;margin-top:52px}
+.srcnote{margin-top:74px;padding-top:26px;border-top:1px solid var(--hair);font:400 13px/1.7 var(--f-ui);color:var(--ink-4)}
+.srcnote a{color:var(--ink-3)}
+.care{margin-top:26px;padding:18px 22px;border:1px solid var(--hair-2);border-radius:3px;background:rgba(255,255,255,.5);font:400 14px/1.7 var(--f-ui);color:var(--ink-3)}
+.care b{color:var(--seal);font-weight:500}
+@media (max-width:760px){
+  .chapter-rail{display:none}
+  .scroll-wrap{padding:72px 22px 40vh}
+  .story{font-size:20.5px}
+  .enso-wrap{opacity:.35}
+  .markable.marked::after{left:-8px;top:-14px}
+  .rung{padding-left:0;padding-top:64px;min-height:250px}
+  .rung .node{left:2px;top:8px}
+  .ladder .rail{left:20px}
+  .tip .tipbox{left:auto;right:-10px;transform:none;width:210px}
+}
+</style>
+</head>
+<body>
+
+<div class="paper-bg" aria-hidden="true">
+  <div class="mottle"></div>
+  <svg class="grain" xmlns="http://www.w3.org/2000/svg">
+    <filter id="washi"><feTurbulence type="fractalNoise" baseFrequency="0.82" numOctaves="2" seed="11" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 0.56  0 0 0 0 0.52  0 0 0 0 0.44  0 0 0 0.055 0"/></filter>
+    <rect width="100%" height="100%" filter="url(#washi)"/>
+  </svg>
+</div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="rough"><feTurbulence type="fractalNoise" baseFrequency="0.045" numOctaves="3" seed="7" result="t"/>
+      <feDisplacementMap in="SourceGraphic" in2="t" scale="5"/></filter>
+    <filter id="rough2"><feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" seed="23" result="t"/>
+      <feDisplacementMap in="SourceGraphic" in2="t" scale="6"/></filter>
+    <filter id="rough3"><feTurbulence type="fractalNoise" baseFrequency="0.06" numOctaves="3" seed="41" result="t"/>
+      <feDisplacementMap in="SourceGraphic" in2="t" scale="7"/></filter>
+  </defs>
+</svg>
+
+
+
+<aside class="chapter-rail" aria-label="chapter progress">
+  <span class="vert">Chapter Ten · 鏡</span>
+  <div class="seal-stamp" title="press the seal">鏡</div>
+  <div class="railline"><div class="raildrop" id="raildrop"></div></div>
+</aside>
+
+<main>
+<div class="scroll-wrap">
+
+  <header class="cover settle">
+    <div class="enso-wrap" aria-hidden="true">
+      <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+        <path d="M150,42 C92,44 46,92 44,152 C42,214 92,258 152,258 C210,258 254,214 256,154 C258,102 222,62 176,50"
+          fill="none" stroke="#141311" stroke-width="17" stroke-linecap="round" filter="url(#rough2)" opacity=".9"/>
+        <circle cx="228" cy="236" r="17" fill="#c8372d" opacity=".92"/>
+      </svg>
+    </div>
+    <p class="eyebrow">The Kata Scroll · Book III — The Company · Chapter Ten</p>
+    <h1 class="display">Why Indian Startups<br><em>Are Unprofitable</em></h1>
+    <p class="lead">A company is burning, and everyone inside it is holding a report. The founder watching money leave, the performance marketer who did the measurable thing, the dashboard nobody trusts. Nike's <b>twenty-five-billion-dollar day</b>, the death spiral that eats startups, the buyer's real journey, and the three true attributions behind every business that ever worked.</p>
+    <div class="meta-row">
+      <span class="fine">from Varun Mayya's Kata 6 · read in full and expanded</span>
+      <svg class="brush seal-brush" style="flex:1;max-width:160px" viewBox="0 0 300 26" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M4,16 C60,8 130,22 190,12 S270,10 296,15" filter="url(#rough)"/></svg>
+    </div>
+  </header>
+
+  <nav class="toc settle" aria-label="in this chapter">
+    <h2>In this chapter</h2>
+    <ol>
+      <li><a href="#sec-1"><span class="n">i.</span> The question of credit</a></li>
+      <li><a href="#sec-2"><span class="n">ii.</span> The measurable thing</a></li>
+      <li><a href="#sec-3"><span class="n">iii.</span> Nike's 25-billion-dollar day</a></li>
+      <li><a href="#sec-4"><span class="n">iv.</span> The death spiral</a></li>
+      <li><a href="#sec-5"><span class="n">v.</span> The counter-examples</a></li>
+      <li><a href="#sec-6"><span class="n">vi.</span> The dashboard nobody trusts</a></li>
+      <li><a href="#sec-7"><span class="n">vii.</span> The buyer's real journey</a></li>
+      <li><a href="#sec-8"><span class="n">viii.</span> Proxy attribution</a></li>
+      <li><a href="#sec-9"><span class="n">ix.</span> Shares over views</a></li>
+      <li><a href="#sec-10"><span class="n">x.</span> The honest instrument</a></li>
+      <li><a href="#sec-11"><span class="n">xi.</span> The life audit</a></li>
+      <li><a href="#sec-12"><span class="n">xii.</span> The three things</a></li>
+      <li><a href="#sec-13"><span class="n">xiii.</span> Practice — your kata</a></li>
+      <li><a href="#sec-14"><span class="n">xiv.</span> Sit with these</a></li>
+    </ol>
+  </nav>
+
+  <figure class="fig narrow settle">
+    <img src="https://i.ytimg.com/vi/jEnxvZXzo0E/maxresdefault.jpg" alt="Kata 6 — Why Indian Startups Are Unprofitable, the original masterclass" loading="lazy"
+      onerror="this.closest('figure').classList.add('imgfail')">
+    <figcaption><b>The source.</b> Varun Mayya teaching Kata 6 — attribution. <a style="color:var(--ink-3)" href="https://www.youtube.com/watch?v=jEnxvZXzo0E" target="_blank" rel="noopener">watch on YouTube ↗</a></figcaption>
+  </figure>
+
+  <section class="sect settle" id="sec-1">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">i.</span></div>
+    <h2 class="display">The question of <em>credit</em></h2>
+    <div class="story">
+      <p class="markable">The company had done ten crores in sales, and it was dying. Varun's team was looking at acquiring it. Why let it go? The usual answers: market size, the market doesn't care. Then one more question. A thousand leads had produced those ten crores. <em>Instead of a thousand leads, what if you had ten thousand? A hundred thousand?</em> The founder did the math in the air and saw it — <em>yeah, it could be very large</em> — and then walked back into his wrong attribution, like a man returning for something he left inside a burning house. In that business the problem was never the market. It was the leads.</p>
+      <p class="markable">The opposite failure is louder. The Yaas client pod — seven or eight people around one channel — has a good month, and every hand goes up: <em>mai came, mai edited, mai did the motion graphics, mai wrote the script.</em> A film hands its VFX to five firms and all five claim they did all of it. Creators hold equity in companies they did nothing for, and when those companies win, a quiet voice says <em>I was the differentiator.</em> Credit divides, so everyone takes a slice. Even hiring runs on it: reading a CV is an attribution exam — what did this person actually do, and how critical were they?</p>
+      <p class="markable">You are reading this book because at some point you will have to sell something — a product, a service, a channel, yourself — and the moment you do, the question of credit starts deciding things around you: who gets the raise, who gets promoted, who gets blamed when the money runs out. The kata's name for the problem is attribution: <b>what was the thing actually responsible for your success?</b> The stake is simple. Knowing why you're successful is what makes it repeatable; otherwise it's random luck. Follow the question far enough and you stop watching who succeeded, and start watching who gets blamed.</p>
+    </div>
+    <svg class="mountain" viewBox="0 0 300 64" preserveAspectRatio="none" aria-hidden="true">
+      <path pathLength="1" d="M6,56 L64,22 L104,44 L150,12 L196,40 L238,26 L294,54" filter="url(#rough3)"/>
+    </svg>
+  </section>
+
+  <section class="sect settle" id="sec-2">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">ii.</span></div>
+    <h2 class="display">The measurable <em>thing</em></h2>
+    <div class="story">
+      <p class="markable">Start with the room's confession. Everyone has drunk a Diet Coke. <b>Which ad converted you?</b> One hand — Elon; he was promoting it too much, the man said, and it made me want to try it. One answer in three hundred. Nobody knows. Dyson, A16Z, Apple — you cannot name the piece of content that made you a fan. No one ever saw a single billboard and bought the Apple product that afternoon. That is the true condition of a brand, and it is unbearable to report.</p>
+      <p class="markable">Because someone does have to report. In India the marketing manager usually arrives from tech — data-science trained, measurement-raised — and one day that chair may be yours. A YouTube channel publishing three hundred videos a year cannot tell you which video sold the product. An ad can. Spend 10 rupees, a man buys the product, take 20 home. Return on ad spend — ROAS. The cleanest sentence in marketing. The kata's verdict on it is one word: <b>moatless.</b> The ad cost only climbs, and the strangers who don't know your brand only get more expensive to reach.</p>
+      <p class="markable">Why choose it? The diagnosis flatters no one. Measurable things are easy to report, and the marketing manager wants to protect a reputation with the boss, and wants the raise — so the measurable thing gets done. It isn't stupidity; it's safety, purchased with the company's money. A hundred years of television, where nobody could measure anything, and the performance-marketing era after it, arrive at the same finding from opposite directions: <b>this kind of marketing gets you in trouble.</b> Misattribution is the root of all evils in marketing, and in content.</p>
+    </div>
+    <div class="quote">"Misattributing things gets you in a lot of trouble."<span class="who">— the root of all evils, in marketing and in content</span></div>
+    <svg class="brush" viewBox="0 0 900 26" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M6,14 C140,5 260,21 420,11 S680,9 780,16 894,11" filter="url(#rough2)"/></svg>
+  </section>
+
+  <section class="sect settle" id="sec-3">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">iii.</span></div>
+    <h2 class="display">Nike's 25-billion-<br><em>dollar day</em></h2>
+    <div class="story">
+      <p class="markable">Now the case the whole kata hangs on. There was a version of Nike that signed the best athletes alive and pointed the camera at them — that celebrated running itself, celebrated sport. You didn't buy a shoe from it so much as join it. Then 2020. A member of Nike's own leadership team later posted the autopsy on LinkedIn: the brand team had shifted <b>from brand marketing to digital marketing, from brand-enhancing to sales-activation.</b> The CMO of the time made a few epic moves — create demand became serve and retain demand — and the money moved toward people who were already Nike consumers, already members. The audience that had already raised its hand.</p>
+      <p class="markable">The instrument that made it possible is one anyone can buy today. Put a pixel on your website and watch a man put one shoe in his cart and leave without paying; Facebook and Google will let you follow him around the internet, because he has <em>shown intent.</em> Spend this, make this — you can say it cleanly in a boardroom. Nike aimed billions of programmatic dollars at those retargeted strangers. Then one day the market filed its own report: <b>Nike lost 25 billion dollars in market valuation in a single day, for trying to make everything data-driven.</b> Billions had gone into something less effective but easier to measure, instead of something more effective but harder to measure. The kata's name for the ledger: an impressive waste of money.</p>
+      <p class="markable">The failure is human. The minute everything is measurable and you're selling one specific shoe unit, audiences can see it — there's no story, no connect, and half of everything anyone buys is story and connect. The measurable choice quietly deleted the thing that had made the brand worth measuring.</p>
+    </div>
+  </section>
+
+  <section class="sect settle" id="sec-4">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">iv.</span></div>
+    <h2 class="display">The death <em>spiral</em></h2>
+    <div class="story">
+      <p class="markable">Watch the same arithmetic from the founder's chair. Day one, the report is beautiful: 10 rupees into the ad, 20 out of the sale. But everyone else discovered the same clean sentence, so the auction climbs — 15, then 16, then 22 — while the unit still makes 20. Someone says it in a meeting: <em>we're not making enough money, increase the price of the unit.</em> The price goes from 20 to 25. The ads climb again; the price chases them; every lap of the loop the company becomes, in the kata's words, an objectively worse business.</p>
+      <p class="markable">And in a country like India the ladder simply ends, because <b>a customer will not pay beyond a certain amount.</b> You get stuck at a 25-rupee sale price while the advertising cost passes 30, then 35. That is a fundamentally unprofitable company, and it arrived one clean, reportable quarter at a time. When the spiral tightens, the marketer who did the measurable thing for safety is the easiest person to find — the dashboard that got the raise now reads out the loss it documented. That, says the kata plainly, is why so many Indian startups are unprofitable and continue to be.</p>
+      <p class="markable">India added its own flourish. Bring in the Dhonis and the Ranveer Singhs, and the ad cost comes down from 10 rupees to slightly less. Celebrity advertising still lives in the brand-awareness camp — but the country started spending it like ROAS: <em>one rupee in, two rupees out, measured weekly.</em> Same spiral, famous faces on it.</p>
+    </div>
+
+    <figure class="diag settle">
+      <svg viewBox="0 0 760 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The ROAS death spiral: ad costs climb, prices rise to cover, customers hit the ceiling, the business becomes objectively worse, repeat">
+        <path d="M120,140 C150,60 320,44 400,66 C480,88 520,120 530,150 C538,176 520,204 480,214 C430,224 380,206 376,176 C373,152 400,132 440,134"
+          fill="none" stroke="#141311" stroke-width="6" stroke-linecap="round" filter="url(#rough3)" opacity=".85"/>
+        <path d="M440,134 L456,120 M440,134 L460,136" stroke="#141311" stroke-width="4.5" fill="none" stroke-linecap="round" filter="url(#rough)"/>
+        <g font-family="Zen Kaku Gothic New, sans-serif" font-size="14" fill="#34312c">
+          <text x="150" y="60">ad cost: 10 → 15 → 22</text>
+          <text x="470" y="80">price: 20 → 25</text>
+          <text x="600" y="150" text-anchor="middle">customer ceiling:</text>
+          <text x="600" y="172" text-anchor="middle">India will not pay more</text>
+          <text x="180" y="250">objectively worse business — repeat</text>
+        </g>
+        <circle cx="120" cy="140" r="14" fill="#c8372d"/>
+        <text x="120" y="196" text-anchor="middle" font-family="Zen Kaku Gothic New, sans-serif" font-size="14" fill="#c8372d">fundamentally unprofitable</text>
+      </svg>
+      <figcaption><b>The ROAS death spiral.</b> Costs climb, prices chase them, the ceiling arrives, the loop tightens — the machine that ate Indian startup economics.</figcaption>
+    </figure>
+  </section>
+
+  <section class="sect settle" id="sec-5">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">v.</span></div>
+    <h2 class="display">The <em>counter-examples</em></h2>
+    <div class="story">
+      <p class="markable">Against the spiral stand the companies that never entered it. In the last minutes of a podcast with <b>Nitin Kamath</b>, a year or two ago, Zerodha's founder said something the kata calls profound. Zerodha has had <b>no cost of acquisition for a very long time</b> — they don't run ads — and their entire margin is exactly the cost of the advertising they don't do. Had they been forced to buy the reach they get free, they would have made zero profit. Physics Wallah runs the same arithmetic on a different platform: acquisition entirely YouTube-driven, no customer to buy.</p>
+      <p class="markable">The pattern was available to everyone. India's edtechs wrote the tragedy in three acts anyway: a company grows big on YouTube, raises money, and then the announcement — <em>hum professional company ban gaye, ab hum sirf celebrity ke saath ad karenge.</em> We're professional now; celebrity ads only. They forget their YouTube roots, run the famous faces as performance marketing, and ride the cost curve down. Senseless. An exercise in stupidity. Also, to be fair, a very good short-term thing.</p>
+      <p class="markable">The reconciliation is a tweet by the AppSumo CEO, or Jason Lemkin — the kata isn't sure which, and says so. <b>In the early days, all marketing needs to be performance marketing.</b> You have to sell units to survive. <b>At a certain scale, all marketing needs to be top-of-the-funnel brand marketing</b> — build the awareness, then let customers arrive on their own. Both halves are true. The disease is living in the first half forever.</p>
+    </div>
+    <div class="quote">"Our entire margin is exactly the cost of our advertising."<span class="who">— Nitin Kamath, on Zerodha's quiet superpower</span></div>
+  </section>
+
+  <section class="sect settle" id="sec-6">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">vi.</span></div>
+    <h2 class="display">The dashboard<br>nobody <em>trusts</em></h2>
+    <div class="story">
+      <p class="markable">The instruments themselves are broken, and the kata breaks them in order. First, the dropdown. Your customer has just bought; days later the questionnaire arrives — <em>how did you hear about us?</em> Who fills it in accurately? The room laughs, because everyone clicks the first option and hits next. The model of the human behind those wrong answers is the truest paragraph in this chapter: <b>the person is on the toilet, one hand on the spray, mom calling, five things running at once in the metro.</b> That error is not one or two percent — it meaningfully changes the data. Five years ago they might have paid attention; today they absolutely do not. Read the dropdown as truth and you will believe your television ads are working. Varun has sat with brand managers and dug through this data; the best ones say, quietly, <em>I don't believe in this.</em> The best companies don't use it.</p>
+      <p class="markable">Second, the affiliate payout — Zerodha's version, as someone there once told him. You watch one affiliate's personal-finance video, click through, look around, don't convert. The same day, a second affiliate's video, same links — you click, and convert. The second person collects the referral. The first person, who introduced you to the platform, who started the convincing, gets nothing. When you watched five or ten pieces of content before buying, <b>all of them were important to the decision</b> — so why does only the last click get paid? The fundamental flaw in every affiliate program. Zerodha's workaround is famously complicated, from what the kata has heard. There is no easy way.</p>
+      <p class="markable">Third, the plumbing. Clicking links is not normal behavior on Instagram or YouTube — a story link opens in the in-app browser, a fake one; Twitter de-boosts posts that carry links. The workaround everyone sells instead — the coupon code, <em>go type VARUN1000 on the platform</em> — gets the kata's flattest verdict: absolute rubbish. Because it is not how people buy. Which is the next section.</p>
+    </div>
+    <svg class="brush" viewBox="0 0 900 26" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M8,12 C180,20 340,6 520,15 S760,20 892,10" filter="url(#rough)"/></svg>
+  </section>
+
+  <section class="sect settle" id="sec-7">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">vii.</span></div>
+    <h2 class="display">The buyer's <em>real journey</em></h2>
+    <div class="story">
+      <p class="markable">You already know this story; you ran it with the last phone you bought. An influencer shows you the new one — amazing camera, great zoom, five features you like. Are you the kind of person who buys it the next day? In a room of three hundred, <b>zero hands went up.</b> What you did instead was open YouTube and search <em>phone reviews.</em> Then the alternatives: brand B's reviews, brand C's specs, an MKBHD video on each of the three. Then you forgot about the whole thing — no money this month, next month maybe — and held the decision for thirty days. The paycheck arrives. A fourth competitor has appeared; you watch that too. And then, finally, the decision is a gut decision. Not the best specs — otherwise Apple wouldn't sell the units it sells in India, at those prices, with better, cheaper alternatives beside them. You bought status, satisfaction, how it would feel. Above the two-hundred-rupee nail-cutter tier, every purchase is a long journey of being convinced.</p>
+      <p class="markable">This is why the coupon code fails. No one snap-buys; the code expires somewhere inside the thirty days; and a month later the buyer uses Honey, or finds a better coupon anyway. People are sophisticated — especially the people with five to eight thousand rupees to spend on a shoe.</p>
+      <p class="markable">And it delivers the chapter's most uncomfortable strategic truth: <b>if you have a bad product and you're running random marketing, you are starting the user on a journey that ends at your competitor's product.</b> A weak competitor advertising against a stronger one, without serious positioning or thought-through marketing, is feeding the bigger competitor — the comparison shopping happens on your dime. Why the hell, the kata asks, do people run ROAS ads against this reality?</p>
+    </div>
+    <div class="quote">"Every buyer's journey is a long journey of being convinced."<span class="who">— the truth ROAS was built to avoid</span></div>
+  </section>
+
+  <section class="sect settle" id="sec-8">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">viii.</span></div>
+    <h2 class="display">Proxy <em>attribution</em></h2>
+    <div class="story">
+      <p class="markable">What good brand managers do instead has a name — <b>proxy attribution</b> — and the kata is honest about it: still wrong, just a step less wrong, and sometimes as manual as standing at an event and meeting the people who came.</p>
+      <p class="markable">Netflix, commissioning a show, is doing the brand manager's math, only better. Every movie is, believe it or not, a marketing campaign: <b>buy this film for 10 crores — will it bring 10 crores of new subscriptions?</b> Netflix knows what the ROAS report never learns: no single movie converts you. The library converts you. The catalog is the acquisition engine, and each film is one more argument inside it.</p>
+      <p class="markable">Consoles ran the same play with games. Sony spends its own money making <b>God of War</b> and <b>Spider-Man</b> exist, because it takes a catalog of games to pull a player onto the platform — people bought the entire PlayStation just to play Spider-Man. That was true of a specific era; the PC ports ended it. The pattern: when the real thing cannot be measured, measure something that points at it.</p>
+    </div>
+  </section>
+
+  <section class="sect settle" id="sec-9">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">ix.</span></div>
+    <h2 class="display">Shares over <em>views</em></h2>
+    <div class="story">
+      <p class="markable">Here is the kata at his own desk, the best place to watch a dashboard lie to its owner. Last year his channel ran two ads — one for Mumbai Tech Week, one for Nvidia's GTC. Instagram offers no attribution; it offers views. The first ad did about 300,000 of them. The second, 274,000. Two numbers sitting on a screen, meaning nothing. The GTC video also collected <b>14,000 likes</b>, and likes are worth exactly nothing — people are brain-dead when they like; they tap and move on. The number he actually reads is smaller: <b>7,600 shares.</b></p>
+      <p class="markable">Why does a person share an event with another person? <em>Because they want to go.</em> It happens in the DMs — <b>chale? Event chale?</b> — one human recruiting another into the purchase, doing the acquisition unpaid. Mumbai Tech Week's video carried 3.1 thousand shares: a less interesting event, still a real signal. These are proxy metrics. Want 10 million views tomorrow? Target the worst, lowest-CPM audience the platform allows. You will have your 10 million by Friday and sell nothing at all.</p>
+      <p class="markable">The proof closed the loop offline. He went to Mumbai Tech Week in person, and the audience was his — person after person coming up: <em>I came because I saw your reel.</em> Until that day he wasn't fully convinced influencer marketing worked. Standing in the middle of real buyers changed his mind, which is the method of the next section, arrived at one section early.</p>
+    </div>
+    <div class="quote">"Why does somebody share an event? Because they want to go. It's in the DMs — chale?"<span class="who">— the intent metric, decoded</span></div>
+  </section>
+
+  <section class="sect settle" id="sec-10">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">x.</span></div>
+    <h2 class="display">The honest <em>instrument</em></h2>
+    <div class="story">
+      <p class="markable">Then the answer with no shortcut in it. It is so hard to tell which of your activities actually worked that the instrument has to be a human being — <b>a really honest one</b>, unbiased, listening to the users and saying: <i>from what I hear, this is what worked.</i> The kata has looked, and his summary is flat: <em>I have not found a better way. I'm sorry — that's the only way.</em> Maybe at Apple-scale, clean signal emerges from the noise of pure data. Almost no company lives at that scale.</p>
+      <p class="markable">So the method is almost embarrassingly old school. <b>Get on the phone. Call the buyers who saw the campaign. Ask them why — or why not — they purchased or engaged.</b> Surveys, run in-house, by the company itself. The main task of a company selling a product is to know why people are buying the product, and almost nobody does it. Run the company on eyes and ears and brains alone, without this, and you will be driven into random narratives. Every time.</p>
+      <p class="markable">One thing the phone calls tell you, for free, is the speed. Buyers do not convert the day they see the thing; somebody watched a video five years ago, carried it somewhere, and came back last month for the AI services. It takes months. YouTube is hard to clearly define the why of — but it definitely helps. Otherwise this business wouldn't exist.</p>
+    </div>
+  </section>
+
+  <section class="sect settle" id="sec-11">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">xi.</span></div>
+    <h2 class="display">The life <em>audit</em></h2>
+    <div class="story">
+      <p class="markable">Then the kata turns the instrument on the room — and through the room, on you. <b>How many of you think your degree got you here?</b> Zero hands, in a room where everyone is making money. Then why did you do the degree? What did it cost — ten lakhs? Twelve? Three hundred people at ten lakhs each: <b>thirty crores, wasted in this room alone.</b> Outside this room, how much? Nobody blames you; your parents put the pressure on, and you were a kid. But the pattern underneath is general: <b>there is a decision you are making right now that has nothing to do with your future success, and you quietly believe it might.</b></p>
+      <p class="markable">The kata sees the same miss everywhere. An editor announces <em>mujhe motion graphics karna hai</em>, and motion graphics has zero correlation with earning more in the next few years — the wrong handle. People do poor attribution to medicines: the ancient remedy that cured you, in the same years puberty finished rebuilding your body and you simply outgrew the asthma. Poor attribution to foods: in India an allergy is a nightmare of additives — some small flavoring, some extra thing in everything you buy — and a person can spend years hunting the one that hurts.</p>
+      <p class="markable">The truth nobody likes hearing is that it's multifactorial. No single thing you did did it. Charlie Munger's name for the working version is the <b>lollapalooza effect</b> — find four or five things moving in the direction you want to go, and take all of them. Hard work belongs on that list as a condition, never as the cause: otherwise laborers would be wealthy, the oil-rig people rich men. And yet the successful do work hard, so the parents' version — <em>work very very hard and you'll become very successful</em> — gets the kata's flat verdict: bad advice. One of the conditions, with the others missing.</p>
+      <p class="markable">The audit matters because attribution is how you price risk. The degree was a ten-lakh risk with, by the room's own admission, zero reward. Misattribute the job to it and the bet retroactively looks sane — which is exactly how the next bad bet gets approved. Done right, attribution sets up correct proxies, stops you skipping the hard work (wrong attribution always sends you looking for shortcuts), and keeps you from missing good opportunities. It even cleans your life up: write down the biggest problem in it — the negative roommate, the ABCD excuse — and the kata's bet is you are attributing it wrongly there too.</p>
+      <p class="markable">The famous beliefs, audited one by one — turn the cards.</p>
+    </div>
+
+    <div class="ladder" id="ladder">
+      <div class="rail" aria-hidden="true"></div>
+
+      <div class="rung">
+        <div class="node">一</div>
+        <div class="flipin">
+          <div class="face front">
+            <div class="amt">"If you build it, they will come"</div>
+            <div class="zt">poor attribution</div>
+            <p class="brief">The field-of-dreams fallacy — building as the cause of arrival, with no distribution in the causal chain.</p>
+            <span class="flipnote">turn the card ↻</span>
+          </div>
+          <div class="face back">
+            <h4>what it hides</h4>
+            <p>Chapter one's law: attempts without distribution die quietly. The building is one condition of arrival, never the cause of it.</p>
+            <p class="ret">↺ return to the front</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="rung">
+        <div class="node">二</div>
+        <div class="flipin">
+          <div class="face front">
+            <div class="amt">"The best product wins"</div>
+            <div class="zt">poor attribution</div>
+            <p class="brief">The engineer's faith — that quality alone converts, in a world where buyers decide on story, status, and feeling.</p>
+            <span class="flipnote">turn the card ↻</span>
+          </div>
+          <div class="face back">
+            <h4>what it hides</h4>
+            <p>Apple sells units in India without the best specs at the price. The buyer's journey ends in a gut decision — product quality is an input to it, not the equation.</p>
+            <p class="ret">↺ return to the front</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="rung">
+        <div class="node">三</div>
+        <div class="flipin">
+          <div class="face front">
+            <div class="amt">"Talent is everything"</div>
+            <div class="zt">poor attribution</div>
+            <p class="brief">The recruiting-deck belief — that one more brilliant hire rewrites the outcome, whatever the market and the machine around them.</p>
+            <span class="flipnote">turn the card ↻</span>
+          </div>
+          <div class="face back">
+            <h4>what it hides</h4>
+            <p>Chapter nine: five coordinated 30% players beat the 150% superstar. Talent is a multiplier of the system it lands in — the system is the other factor.</p>
+            <p class="ret">↺ return to the front</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="rung">
+        <div class="node">四</div>
+        <div class="flipin">
+          <div class="face front">
+            <div class="amt">"Follow your passion"</div>
+            <div class="zt">poor attribution</div>
+            <p class="brief">The commencement-speech classic — passion as the causal engine, with the money following along obediently behind.</p>
+            <span class="flipnote">turn the card ↻</span>
+          </div>
+          <div class="face back">
+            <h4>what it hides</h4>
+            <p>Chapter two's mercy clause — enjoy it "reasonably enough" and commit; passion is a selection filter for endurance, not a strategy. The money follows markets served.</p>
+            <p class="ret">↺ return to the front</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="rung">
+        <div class="node">五</div>
+        <div class="flipin">
+          <div class="face front">
+            <div class="amt">"Capital scales any business"</div>
+            <div class="zt">poor attribution</div>
+            <p class="brief">The investor-pitch belief — money as the universal multiplier of whatever exists, good or broken.</p>
+            <span class="flipnote">turn the card ↻</span>
+          </div>
+          <div class="face back">
+            <h4>what it hides</h4>
+            <p>Aeos started at zero; hundreds of companies raised hundreds of millions and reached zero. Chapter seven: money after the shape is known — it scales what exists, including the flaws.</p>
+            <p class="ret">↺ return to the front</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sect settle" id="sec-12">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">xii.</span></div>
+    <h2 class="display">The three <em>things</em></h2>
+    <div class="story">
+      <p class="markable">Inside a company, attribution quietly decides two things: who gets promoted, and what gets repeated. The first fails in a scene every video team knows. A young teammate comes to the founder — <em>I was the key person on that one</em> — and the kata's reply ends the argument: <b>so you're saying the editor didn't edit the video?</b> The writer takes his turn: that's not the important part, my writing is. The DOP: my camera angles made it good. But the best videos anyone has ever made are team efforts — the game was an excellent team project, everyone pulling their weight, no one hero superstar. Do attribution badly, and the loudest person collects the credit, and then the promotion.</p>
+      <p class="markable">The second is reliable, repeatable formulas — the ones that scale a business. The argument the kata keeps having: <b>YouTube works.</b> A brand does YouTube for a while, reaches four or five hundred thousand subscribers, asks the fatal question — <em>is there ROI here?</em> — and quits. Meanwhile he hires by putting up a story: two thousand applicants, the best ones. He needs pilot customers: a story saying <em>anyone want to try this?</em> — ten or twenty customers the same day. A very specific type of follower makes running a company cheaper, and the brands still ask him for the ROI of the thing that prints his hiring pipeline.</p>
+      <p class="markable">Around all of it sits manufactured noise, mostly from business-case-study creators whose job is sensation — <em>Zara is successful because of THIS one twist</em> — a trade the kata knows from the inside, having made case studies itself for years. If capital scaled any business, Aeos wouldn't exist; it started at zero, and hundreds of companies that raised hundreds of millions went to zero anyway. Compress the noise — correlation is not causation — and the true attribution behind every business the kata has ever met is three lines: <b>find an untapped market. Hire good talent and execute well. Stick around long enough to reap the benefits — just don't die.</b> Any trick you pull, competitors copy. Those three, mostly, they can't. Every founder is these three, with exceptions.</p>
+      <p class="markable">The founder's own confession completes the audit. In his last company, a software-as-a-service business, they overbuilt technology — <em>one more feature and users will come.</em> The tipping feature. WebRTC-based live calling, because an acquirer would value the custom engineering. Wrong attributions, every one, paid for in engineering hours. <b>In India, acquirers buy revenue.</b> Most acquirers buy revenue.</p>
+      <p class="markable">The exercise, given to everyone: <b>write down what you are succeeding at and what you are attributing it to — and what you are failing at, and what you're attributing that to.</b> It's a brilliant way to think about life. Trust me on this.</p>
+    </div>
+  </section>
+
+  <section class="sect settle" id="sec-13">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">xiii.</span></div>
+    <h2 class="display">Practice —<br><em>this is your kata</em></h2>
+    <div class="story">
+      <p class="markable">Attribution is a discipline of honesty, practiced weekly. This month's repetitions:</p>
+    </div>
+    <div class="checks">
+      <div class="chk"><span class="box"><svg viewBox="0 0 30 30" aria-hidden="true"><path pathLength="1" d="M6,17 L13,23 L25,7"/></svg></span><span class="txt">Run the leads question on your biggest current excuse: if you had 10× the input you're blaming, would you have 10× the result? If yes — stop blaming the market.</span></div>
+      <div class="chk"><span class="box"><svg viewBox="0 0 30 30" aria-hidden="true"><path pathLength="1" d="M6,17 L13,23 L25,7"/></svg></span><span class="txt">Audit your own ROAS dependence: which of your decisions exist because they're measurable, not because they work?</span></div>
+      <div class="chk"><span class="box"><svg viewBox="0 0 30 30" aria-hidden="true"><path pathLength="1" d="M6,17 L13,23 L25,7"/></svg></span><span class="txt">Call five real buyers this month — customers, clients, readers — and ask why they actually chose you. Old-school. In-house. No dashboard.</span></div>
+      <div class="chk"><span class="box"><svg viewBox="0 0 30 30" aria-hidden="true"><path pathLength="1" d="M6,17 L13,23 L25,7"/></svg></span><span class="txt">Switch one metric you report from views to shares — from impressions to evidence of intent.</span></div>
+      <div class="chk"><span class="box"><svg viewBox="0 0 30 30" aria-hidden="true"><path pathLength="1" d="M6,17 L13,23 L25,7"/></svg></span><span class="txt">Write your own life audit: what am I succeeding at, what am I attributing it to — and which of those attributions is a 30-crore degree?</span></div>
+    </div>
+    <svg class="brush" viewBox="0 0 900 26" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M8,14 C160,22 330,8 500,16 S720,20 892,12" filter="url(#rough2)"/></svg>
+  </section>
+
+  <section class="sect settle" id="sec-14">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">xiv.</span></div>
+    <h2 class="display">Sit with <em>these</em></h2>
+    <div class="story">
+      <p class="markable">— What am I secretly crediting myself for — the equity I hold in things I didn't move?</p>
+      <p class="markable">— Which measurable thing am I doing because it protects my reputation, not because it works?</p>
+      <p class="markable">— The last thing I bought: which ten pieces of content convinced me — and who got paid for the last click?</p>
+      <p class="markable">— The true-three test: untapped market, good talent executing, still alive. Which of the three am I actually missing?</p>
+    </div>
+    <div class="endrow">
+      <div class="seal-stamp" style="width:58px;height:58px;font-size:26px" title="press to close the chapter">終</div>
+      <span class="fine">end of chapter ten · next — <a href="ch11-distribution-10x-luck.html" style="color:var(--ink-3)">chapter eleven: How Distribution Can 10× Your Luck, Career & Income</a> · <a href="index.html" style="color:var(--ink-3)">or return to the cover</a></span>
+    </div>
+    <p class="srcnote">The Kata Scroll — chapter ten, Book III, written from a complete read of the transcript of
+    <a href="https://www.youtube.com/watch?v=jEnxvZXzo0E" target="_blank" rel="noopener">Varun Mayya's "Why Indian Startups Are Unprofitable" (Kata 6)</a>,
+    ~7,700 words, expanded for study. The dying acquisition and the leads question, the Yaas pod, the VFX firms and the CV exam, the Diet Coke room and Elon, the ROAS definition and the moatless verdict, the marketing-manager motive, Nike's 2020 shifts and the pixel retargeting behind the 25-billion day, the death-spiral arithmetic, Dhoni/Ranveer celebrity-as-ROAS, the Nitin Kamath margin quote, Physics Wallah, the "hum professional" tragedy, the Lemkin tweet, the how-did-you-hear dropdown and the toilet model, the Zerodha affiliate problem, links and coupon codes, the phone-buying journey and the gut decision, the weak-competitor trap and Honey, Netflix's movie-as-campaign and console exclusives, the Mumbai Tech Week and Nvidia GTC shares data and the "chale?" DMs, qualitative attribution and the phone-call method, the five-year-ago buyer, the 30-crore degree audit and its risk-reward, motion graphics, medications and food allergies, the lollapalooza cluster, the laborers argument, the roommate, the five poor attributions, the editor/writer/DOP credit scene, the story-based hiring and pilots, the brands-quitting-YouTube argument, the business-case-study critique, the true three (untapped market, talent executing, just don't die), and the overbuilt-technology confession are all from the session. Chapter thumbnail via YouTube. Diagrams are original. The Kata Scroll is an independent study companion, not affiliated with Varun Mayya or Aeos.</p>
+  </section>
+
+</div>
+</main>
+
+<script>
+(function(){
+  'use strict';
+  const io=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('revealed');io.unobserve(e.target);}});
+  },{threshold:.12});
+  document.querySelectorAll('.settle, .brush, .mountain').forEach(function(el){io.observe(el);});
+  document.querySelectorAll('.markable').forEach(function(p){
+    p.addEventListener('dblclick',function(){p.classList.toggle('marked');});
+    p.title='double-tap to mark this line';
+  });
+  document.querySelectorAll('.rung').forEach(function(r){
+    r.querySelector('.flipin').addEventListener('click',function(){r.classList.toggle('flip');});
+  });
+  document.querySelectorAll('.chk').forEach(function(c){
+    c.addEventListener('click',function(){c.classList.toggle('done');});
+  });
+  document.querySelectorAll('.tip').forEach(function(t){
+    t.addEventListener('click',function(ev){ev.stopPropagation();t.classList.toggle('open');});
+  });
+  document.addEventListener('click',function(ev){
+    document.querySelectorAll('.tip.open').forEach(function(t){if(!t.contains(ev.target))t.classList.remove('open');});
+  });
+  const drop=document.getElementById('raildrop');
+  const rail=document.querySelector('.chapter-rail .railline');
+  function onScroll(){
+    if(!drop||!rail)return;
+    var h=document.documentElement;
+    var p=Math.min(1,Math.max(0,h.scrollTop/((h.scrollHeight-h.clientHeight)||1)));
+    var max=rail.clientHeight-16;
+    drop.style.top=(2+p*max)+'px';
+  }
+  addEventListener('scroll',onScroll,{passive:true});
+  addEventListener('resize',onScroll);
+  onScroll();
+  document.querySelectorAll('.seal-stamp').forEach(function(s){
+    s.addEventListener('click',function(){
+      s.style.transform='rotate(-4deg) scale(.9)';
+      setTimeout(function(){s.style.transform='';},160);
+    });
+  });
+})();
+</script>
+<script>
+/* reading memory — the book remembers your place, your marks, your practice */
+(function(){
+  'use strict';
+  var KEY='kata:'+(location.pathname.split('/').pop()||'index.html');
+  function load(){try{var s=JSON.parse(localStorage.getItem(KEY)||'null');return (s&&typeof s==='object')?s:null;}catch(e){return null;}}
+  function save(s){s.ts=Date.now();try{localStorage.setItem(KEY,JSON.stringify(s));}catch(e){}}
+  function snap(){
+    var s=load()||{marks:[],checks:[],pos:0};
+    s.marks=collect('.markable','marked');
+    s.checks=collect('.chk','done');
+    save(s);
+  }
+  function collect(sel,cls){
+    var out=[];
+    Array.prototype.forEach.call(document.querySelectorAll(sel),function(el,i){if(el.classList.contains(cls))out.push(i);});
+    return out;
+  }
+  var st=load();
+  if(st){
+    (st.marks||[]).forEach(function(i){var p=document.querySelectorAll('.markable')[i];if(p)p.classList.add('marked');});
+    (st.checks||[]).forEach(function(i){var c=document.querySelectorAll('.chk')[i];if(c)c.classList.add('done');});
+  }
+  document.addEventListener('dblclick',function(){snap();});
+  document.addEventListener('click',function(ev){
+    if(ev.target&&ev.target.closest&&ev.target.closest('.chk'))snap();
+  });
+  function pos(){var h=document.documentElement;return h.scrollHeight>h.clientHeight?h.scrollTop/(h.scrollHeight-h.clientHeight):0;}
+  function savePos(){var s=load()||{marks:[],checks:[],pos:0};s.pos=pos();save(s);}
+  var t=null;
+  addEventListener('scroll',function(){if(t)return;t=setTimeout(function(){t=null;savePos();},400);},{passive:true});
+  addEventListener('pagehide',savePos);
+  function restore(){
+    if(location.hash)return;
+    var s=load();if(!s||!(s.pos>0.02))return;
+    var h=document.documentElement;
+    var y=s.pos*(h.scrollHeight-h.clientHeight);
+    if(y>0){h.style.scrollBehavior='auto';scrollTo(0,y);setTimeout(function(){h.style.scrollBehavior='';},80);}
+  }
+  if(document.readyState==='complete')restore();else addEventListener('load',restore);
+  setTimeout(restore,900);
+  if('serviceWorker' in navigator&&location.protocol==='https:'){
+    addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});
+  }
+})();
+</script>
+</body>
+</html>

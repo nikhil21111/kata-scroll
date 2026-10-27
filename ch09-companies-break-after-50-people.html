@@ -1,0 +1,594 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 09 · Why 90% of Companies Break After 50 People — The Kata Scroll</title>
+<meta name="description" content="The Lightning Way — coordination costs, the leader as current generator, the mastery hierarchy, the clear-writing cheat code, and the four horsemen of delusion bubbles. From Varun Mayya's Kata 2.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="The Kata Scroll">
+<meta property="og:title" content="Chapter 09 · Why 90% of Companies Break After 50 People">
+<meta property="og:description" content="The Lightning Way — coordination costs, the leader as current generator, the mastery hierarchy, the clear-writing cheat code, and the four horsemen of delusion bubbles. From Varun Mayya's Kata 2.">
+<meta property="og:image" content="https://i.ytimg.com/vi/uojkYJz7d-k/maxresdefault.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#fbfaf6">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Zen+Kaku+Gothic+New:wght@400;500&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* ═════════ THE KATA SCROLL · CHAPTER 04 · inkwash ═════════ */
+:root{
+  --paper:#fbfaf6; --ink:#141311; --ink-2:#34312c; --ink-3:#66625a; --ink-4:#a19c92;
+  --hair:rgba(20,19,17,.12); --hair-2:rgba(20,19,17,.22);
+  --seal:#c8372d;
+  --f-display:'Cormorant Garamond',Georgia,serif;
+  --f-ui:'Zen Kaku Gothic New',Inter,system-ui,sans-serif;
+  --f-jp:'Shippori Mincho','Noto Serif JP',serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink-2);font-family:var(--f-ui);font-size:17px;line-height:1.75;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:rgba(200,55,45,.22)}
+img{max-width:100%}
+.paper-bg{position:fixed;inset:0;z-index:0;pointer-events:none}
+.paper-bg .mottle{position:absolute;inset:0;background:
+  radial-gradient(60% 50% at 18% 22%,rgba(214,206,190,.16),transparent 70%),
+  radial-gradient(50% 45% at 86% 78%,rgba(214,206,190,.14),transparent 70%),
+  radial-gradient(120% 100% at 50% 50%,transparent 62%,rgba(150,138,112,.10) 100%)}
+.paper-bg svg.grain{position:absolute;inset:0;width:100%;height:100%;mix-blend-mode:multiply;opacity:.92}
+main{position:relative;z-index:1}
+.vert{writing-mode:vertical-rl;font:500 13px/1 var(--f-ui);letter-spacing:.42em;text-transform:uppercase;color:var(--ink-4)}
+.seal-stamp{display:inline-flex;align-items:center;justify-content:center;background:var(--seal);color:var(--paper);
+  font-family:var(--f-jp);font-weight:700;border-radius:5px;transform:rotate(-4deg);
+  box-shadow:inset 0 0 10px rgba(0,0,0,.28),0 1px 0 rgba(0,0,0,.08);user-select:none;cursor:pointer;transition:transform .18s ease}
+.seal-stamp:active{transform:rotate(-4deg) scale(.92)}
+.eyebrow{display:inline-flex;align-items:center;gap:16px;font:500 14px/1 var(--f-ui);letter-spacing:.3em;text-transform:uppercase;color:var(--ink-3)}
+.eyebrow::before{content:'';width:34px;height:2px;background:var(--seal)}
+.display{font-family:var(--f-display);font-weight:500;color:var(--ink);letter-spacing:-.012em;line-height:1.02}
+.display em{font-style:italic;color:var(--seal)}
+.lead{font:400 19px/1.8 var(--f-ui);color:var(--ink-3);max-width:52ch}
+.lead b{color:var(--ink);font-weight:500}
+.fine{font:400 14px/1.6 var(--f-ui);color:var(--ink-4);letter-spacing:.02em}
+.brush{display:block;width:100%;height:26px;overflow:visible}
+.brush path{stroke:var(--ink);stroke-width:5;fill:none;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.7s cubic-bezier(.6,0,.3,1)}
+.brush.seal-brush path{stroke:var(--seal)}
+.brush.revealed path{stroke-dashoffset:0}
+.mountain{display:block;width:min(300px,70%);height:64px;margin:34px auto;overflow:visible;opacity:.9}
+.mountain path{stroke:var(--ink-3);fill:none;stroke-width:3.4;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 2.4s ease}
+.mountain.revealed path{stroke-dashoffset:0}
+.settle{opacity:0;filter:blur(6px);transform:translateY(14px);transition:opacity 1.05s ease,filter 1.05s ease,transform 1.05s ease}
+.settle.revealed{opacity:1;filter:blur(0);transform:none}
+@media (prefers-reduced-motion:reduce){.settle{transition:none;opacity:1;filter:none;transform:none}.brush path,.mountain path{transition:none;stroke-dashoffset:0}}
+.scroll-wrap{max-width:840px;margin:0 auto;padding:96px 28px 42vh;position:relative}
+.chapter-rail{position:fixed;left:26px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;gap:18px;z-index:6}
+.chapter-rail .seal-stamp{width:52px;height:52px;font-size:24px}
+.chapter-rail .railline{width:3px;height:220px;background:var(--hair);border-radius:3px;position:relative;overflow:visible}
+.chapter-rail .raildrop{position:absolute;left:50%;top:0;width:13px;height:19px;background:var(--seal);border-radius:50% 50% 50% 50%/62% 62% 38% 38%;transform:translate(-50%,-2px);transition:top .22s linear}
+.cover{min-height:82vh;display:flex;flex-direction:column;justify-content:center;position:relative}
+.cover h1.display{font-size:clamp(46px,6.4vw,84px);margin:22px 0 26px}
+.cover .jp-side{position:absolute;right:-4px;top:10%;height:224px}
+.cover .meta-row{display:flex;align-items:center;gap:18px;margin-top:42px;flex-wrap:wrap}
+.enso-wrap{position:absolute;right:2%;top:6%;width:clamp(150px,20vw,240px);opacity:.8;pointer-events:none}
+.toc{margin:74px 0 30px;padding:34px 38px;background:rgba(255,255,255,.5);border:1px solid var(--hair);border-radius:3px}
+.toc h2{font:500 13px/1 var(--f-ui);letter-spacing:.3em;text-transform:uppercase;color:var(--ink-3);margin-bottom:20px}
+.toc ol{list-style:none;columns:2;column-gap:52px}
+.toc li{break-inside:avoid;margin-bottom:11px}
+.toc a{display:flex;gap:14px;align-items:baseline;text-decoration:none;color:var(--ink-2);font-size:15.5px;transition:color .3s}
+.toc a .n{font-family:var(--f-display);font-style:italic;color:var(--seal);min-width:26px}
+.toc a:hover{color:var(--seal)}
+.toc a:hover .n{color:var(--ink)}
+@media (max-width:640px){.toc ol{columns:1}}
+.sect{padding-top:66px;margin-top:58px;position:relative;scroll-margin-top:40px}
+.sect .washx{position:absolute;inset:-46px -70px;background:radial-gradient(42% 52% at 32% 42%,rgba(20,19,17,.05),transparent 72%);opacity:0;transform:scale(.95);transition:opacity 1.3s ease,transform 1.3s ease;pointer-events:none;border-radius:50%}
+.sect.revealed .washx{opacity:1;transform:scale(1)}
+.sect .kicker{display:flex;align-items:baseline;gap:16px;margin-bottom:18px}
+.sect .kicker .no{font-family:var(--f-display);font-style:italic;font-size:30px;color:var(--seal)}
+.sect h2.display{font-size:clamp(33px,3.9vw,50px);margin-bottom:22px;line-height:1.06}
+.story{font-family:var(--f-display);font-size:23px;line-height:1.85;color:var(--ink-2);max-width:64ch}
+.story p{margin-bottom:1.35em}
+.story p:first-of-type::first-letter{font-size:72px;line-height:.85;float:left;padding:8px 14px 0 0;color:var(--ink);font-style:italic}
+.story .aside{font-family:var(--f-ui);font-size:15.5px;color:var(--ink-3);border-left:2px solid var(--hair-2);padding:6px 0 6px 22px;margin:2em 0}
+.quote{font-family:var(--f-display);font-style:italic;font-size:clamp(26px,3.2vw,32px);line-height:1.5;color:var(--ink);max-width:32ch;margin:60px auto;text-align:center;position:relative}
+.quote::before{content:'"';font-size:72px;color:var(--seal);position:absolute;top:-34px;left:50%;transform:translateX(-50%);opacity:.8}
+.quote .who{display:block;font-family:var(--f-ui);font-style:normal;font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-4);margin-top:18px}
+.markable{cursor:pointer;border-radius:2px;transition:background .4s;position:relative}
+.markable:hover{background:rgba(200,55,45,.045)}
+.markable.marked{background:linear-gradient(180deg,transparent 62%,rgba(200,55,45,.17) 62%)}
+.markable.marked::after{content:'富';position:absolute;left:-30px;top:2px;font-family:var(--f-jp);color:var(--seal);font-size:15px;opacity:.85}
+.tip{border-bottom:2px dotted var(--seal);cursor:pointer;position:relative}
+.tip .tipbox{position:absolute;left:50%;bottom:135%;transform:translateX(-50%);width:238px;background:var(--ink);color:var(--paper);font:400 13.5px/1.55 var(--f-ui);padding:13px 15px;border-radius:4px;opacity:0;pointer-events:none;transition:opacity .3s;z-index:30}
+.tip:hover .tipbox,.tip.open .tipbox{opacity:1}
+.tip .tipbox b{color:#fff;font-weight:500}
+figure.fig{margin:54px 0;padding:16px;background:rgba(255,255,255,.55);border:1px solid var(--hair);border-radius:3px;box-shadow:0 1px 0 rgba(20,19,17,.02),0 34px 52px -44px rgba(20,19,17,.4)}
+figure.fig img{display:block;width:100%;border-radius:2px;filter:sepia(.14) saturate(.86) contrast(.97)}
+figure.fig figcaption{padding:14px 6px 4px;font:400 13.5px/1.6 var(--f-ui);color:var(--ink-4)}
+figure.fig figcaption b{color:var(--ink-3);font-weight:500}
+figure.fig.imgfail img{display:none}
+figure.fig.imgfail{padding:34px}
+figure.fig.imgfail figcaption::before{content:'▮ the image rested — ink remembers —';display:block;font-style:italic;margin-bottom:8px;color:var(--ink-4)}
+figure.fig.narrow{max-width:560px;margin-left:auto;margin-right:auto}
+.diag{margin:58px 0}
+.diag svg{display:block;width:100%;height:auto;overflow:visible}
+.diag figcaption{margin-top:14px;font:400 13.5px/1.6 var(--f-ui);color:var(--ink-4);text-align:center}
+.ladder{position:relative;margin:64px auto 22px;max-width:730px}
+.ladder .rail{position:absolute;left:25px;top:8px;bottom:8px;width:3px;background:linear-gradient(180deg,var(--ink-3),var(--ink));border-radius:3px}
+.rung{position:relative;padding-left:88px;margin-bottom:44px;perspective:1300px;min-height:236px}
+.rung .node{position:absolute;left:6px;top:14px;width:42px;height:42px;border-radius:50%;border:2.5px solid var(--ink-3);background:var(--paper);display:flex;align-items:center;justify-content:center;font-family:var(--f-jp);font-weight:700;font-size:18px;color:var(--ink-2);transition:all .5s ease;z-index:2}
+.rung.flip .node{border-color:var(--seal);color:var(--seal);transform:rotate(-6deg) scale(1.07)}
+.rung .flipin{position:relative;transform-style:preserve-3d;transition:transform .95s cubic-bezier(.58,0,.26,1)}
+.rung.flip .flipin{transform:rotateY(180deg)}
+.rung .face{backface-visibility:hidden;-webkit-backface-visibility:hidden;border:1px solid var(--hair);border-radius:4px;background:rgba(255,255,255,.58);box-shadow:0 1px 0 rgba(20,19,17,.02),0 30px 48px -42px rgba(20,19,17,.38);padding:30px 34px;cursor:pointer}
+.rung .face.front .amt{font-family:var(--f-display);font-size:38px;color:var(--ink);line-height:1.05}
+.rung .face.front .zt{font:500 13px/1 var(--f-ui);letter-spacing:.22em;text-transform:uppercase;color:var(--seal);margin:10px 0 14px}
+.rung .face.front .brief{font-size:16px;color:var(--ink-3);line-height:1.7;font-family:var(--f-ui)}
+.rung .face.front .flipnote{position:absolute;right:22px;bottom:14px;font:italic 400 13px/1 var(--f-display);color:var(--ink-4)}
+.rung .face.back{position:absolute;inset:0;transform:rotateY(180deg);background:var(--ink);border-color:var(--ink);overflow:auto}
+.rung .face.back h4{font:500 11px/1 var(--f-ui);letter-spacing:.28em;text-transform:uppercase;color:rgba(251,250,246,.48);margin:14px 0 7px}
+.rung .face.back p{font:400 14.5px/1.65 var(--f-ui);color:rgba(251,250,246,.9)}
+.rung .face.back .ret{margin-top:16px;font:italic 400 13px/1 var(--f-display);color:rgba(251,250,246,.55)}
+@media (prefers-reduced-motion:reduce){.rung .flipin{transition:none}.rung.flip .flipin{transform:none}.rung .face.back{position:relative;transform:none;display:none}.rung.flip .face.back{display:block}}
+.checks{margin-top:22px}
+.chk{display:flex;align-items:center;gap:18px;padding:13px 6px;cursor:pointer;user-select:none}
+.chk .box{flex:none;width:26px;height:26px;border:2px solid rgba(20,19,17,.4);border-radius:2px;position:relative}
+.chk .box svg{position:absolute;inset:-4px;width:30px;height:30px}
+.chk .box svg path{stroke:var(--seal);stroke-width:3.4;fill:none;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .5s ease}
+.chk.done .box svg path{stroke-dashoffset:0}
+.chk .txt{font-size:16.5px;color:var(--ink-2);transition:color .5s}
+.chk.done .txt{color:var(--ink-4);text-decoration:line-through;text-decoration-color:rgba(200,55,45,.5)}
+.endrow{display:flex;align-items:center;gap:20px;margin-top:52px}
+.srcnote{margin-top:74px;padding-top:26px;border-top:1px solid var(--hair);font:400 13px/1.7 var(--f-ui);color:var(--ink-4)}
+.srcnote a{color:var(--ink-3)}
+.care{margin-top:26px;padding:18px 22px;border:1px solid var(--hair-2);border-radius:3px;background:rgba(255,255,255,.5);font:400 14px/1.7 var(--f-ui);color:var(--ink-3)}
+.care b{color:var(--seal);font-weight:500}
+@media (max-width:760px){
+  .chapter-rail{display:none}
+  .scroll-wrap{padding:72px 22px 40vh}
+  .story{font-size:20.5px}
+  .enso-wrap{opacity:.35}
+  .markable.marked::after{left:-8px;top:-14px}
+  .rung{padding-left:0;padding-top:64px;min-height:250px}
+  .rung .node{left:2px;top:8px}
+  .ladder .rail{left:20px}
+  .tip .tipbox{left:auto;right:-10px;transform:none;width:210px}
+}
+</style>
+</head>
+<body>
+
+<div class="paper-bg" aria-hidden="true">
+  <div class="mottle"></div>
+  <svg class="grain" xmlns="http://www.w3.org/2000/svg">
+    <filter id="washi"><feTurbulence type="fractalNoise" baseFrequency="0.82" numOctaves="2" seed="11" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 0.56  0 0 0 0 0.52  0 0 0 0 0.44  0 0 0 0.055 0"/></filter>
+    <rect width="100%" height="100%" filter="url(#washi)"/>
+  </svg>
+</div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="rough"><feTurbulence type="fractalNoise" baseFrequency="0.045" numOctaves="3" seed="7" result="t"/>
+      <feDisplacementMap in="SourceGraphic" in2="t" scale="5"/></filter>
+    <filter id="rough2"><feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" seed="23" result="t"/>
+      <feDisplacementMap in="SourceGraphic" in2="t" scale="6"/></filter>
+    <filter id="rough3"><feTurbulence type="fractalNoise" baseFrequency="0.06" numOctaves="3" seed="41" result="t"/>
+      <feDisplacementMap in="SourceGraphic" in2="t" scale="7"/></filter>
+  </defs>
+</svg>
+
+
+
+<aside class="chapter-rail" aria-label="chapter progress">
+  <span class="vert">Chapter Nine · 和</span>
+  <div class="seal-stamp" title="press the seal">和</div>
+  <div class="railline"><div class="raildrop" id="raildrop"></div></div>
+</aside>
+
+<main>
+<div class="scroll-wrap">
+
+  <header class="cover settle">
+    <div class="enso-wrap" aria-hidden="true">
+      <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+        <path d="M150,42 C92,44 46,92 44,152 C42,214 92,258 152,258 C210,258 254,214 256,154 C258,102 222,62 176,50"
+          fill="none" stroke="#141311" stroke-width="17" stroke-linecap="round" filter="url(#rough2)" opacity=".9"/>
+        <circle cx="228" cy="236" r="17" fill="#c8372d" opacity=".92"/>
+      </svg>
+    </div>
+    <p class="eyebrow">The Kata Scroll · Book III — The Company · Chapter Nine</p>
+    <h1 class="display">Why 90% of Companies<br><em>Break After 50 People</em></h1>
+    <p class="lead">The Lightning Way — the coordination-cost model of teams, the leader as <b>current generator</b>, what people actually want (it isn't cash), the clear-writing cheat code that moves the whole threshold, and the four horsemen that keep a company a functioning delusion.</p>
+    <div class="meta-row">
+      <span class="fine">from Varun Mayya's Kata 2 · read in full and expanded</span>
+      <svg class="brush seal-brush" style="flex:1;max-width:160px" viewBox="0 0 300 26" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M4,16 C60,8 130,22 190,12 S270,10 296,15" filter="url(#rough)"/></svg>
+    </div>
+  </header>
+
+  <nav class="toc settle" aria-label="in this chapter">
+    <h2>In this chapter</h2>
+    <ol>
+      <li><a href="#sec-1"><span class="n">i.</span> The 500th employee</a></li>
+      <li><a href="#sec-2"><span class="n">ii.</span> The Dota dynamic</a></li>
+      <li><a href="#sec-3"><span class="n">iii.</span> Coordination costs</a></li>
+      <li><a href="#sec-4"><span class="n">iv.</span> The unblocker</a></li>
+      <li><a href="#sec-5"><span class="n">v.</span> Generating current</a></li>
+      <li><a href="#sec-6"><span class="n">vi.</span> Stories & incentives</a></li>
+      <li><a href="#sec-7"><span class="n">vii.</span> What people actually want</a></li>
+      <li><a href="#sec-8"><span class="n">viii.</span> The aligned incentive</a></li>
+      <li><a href="#sec-9"><span class="n">ix.</span> The blockages catalog</a></li>
+      <li><a href="#sec-10"><span class="n">x.</span> The clear-writing cheat code</a></li>
+      <li><a href="#sec-11"><span class="n">xi.</span> The four horsemen</a></li>
+      <li><a href="#sec-12"><span class="n">xii.</span> Practice — your kata</a></li>
+      <li><a href="#sec-13"><span class="n">xiii.</span> Sit with these</a></li>
+    </ol>
+  </nav>
+
+  <figure class="fig narrow settle">
+    <img src="https://i.ytimg.com/vi/uojkYJz7d-k/maxresdefault.jpg" alt="Kata 2 — Why 90% of Companies Break After 50 People, the original masterclass" loading="lazy"
+      onerror="this.closest('figure').classList.add('imgfail')">
+    <figcaption><b>The source.</b> Varun Mayya teaching Kata 2 — the Lightning Way. <a style="color:var(--ink-3)" href="https://www.youtube.com/watch?v=uojkYJz7d-k" target="_blank" rel="noopener">watch on YouTube ↗</a></figcaption>
+  </figure>
+
+  <section class="sect settle" id="sec-1">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">i.</span></div>
+    <h2 class="display">The 500th<br><em>employee</em></h2>
+    <div class="story">
+      <p class="markable">The session opens with the confession of every founder who has grown past the apartment: <b>the chronic worry is that at 500 employees, I don't know what our 500th employee is doing.</b> Even the managers probably don't know what their two-level skip-down is doing. And that is genuinely frightening, because services must be standardized — <b>how does your thousandth employee give the same quality as the first few who cared, in the apartment, at the start?</b> The trap he confesses to at 24, 25: young services founders aggressively scale projects — take one, take the next, take the third — and the first one drops. Aeos scaled fast by doing the opposite: caring deeply, obsessively, about clients — especially the marquee ones.</p>
+      <p class="markable">Underneath the worry sits the question the whole kata answers: <b>how can everybody on your team care about your customer as much as you do — when you are not physically present? And to be honest: why should they?</b> The internet's prevailing mood says don't care — who cares about your job, your customers? And yet the kata's quiet discovery: the team that cares, and makes its members care, <b>ends up doing better than everybody else. That is the basic secret.</b> The proxy for scaling that caring: make really good leaders — people who absorb the DNA and pass it to the next layer, who pass it to the next. The company becomes a relay of care. Everything that follows is how to build the relay.</p>
+    </div>
+    <svg class="mountain" viewBox="0 0 300 64" preserveAspectRatio="none" aria-hidden="true">
+      <path pathLength="1" d="M6,56 L64,22 L104,44 L150,12 L196,40 L238,26 L294,54" filter="url(#rough3)"/>
+    </svg>
+  </section>
+
+  <section class="sect settle" id="sec-2">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">ii.</span></div>
+    <h2 class="display">The Dota <em>dynamic</em></h2>
+    <div class="story">
+      <p class="markable">The model of everything comes from a video game. Dota looks like five versus five — <b>but actually it's nine versus one, and all ten players think so.</b> You can be the absolute best player on the field and your team drags you down — and six months later you realize you were the drag. The physics: <b>five coordinated players at 30% skill will beat a team with one player at 150% skill and four people pulling against him.</b> Coordination is the multiplier that skill never outruns.</p>
+      <p class="markable">And the reason this is hard is the oldest reason: it is very hard to get four or five people to coordinate. It's why people leave to start their own company and then discover <b>they can't even convince five friends to take a one-year risk together</b> — everyone wants it in their slightly different direction. The kata's accusation, aimed at the graveyard of startups: <b>most startups explode or fail because three, four, five co-founders all want to go slightly different directions after some time</b> — everyone has the status need, everyone needs it to be <em>my</em> journey, everyone's operating from their own POV. The coordinated team rips apart the team of superstars. Hold that sentence; the rest of the chapter is engineering it.</p>
+    </div>
+    <div class="quote">"Five coordinated players at 30% skill will beat a 150% superstar and four people pulling against him."<span class="who">— the Dota dynamic, and the thesis of the chapter</span></div>
+    <svg class="brush" viewBox="0 0 900 26" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M6,14 C140,5 260,21 420,11 S680,9 780,16 894,11" filter="url(#rough2)"/></svg>
+  </section>
+
+  <section class="sect settle" id="sec-3">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">iii.</span></div>
+    <h2 class="display">Coordination <em>costs</em></h2>
+    <div class="story">
+      <p class="markable">Now the model, drawn on the kata's own slide. Four people — A, B, C, D — need to produce a high-quality output. Above them floats a line: <b>the threshold of effective coordination.</b> Every person has a cost of coordination, and it's personal: person A is extraordinarily arrogant — won't work with anybody; person B is collaborative but can't speak the language the team works in; person C has the attitude but not the skill. The goal is simple to state and brutal to do: <b>get every person's cost below the line.</b> Below it, output flows; above it, nothing does — regardless of talent.</p>
+      <p class="markable">And the internet's objection — <em>why can't these five people just raise $50 million and fix it?</em> — gets the kata's coldest reply: the money was never the issue. <b>When you get the cost of coordination down, you get output. When you have output, you can raise venture capital.</b> The causality only runs one direction. Everything — funding, scale, the thousandth employee — flows from this one diagram.</p>
+    </div>
+
+    <figure class="diag settle">
+      <svg viewBox="0 0 760 256" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The coordination threshold: four people with different coordination costs, a leader pushing costs down, and the writer moving the entire threshold lower">
+        <path d="M40,100 L720,100" stroke="#141311" stroke-width="5" stroke-linecap="round" filter="url(#rough2)" opacity=".9"/>
+        <g font-family="Zen Kaku Gothic New, sans-serif" font-size="14" fill="#66625a">
+          <text x="380" y="40" text-anchor="middle">threshold of effective coordination</text>
+        </g>
+        <g fill="#a19c92" filter="url(#rough)">
+          <circle cx="150" cy="160" r="20"/><circle cx="300" cy="135" r="20"/><circle cx="450" cy="175" r="20"/><circle cx="600" cy="150" r="20"/>
+        </g>
+        <g font-family="Zen Kaku Gothic New, sans-serif" font-size="14" fill="#34312c">
+          <text x="150" y="205" text-anchor="middle">arrogance</text>
+          <text x="300" y="205" text-anchor="middle">language</text>
+          <text x="450" y="205" text-anchor="middle">no skill</text>
+          <text x="600" y="205" text-anchor="middle">low trust</text>
+        </g>
+        <g stroke="#c8372d" stroke-width="4" fill="none" stroke-linecap="round" filter="url(#rough)">
+          <path d="M150,140 L150,110 M300,115 L300,85 M450,155 L450,125 M600,130 L600,100"/>
+          <path d="M150,110 L138,122 M150,110 L162,122 M300,85 L288,97 M300,85 L312,97 M450,125 L438,137 M450,125 L462,137 M600,100 L588,112 M600,100 L612,112"/>
+        </g>
+        <g font-family="Zen Kaku Gothic New, sans-serif" font-size="14" fill="#c8372d">
+          <text x="380" y="235" text-anchor="middle">the leader pushes every cost below the line — the writer moves the line itself</text>
+        </g>
+      </svg>
+      <figcaption><b>The threshold.</b> Four humans, four costs, one line. Output only exists below it — and section x's cheat code is lowering the line itself.</figcaption>
+    </figure>
+  </section>
+
+  <section class="sect settle" id="sec-4">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">iv.</span></div>
+    <h2 class="display">The <em>unblocker</em></h2>
+    <div class="story">
+      <p class="markable">So what is a leader, exactly? The kata's definition is mechanical: <b>a leader's job is to drop the cost of coordination — by hook or by crook.</b> The team speaks Hindi and one brilliant person speaks only English? Then that person is the problem — upskill them, translate for them, or move them. No sentimentality; the line matters more than any individual above it.</p>
+      <p class="markable">And the archetype of the job comes from a story Andrej Karpathy tells about Elon Musk: people misunderstand what Elon does in a company. <b>Elon is a guy with a big hammer.</b> He walks to each table and asks: <em>what's stopping you from doing your work?</em> "That guy — he won't give me the files." So Elon goes to the guy: <em>give him the files.</em> Or it's bigger — "I need a hundred GPUs from Nvidia" — and Elon picks up the phone: <em>Jensen, I need a hundred chips</em> — and hangs up. <b>The massive unblocker.</b> Because of entropy, the kata notes, people <em>become</em> blockers in different areas, all by themselves, forever — and the leader's work is removing them so the lightning channels keep flowing. The proof it compounds: the game-dev team's coordination cost, very high at the start, kept falling and falling — and now the same people produce things dramatically faster.</p>
+    </div>
+    <div class="quote">"Elon is a guy with a big hammer. What's stopping you from doing your work?"<span class="who">— the Karpathy story, via Kata 2</span></div>
+  </section>
+
+  <section class="sect settle" id="sec-5">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">v.</span></div>
+    <h2 class="display">Generating <em>current</em></h2>
+    <div class="story">
+      <p class="markable">The metaphor the whole system runs on — the Aeos logo is a lightning bolt, and this chapter is called <b>the Lightning Way</b>. A leader is <b>a generator of current</b>: your job is to make four, ten, a hundred people who don't care about a specific task care about it. The ways to generate current, catalogued like weather: <b>excitement</b> — the Zumba leader at 7 am, "let's go, you can do it," and the old auntie runs because he's telling her to; <b>incentives</b> — five sales and something happens, the sales organization's fuel; <b>inspiration</b> — "we're going to make India better," some goal bigger than the room; and <b>fear</b> — the teacher who threw the duster, the cane, the oldest current in the school system. Most leaders run on some blend of the four.</p>
+      <p class="markable">The structure at Aeos: <b>sixteen people at the core, each with their own teams beneath them</b> — Yaas alone runs fifteen to twenty more under Rohit, Lavina, and Ronit — and Varun wakes up every day to generate current through those sixteen, who relay it downward. And the honest cost of the job: <b>the best leaders are infectious — a never-ending supply of current without burning out</b> — and some days he wakes up and doesn't want to shoot anything at all, and does it anyway, because <em>my team's counting on me.</em> That's the position description, in full. (And the reverse flow is real: some days the leadership team picks <em>him</em> up — Saga reverse-pressuring him into the studio: <em>"dude, we need to shoot this."</em> Current can be absorbed, too, if you allow your peers to lead you for a moment.)</p>
+    </div>
+  </section>
+
+  <section class="sect settle" id="sec-6">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">vi.</span></div>
+    <h2 class="display">Stories &<br><em>incentives</em></h2>
+    <div class="story">
+      <p class="markable">The two units of current generation, named. <b>Stories:</b> the kata's open secret is that most of what becomes valuable in Aeos is valuable <em>because of the stories attached to it</em>. The shoes — some people didn't get them and felt bad, and wanted to reach that goal. The lounge behind the three-year lock. "I have found ways to take things that are fundamentally useless — <b>a shoe is useless; everyone can buy a shoe</b> — and assign meaning to them via stories." Chapter six's world-building, running a payroll. <b>Incentives:</b> the milestone, the reward — and the part everyone drops: <b>follow-through.</b> In three years the company has followed through on every incentive it set — sales reps get what was promised; a batch of scooters just went out to the team. An incentive honored is a story proven; an incentive forgotten is a story broken.</p>
+      <p class="markable">And the accounting of stories over time, stated as prophecy mechanics: <b>a streak of success makes you prophetic to your teams; a streak of failures makes your storytelling unreliable.</b> After three years of nearly every unit doing well, people say "if Varun said it, it'll work" — a power he did not have at 25, and which three bad years would dissolve. Which creates the tension the kata navigates in public: reliability tempts you to only take the sure bets — <b>but you still need hard shots, or you never push the boundary.</b> His current target failure rate: <b>about 50%.</b> The last three years ran at zero on the projects they cared about; the fix is taking <em>harder</em> bets, not safer ones.</p>
+    </div>
+    <div class="quote">"A streak of success makes you prophetic to your teams. A streak of failures makes your storytelling unreliable."<span class="who">— the prophecy ledger</span></div>
+  </section>
+
+  <section class="sect settle" id="sec-7">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">vii.</span></div>
+    <h2 class="display">What people<br><em>actually want</em></h2>
+    <div class="story">
+      <p class="markable">The obsession underneath everything: what drives people in an organization — not what they <em>say</em> (what people say and what people do are two different things), but the lived thing. Everyone says money. With leadership now making real money, Varun found that <b>false</b>. If money was all that mattered, why would anyone quit Nvidia the day their four-year vesting ends? Why leave Google? Why did the Loom founder walk away from <em>unvested</em> stock after the sale — "I don't care about this anymore"? Throwing money at people already failed at India's VC-funded startups — <b>otherwise Byju's would be the biggest company in India.</b></p>
+      <p class="markable">So the hierarchy, in ascending order of power. <b>Cash</b> — the least powerful incentive: it matters exactly until people feel they make enough among their peer group (a lakh, two, three — the number is social, not absolute), and after that it stops pulling. Then <b>respect</b> — am I respected in my community, known for this special kind of motion graphics. Then <b>status</b> — different from respect: among designers, which number am I? Then <b>purpose</b> — is there meaning in this daily thing (why people eventually leave finance). And at the top, <b>mastery — the best incentive.</b> The proof is Dota's MMR: a number that pays no money, that he has struggled to raise for over a decade. The proof in every workplace: <b>every video editor he has ever met, without exception, wants to become a motion graphics designer</b> — though there is zero correlation with money (informational content pays better; too much motion graphics sometimes takes away from the message) — and no editor has ever been convinced otherwise, because it's the mastery path. The proof in craft itself: the game where the girl puts on a jacket — ordinary gamers don't care; every game developer knows <b>that jacket is very hard to do.</b> Showing off mastery is the flex that never pays and never stops pulling.</p>
+      <p class="markable">The caution flag, from the book <em>Punished by Rewards</em> (recommended to every leader, spoiled in one line): <b>external rewards overshadow intrinsic motivation</b> — pay a great coder per fix and slowly they code for the money and stop enjoying the code; short-term compliance, long-term harm; some rewards corrode trust outright. Varun admits going too far with incentives and having to read the book and correct. Nothing beats the quest for mastery, the feeling of being challenged and winning — <b>the lightning state: almost there, and you know exactly what you need to do from today to get there.</b> Leaders have it via the P&L — the gap between where I am and where I want to be. The summary triad: <b>autonomy, purpose, and mastery — without worry of survival</b> (never underpay so much that survival is all they can think about).</p>
+    </div>
+    <svg class="brush" viewBox="0 0 900 26" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M8,12 C180,20 340,6 520,15 S760,20 892,10" filter="url(#rough)"/></svg>
+  </section>
+
+  <section class="sect settle" id="sec-8">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">viii.</span></div>
+    <h2 class="display">The aligned <em>incentive</em></h2>
+    <div class="story">
+      <p class="markable">The discipline that makes incentives work at all: they must align with what the team member <em>individually</em> wants — the story in their head, not yours. The kata's ladder example: some people genuinely want four-day weeks — so make the ladder: <b>finish a year and hit these milestones, five days; two years, four days; three years, three days.</b> You've taken what everybody wants and set it as an earned incentive. (The aside that mystifies the internet: many at Aeos are <em>allergic</em> to work from home — content is fun, the banter is the job — a preference the feed simply cannot compute.)</p>
+      <p class="markable">And the failure mode of misalignment, told through the story a friend told him: a designer girl from a very small town passed out of his school — <b>in her village, everyone celebrated that she was the first person making more than a lakh a month.</b> The money didn't matter to her; the reputation in that village did. She didn't care what Bangalore thought of her — <em>"I care what my old people thought about me."</em> Meanwhile a leader half a world away is offering incentives designed for someone else's story entirely. The exercise the kata assigns every leader: <b>ask yourself — what are the aspirations of your teams?</b> Varun knows his leadership's aspirations cold — and knows how much of each is social: the house-buying contagion, where people who couldn't afford houses two years ago and never planned them now want one <em>because they see the others getting theirs.</em> Aspirations are partly epidemic. Design for the actual disease.</p>
+    </div>
+  </section>
+
+  <section class="sect settle" id="sec-9">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">ix.</span></div>
+    <h2 class="display">The blockages <em>catalog</em></h2>
+    <div class="story">
+      <p class="markable">The chapter's most personal section, introduced with a confession: <b>"10 years ago, 5 years ago — I have been the blockage."</b> Every human blockage is listed — all learnable, all fixable, each needing time and a mirror (somebody else telling you <em>this is a blockage</em>). The catalog: <b>high ego</b> ("I know everything, I don't need a team, me"); <b>low skill or mastery — the easiest fixed</b> (Saga on team VM: not good at scripting, tried editing, the right role found him over time, mastery followed; people go low-to-high skill remarkably fast in high-talent-density environments); <b>poor attitude — the hardest</b> (it comes from your parents, from the environment you were raised in; "work is bad, I just want to go home" — under 1% of people, and you can see it from far away: nobody works with them); <b>poor communication skills</b> (deadly in synthesis businesses); <b>attention to the wrong details</b> ("bro, the video <em>sucks</em> — why are you polishing this tiny thing?" — fix the big issue first; easily fixed); <b>low trust</b> ("they'll sabotage me, the company is exploiting me" — walks in pre-installed, very hard to fix); <b>low accountability</b> — the blame game — with the crucial nuance that <em>everyone</em> starts low in their twenties, and "this screwed up — <b>my fault</b>" requires the confidence that you won't be fired for admitting it, which Aeos deliberately designs for; <b>passive aggression</b>; <b>too transactional</b> ("the client called on Sunday — I'm not paid for this"); and <b>victimhood</b> — the world is against me, I am fine.</p>
+      <p class="markable">The closing notes of the section carry the leader's own maintenance manual: you will burn out without purpose — and purpose is <em>all fictional and made up, by the way</em>, which makes it no less load-bearing. You cannot lead without intrinsic motivation — "it could be a company, it could be a family, anything — but if it doesn't come from inside, you're never going to be a leader." And leadership is learnable, full stop: <b>Vishal</b> — two years ago they struggled to get any work out of him; today he's in the studio at midnight, pressuring <em>his</em> people, generating his own current. "How did you change so much?" It can be taught. The best leaders teach the art of current generation itself.</p>
+    </div>
+  </section>
+
+  <section class="sect settle" id="sec-10">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">x.</span></div>
+    <h2 class="display">The clear-writing<br><em>cheat code</em></h2>
+    <div class="story">
+      <p class="markable">And now the secret the kata saved for the back half — the cheat. Your job as a leader is to push each person's coordination cost below the line. <b>But you can also cheat, and move the entire line itself.</b> The technique that does it: <b>clear writing.</b> Person A — this is exactly what I need from you, these are your incentives, this is your plan. Person B — the same, precise. Then the grand plan for how you all coordinate. The kata's own receipts from inside Aeos: projects where belief was very low, run by natural non-coordinators, <b>made to coordinate through the document alone.</b></p>
+      <p class="markable">The leaders who do it: it's not a theory — <b>the best leaders are writing all the time.</b> Deepinder Goyal has written hundreds of pages on culture; the Zomans of the world write like they breathe. Varun's live example (apologized for in advance): a full Google Doc sent to Hush — <em>voiceover set one, voiceover set two, make sure the audio is clean</em> — exact pointers, clear bullets — <em>"therefore me and Hush do not need to have a meeting."</em> The skill was already there; the coordination cost left the equation entirely; the communication happened asynchronously and the work began. The benefits list, read fast because it compounds: writing reduces coordination costs, provides direction, provides speed — <b>people stop needing to check whether they're doing the right task, or the task right</b>, because the writing says what a good outcome looks and sounds like. Blockers surface early (the mocap system, the office space needed three months in advance — you only see them when you write). Incentives and roles get easier to plan — you are writing their JDs. Hiring gets easier. Meetings collapse — <b>you need one-tenth the meetings you currently have if you write well.</b> And the meta-proof: <b>scaling from zero to 500 people and 50,000 square feet on these margins is impossible unless everything was written down at every single corner.</b></p>
+      <p class="markable">Two deeper notes close the section. First, the empathy: writing poorly means zigzagging — off target, back to goal — which is 99% of companies, and forgivably so, because finding product-market fit <em>requires</em> zigzagging through three or four fields before anything works. That zigzag is where all the risk in the world lives. But once you've figured it out, <b>quality writing is the shortest path to the goal.</b> Second, the assignment for everyone — company or not: <b>your team sees 5% of the picture you do. Writing lets them see 100% of it.</b> The world's problem isn't lack of vision; it's that translating vision into execution requires describing a complicated problem clearly, which most people cannot do. So: <em>write where you want to be in a year.</em> You'll see exactly what to build. Skip all the side quests. (The tell that you're already good: the best people in every team already write the most — Rishi the programmer documented the entire combat system for a team small enough that it barely needed it — because writing is how you organize your own thoughts, and the clarity leaks out to everyone else.)</p>
+    </div>
+    <div class="quote">"You need one-tenth the meetings you currently have — if you write well."<span class="who">— the cheat code, priced</span></div>
+  </section>
+
+  <section class="sect settle" id="sec-11">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">xi.</span></div>
+    <h2 class="display">The four <em>horsemen</em></h2>
+    <div class="story">
+      <p class="markable">Now the full system, stated with a smile that doesn't blink: <b>all companies are delusion bubbles.</b> You have to be delusional to be part of any company — otherwise everyone wakes up daily and says "this sucks." A closed system, a delusion bubble, a suspended reality — same thing — and every one of them needs four horsemen to stay suspended. Turn each card for the horseman, what it looks like in a company, and its exact parallel in religion — which, the kata notes, is simply the oldest, most successful closed system ever run (it ran one of India's largest Discord communities; it now runs a very large community in real life, that makes money together).</p>
+    </div>
+
+    <div class="ladder" id="ladder">
+      <div class="rail" aria-hidden="true"></div>
+
+      <div class="rung">
+        <div class="node">一</div>
+        <div class="flipin">
+          <div class="face front">
+            <div class="amt">Direction & shared stories</div>
+            <div class="zt">the writing horseman</div>
+            <p class="brief">Aspirations, goals, direction — which all boil down to writing: the document that says where we're going and why.</p>
+            <span class="flipnote">turn the card ↻</span>
+          </div>
+          <div class="face back">
+            <h4>in religion</h4>
+            <p>The holy book. Two Christians meeting at a hospital recognize shared values instantly — same source material. Two Hindus, the same. The book is the coordination engine.</p>
+            <h4>at Aeos</h4>
+            <p>Every corner written down — the JDs, the plans, the grand plan. Section x is this horseman, armed.</p>
+            <p class="ret">↺ return to the front</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="rung">
+        <div class="node">二</div>
+        <div class="flipin">
+          <div class="face front">
+            <div class="amt">Celebration</div>
+            <div class="zt">the festivals horseman</div>
+            <p class="brief">When milestones hit, the system celebrates together — the Diwali party, the win that the whole room feels.</p>
+            <span class="flipnote">turn the card ↻</span>
+          </div>
+          <div class="face back">
+            <h4>in religion</h4>
+            <p>Festivals and rituals — meaningless to outsiders ("that festival makes no sense to me"), everything to insiders, who don't care what outsiders think.</p>
+            <h4>why it matters</h4>
+            <p>Celebration converts progress into shared emotion — the current that keeps the bubble inflated between goals.</p>
+            <p class="ret">↺ return to the front</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="rung">
+        <div class="node">三</div>
+        <div class="flipin">
+          <div class="face front">
+            <div class="amt">Rules & enforcement</div>
+            <div class="zt">the stakes horseman</div>
+            <p class="brief">Miss the bargain repeatedly, and you lose storytelling power: the person who doesn't deliver must visibly lose the opportunity to someone more deserving.</p>
+            <span class="flipnote">turn the card ↻</span>
+          </div>
+          <div class="face back">
+            <h4>the dark story</h4>
+            <p>Giordano Bruno — burnt at the stake for saying what the church disagreed with. The bubble's price: <i>even if you're right</i>, if you corrode the system, the system removes you — for everybody else's mental health.</p>
+            <h4>the honest version</h4>
+            <p>The venture analyst with new check-writing power: "if I write the wrong check, I lose my job — even though the outcome is partly outside my control." That threat, held honestly, is what makes commitments mean something.</p>
+            <p class="ret">↺ return to the front</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="rung">
+        <div class="node">四</div>
+        <div class="flipin">
+          <div class="face front">
+            <div class="amt">Outside validation</div>
+            <div class="zt">the credibility horseman</div>
+            <p class="brief">People outside the system, whom you look up to, taking it seriously — because inside a bubble, "this will fail" is always the obvious read.</p>
+            <span class="flipnote">turn the card ↻</span>
+          </div>
+          <div class="face back">
+            <h4>in religion</h4>
+            <p>How much would you believe if your parents didn't? If relatives, media, and priests didn't take it seriously? The ecosystem lends the belief its spine.</p>
+            <h4>at Aeos</h4>
+            <p>Clients who actively spend — no better validation exists. And the industry is real: YouTube contributed ₹19,000 crores to India's GDP and 935,000 jobs as of 2024 — big enough to aim at, if nobody's fighting.</p>
+            <p class="ret">↺ return to the front</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="story" style="margin-top:26px">
+      <p class="markable">Built <b>pre, not post</b> — the 13-years-of-companies discipline: Aeos constructed all four horsemen deliberately, before they were needed, because Varun has run enough companies to know they don't assemble themselves.</p>
+      <p class="markable">And the selfish end-goal that justifies all of it, stated as natural law: <b>a coordinated system focused purely on growth crushes an uncoordinated system busy infighting.</b> The kata will guarantee that 90% of companies outside are fighting among themselves — over status, over money, over whose journey it is — and the ones that aren't fighting have <b>very strong leaders crushing the fighting</b> (which, the aside notes without judgment, is why India — so many divided cultures — has a populist leader: strong leaders suppress infighting; fighting is simply human nature). The second way is awareness: <em>if we all coordinate, we'll win</em> — the industry is big enough (₹19,000 crores to GDP, 935,000 jobs — aim there instead of at each other). At Aeos there has been no fighting because it was worked on actively: disagreements happen, <b>"we'll throw chappals at each other at the leadership — and then we reset quickly."</b></p>
+      <p class="markable">Two closing cautions keep the law honest. First, the ceiling: you will never get 100% coordination — <b>flatten the curve proved it</b> ("why can't everybody just sit at home for 14 days?" — because getting 100% of people to do anything, ever, is impossible) — so aim for 90-97%, feel it rather than measure it, and <b>weed out the non-coordinators</b>: at Yaas the internal name is <b>red aura</b> — red aura, and we try to disconnect you from the company quickly. But keep the bubble permeable: allow debate, and when someone has real conviction in something untried — <b>run the experiment; what's the harm?</b> Especially in content and games, where experiments run fast and cheap. Second, the fuel cost: the world drags you back toward pessimism daily — capitalism is bad, money is evil, everyone will scam you — and it takes deliberate energy to say <em>"actually, I'm around really cool people. We started from an apartment and got here. We should keep this alive."</em> The current that keeps a thousand people coordinated is generated against gravity, every single morning — and <b>with that current, you can make several years of progress in one year</b> — the gap between the game's first trailer and second surprised everyone precisely because they underestimated how coordinated the team behind it was.</p>
+    </div>
+  </section>
+
+  <section class="sect settle" id="sec-12">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">xii.</span></div>
+    <h2 class="display">Practice —<br><em>this is your kata</em></h2>
+    <div class="story">
+      <p class="markable">Coordination is trained, not wished for. This week's repetitions:</p>
+    </div>
+    <div class="checks">
+      <div class="chk"><span class="box"><svg viewBox="0 0 30 30" aria-hidden="true"><path pathLength="1" d="M6,17 L13,23 L25,7"/></svg></span><span class="txt">Draw your four-person coordination chart honestly: each name, each cost, each one above or below the line — starting with your own.</span></div>
+      <div class="chk"><span class="box"><svg viewBox="0 0 30 30" aria-hidden="true"><path pathLength="1" d="M6,17 L13,23 L25,7"/></svg></span><span class="txt">Run the Karpathy question with your team this week: "what's stopping you from doing your work?" — then go unblock the first three answers personally.</span></div>
+      <div class="chk"><span class="box"><svg viewBox="0 0 30 30" aria-hidden="true"><path pathLength="1" d="M6,17 L13,23 L25,7"/></svg></span><span class="txt">Replace one recurring meeting with a document — exact pointers, incentives, plan — and see if anyone even misses the meeting.</span></div>
+      <div class="chk"><span class="box"><svg viewBox="0 0 30 30" aria-hidden="true"><path pathLength="1" d="M6,17 L13,23 L25,7"/></svg></span><span class="txt">Map one person's actual incentive hierarchy — cash, respect, status, purpose, mastery — and redesign one reward to speak their language, not yours.</span></div>
+      <div class="chk"><span class="box"><svg viewBox="0 0 30 30" aria-hidden="true"><path pathLength="1" d="M6,17 L13,23 L25,7"/></svg></span><span class="txt">Audit the four horsemen of your own bubble: is anything being written, celebrated, enforced, and validated from outside — or is one horseman missing?</span></div>
+    </div>
+    <svg class="brush" viewBox="0 0 900 26" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M8,14 C160,22 330,8 500,16 S720,20 892,12" filter="url(#rough2)"/></svg>
+  </section>
+
+  <section class="sect settle" id="sec-13">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">xiii.</span></div>
+    <h2 class="display">Sit with <em>these</em></h2>
+    <div class="story">
+      <p class="markable">— In my current team, which am I: the 30% coordinated, or the 150% being dragged?</p>
+      <p class="markable">— What is my cost of coordination, honestly — and which blockage in the catalog is mine with a different name?</p>
+      <p class="markable">— What do the people around me actually want — the village they want to be famous in — and how much of my incentive design is just my own story, projected?</p>
+      <p class="markable">— And if the coordinated team always beats the fighting superstars: who am I currently fighting, that I could instead be writing to?</p>
+    </div>
+    <div class="endrow">
+      <div class="seal-stamp" style="width:58px;height:58px;font-size:26px" title="press to close the chapter">終</div>
+      <span class="fine">end of chapter nine · next — <a href="ch10-why-startups-unprofitable.html" style="color:var(--ink-3)">chapter ten: Why Indian Startups Are Unprofitable</a> · <a href="index.html" style="color:var(--ink-3)">or return to the cover</a></span>
+    </div>
+    <p class="srcnote">The Kata Scroll — chapter nine, Book III, written from a complete read of the transcript of
+    <a href="https://www.youtube.com/watch?v=uojkYJz7d-k" target="_blank" rel="noopener">Varun Mayya's "Why 90% of Companies Break After 50 People" (Kata 2)</a>,
+    ~13,000 words, expanded for study. The 500th-employee worry, the Dota dynamic (9 versus 1), the coordination-cost model and threshold, the Karpathy Elon story, current generation (Zumba, incentives, inspiration, fear), the useless shoe and the lounge, the prophecy ledger and the 50% failure target, the Loom founder and Nvidia vesting, the incentive hierarchy (cash → respect → status → purpose → mastery) with the MMR and motion-graphics examples, the Intergalactic jacket, <i>Punished by Rewards</i>, the lightning state, the four-day-week ladder, the village-girl reputation story, the aspirations exercise and house contagion, the ten human blockages with the Saga/Shans/Vishal examples, the clear-writing cheat code with the Hush document and Rishi's combat-system docs, the four horsemen with the religion parallels and Giordano Bruno, the venture analyst, the ₹19,000-crore YouTube economy, and the red-aura rule are all from the session. Chapter thumbnail via YouTube. Diagrams are original. The Kata Scroll is an independent study companion, not affiliated with Varun Mayya or Aeos.</p>
+  </section>
+
+</div>
+</main>
+
+<script>
+(function(){
+  'use strict';
+  const io=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('revealed');io.unobserve(e.target);}});
+  },{threshold:.12});
+  document.querySelectorAll('.settle, .brush, .mountain').forEach(function(el){io.observe(el);});
+  document.querySelectorAll('.markable').forEach(function(p){
+    p.addEventListener('dblclick',function(){p.classList.toggle('marked');});
+    p.title='double-tap to mark this line';
+  });
+  document.querySelectorAll('.rung').forEach(function(r){
+    r.querySelector('.flipin').addEventListener('click',function(){r.classList.toggle('flip');});
+  });
+  document.querySelectorAll('.chk').forEach(function(c){
+    c.addEventListener('click',function(){c.classList.toggle('done');});
+  });
+  document.querySelectorAll('.tip').forEach(function(t){
+    t.addEventListener('click',function(ev){ev.stopPropagation();t.classList.toggle('open');});
+  });
+  document.addEventListener('click',function(ev){
+    document.querySelectorAll('.tip.open').forEach(function(t){if(!t.contains(ev.target))t.classList.remove('open');});
+  });
+  const drop=document.getElementById('raildrop');
+  const rail=document.querySelector('.chapter-rail .railline');
+  function onScroll(){
+    if(!drop||!rail)return;
+    var h=document.documentElement;
+    var p=Math.min(1,Math.max(0,h.scrollTop/((h.scrollHeight-h.clientHeight)||1)));
+    var max=rail.clientHeight-16;
+    drop.style.top=(2+p*max)+'px';
+  }
+  addEventListener('scroll',onScroll,{passive:true});
+  addEventListener('resize',onScroll);
+  onScroll();
+  document.querySelectorAll('.seal-stamp').forEach(function(s){
+    s.addEventListener('click',function(){
+      s.style.transform='rotate(-4deg) scale(.9)';
+      setTimeout(function(){s.style.transform='';},160);
+    });
+  });
+})();
+</script>
+<script>
+/* reading memory — the book remembers your place, your marks, your practice */
+(function(){
+  'use strict';
+  var KEY='kata:'+(location.pathname.split('/').pop()||'index.html');
+  function load(){try{var s=JSON.parse(localStorage.getItem(KEY)||'null');return (s&&typeof s==='object')?s:null;}catch(e){return null;}}
+  function save(s){s.ts=Date.now();try{localStorage.setItem(KEY,JSON.stringify(s));}catch(e){}}
+  function snap(){
+    var s=load()||{marks:[],checks:[],pos:0};
+    s.marks=collect('.markable','marked');
+    s.checks=collect('.chk','done');
+    save(s);
+  }
+  function collect(sel,cls){
+    var out=[];
+    Array.prototype.forEach.call(document.querySelectorAll(sel),function(el,i){if(el.classList.contains(cls))out.push(i);});
+    return out;
+  }
+  var st=load();
+  if(st){
+    (st.marks||[]).forEach(function(i){var p=document.querySelectorAll('.markable')[i];if(p)p.classList.add('marked');});
+    (st.checks||[]).forEach(function(i){var c=document.querySelectorAll('.chk')[i];if(c)c.classList.add('done');});
+  }
+  document.addEventListener('dblclick',function(){snap();});
+  document.addEventListener('click',function(ev){
+    if(ev.target&&ev.target.closest&&ev.target.closest('.chk'))snap();
+  });
+  function pos(){var h=document.documentElement;return h.scrollHeight>h.clientHeight?h.scrollTop/(h.scrollHeight-h.clientHeight):0;}
+  function savePos(){var s=load()||{marks:[],checks:[],pos:0};s.pos=pos();save(s);}
+  var t=null;
+  addEventListener('scroll',function(){if(t)return;t=setTimeout(function(){t=null;savePos();},400);},{passive:true});
+  addEventListener('pagehide',savePos);
+  function restore(){
+    if(location.hash)return;
+    var s=load();if(!s||!(s.pos>0.02))return;
+    var h=document.documentElement;
+    var y=s.pos*(h.scrollHeight-h.clientHeight);
+    if(y>0){h.style.scrollBehavior='auto';scrollTo(0,y);setTimeout(function(){h.style.scrollBehavior='';},80);}
+  }
+  if(document.readyState==='complete')restore();else addEventListener('load',restore);
+  setTimeout(restore,900);
+  if('serviceWorker' in navigator&&location.protocol==='https:'){
+    addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 13 · How to Take Risk Like Rich People Do — The Kata Scroll</title>
+<meta name="description" content="The risk masterclass — GTO and cheap experiments, the two-year worksheet, deep optionality, loss aversion as management, and multi-way variance. From Varun Mayya's Kata 9.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="The Kata Scroll">
+<meta property="og:title" content="Chapter 13 · How to Take Risk Like Rich People Do">
+<meta property="og:description" content="The risk masterclass — GTO and cheap experiments, the two-year worksheet, deep optionality, loss aversion as management, and multi-way variance. From Varun Mayya's Kata 9.">
+<meta property="og:image" content="https://i.ytimg.com/vi/EWFn-RgxZ5M/maxresdefault.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#fbfaf6">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Zen+Kaku+Gothic+New:wght@400;500&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* ═════════ THE KATA SCROLL · CHAPTER 04 · inkwash ═════════ */
+:root{
+  --paper:#fbfaf6; --ink:#141311; --ink-2:#34312c; --ink-3:#66625a; --ink-4:#a19c92;
+  --hair:rgba(20,19,17,.12); --hair-2:rgba(20,19,17,.22);
+  --seal:#c8372d;
+  --f-display:'Cormorant Garamond',Georgia,serif;
+  --f-ui:'Zen Kaku Gothic New',Inter,system-ui,sans-serif;
+  --f-jp:'Shippori Mincho','Noto Serif JP',serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink-2);font-family:var(--f-ui);font-size:17px;line-height:1.75;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:rgba(200,55,45,.22)}
+img{max-width:100%}
+.paper-bg{position:fixed;inset:0;z-index:0;pointer-events:none}
+.paper-bg .mottle{position:absolute;inset:0;background:
+  radial-gradient(60% 50% at 18% 22%,rgba(214,206,190,.16),transparent 70%),
+  radial-gradient(50% 45% at 86% 78%,rgba(214,206,190,.14),transparent 70%),
+  radial-gradient(120% 100% at 50% 50%,transparent 62%,rgba(150,138,112,.10) 100%)}
+.paper-bg svg.grain{position:absolute;inset:0;width:100%;height:100%;mix-blend-mode:multiply;opacity:.92}
+main{position:relative;z-index:1}
+.vert{writing-mode:vertical-rl;font:500 13px/1 var(--f-ui);letter-spacing:.42em;text-transform:uppercase;color:var(--ink-4)}
+.seal-stamp{display:inline-flex;align-items:center;justify-content:center;background:var(--seal);color:var(--paper);
+  font-family:var(--f-jp);font-weight:700;border-radius:5px;transform:rotate(-4deg);
+  box-shadow:inset 0 0 10px rgba(0,0,0,.28),0 1px 0 rgba(0,0,0,.08);user-select:none;cursor:pointer;transition:transform .18s ease}
+.seal-stamp:active{transform:rotate(-4deg) scale(.92)}
+.eyebrow{display:inline-flex;align-items:center;gap:16px;font:500 14px/1 var(--f-ui);letter-spacing:.3em;text-transform:uppercase;color:var(--ink-3)}
+.eyebrow::before{content:'';width:34px;height:2px;background:var(--seal)}
+.display{font-family:var(--f-display);font-weight:500;color:var(--ink);letter-spacing:-.012em;line-height:1.02}
+.display em{font-style:italic;color:var(--seal)}
+.lead{font:400 19px/1.8 var(--f-ui);color:var(--ink-3);max-width:52ch}
+.lead b{color:var(--ink);font-weight:500}
+.fine{font:400 14px/1.6 var(--f-ui);color:var(--ink-4);letter-spacing:.02em}
+.brush{display:block;width:100%;height:26px;overflow:visible}
+.brush path{stroke:var(--ink);stroke-width:5;fill:none;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.7s cubic-bezier(.6,0,.3,1)}
+.brush.seal-brush path{stroke:var(--seal)}
+.brush.revealed path{stroke-dashoffset:0}
+.mountain{display:block;width:min(300px,70%);height:64px;margin:34px auto;overflow:visible;opacity:.9}
+.mountain path{stroke:var(--ink-3);fill:none;stroke-width:3.4;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 2.4s ease}
+.mountain.revealed path{stroke-dashoffset:0}
+.settle{opacity:0;filter:blur(6px);transform:translateY(14px);transition:opacity 1.05s ease,filter 1.05s ease,transform 1.05s ease}
+.settle.revealed{opacity:1;filter:blur(0);transform:none}
+@media (prefers-reduced-motion:reduce){.settle{transition:none;opacity:1;filter:none;transform:none}.brush path,.mountain path{transition:none;stroke-dashoffset:0}}
+.scroll-wrap{max-width:840px;margin:0 auto;padding:96px 28px 42vh;position:relative}
+.chapter-rail{position:fixed;left:26px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;gap:18px;z-index:6}
+.chapter-rail .seal-stamp{width:52px;height:52px;font-size:24px}
+.chapter-rail .railline{width:3px;height:220px;background:var(--hair);border-radius:3px;position:relative;overflow:visible}
+.chapter-rail .raildrop{position:absolute;left:50%;top:0;width:13px;height:19px;background:var(--seal);border-radius:50% 50% 50% 50%/62% 62% 38% 38%;transform:translate(-50%,-2px);transition:top .22s linear}
+.cover{min-height:82vh;display:flex;flex-direction:column;justify-content:center;position:relative}
+.cover h1.display{font-size:clamp(46px,6.4vw,84px);margin:22px 0 26px}
+.cover .jp-side{position:absolute;right:-4px;top:10%;height:224px}
+.cover .meta-row{display:flex;align-items:center;gap:18px;margin-top:42px;flex-wrap:wrap}
+.enso-wrap{position:absolute;right:2%;top:6%;width:clamp(150px,20vw,240px);opacity:.8;pointer-events:none}
+.toc{margin:74px 0 30px;padding:34px 38px;background:rgba(255,255,255,.5);border:1px solid var(--hair);border-radius:3px}
+.toc h2{font:500 13px/1 var(--f-ui);letter-spacing:.3em;text-transform:uppercase;color:var(--ink-3);margin-bottom:20px}
+.toc ol{list-style:none;columns:2;column-gap:52px}
+.toc li{break-inside:avoid;margin-bottom:11px}
+.toc a{display:flex;gap:14px;align-items:baseline;text-decoration:none;color:var(--ink-2);font-size:15.5px;transition:color .3s}
+.toc a .n{font-family:var(--f-display);font-style:italic;color:var(--seal);min-width:26px}
+.toc a:hover{color:var(--seal)}
+.toc a:hover .n{color:var(--ink)}
+@media (max-width:640px){.toc ol{columns:1}}
+.sect{padding-top:66px;margin-top:58px;position:relative;scroll-margin-top:40px}
+.sect .washx{position:absolute;inset:-46px -70px;background:radial-gradient(42% 52% at 32% 42%,rgba(20,19,17,.05),transparent 72%);opacity:0;transform:scale(.95);transition:opacity 1.3s ease,transform 1.3s ease;pointer-events:none;border-radius:50%}
+.sect.revealed .washx{opacity:1;transform:scale(1)}
+.sect .kicker{display:flex;align-items:baseline;gap:16px;margin-bottom:18px}
+.sect .kicker .no{font-family:var(--f-display);font-style:italic;font-size:30px;color:var(--seal)}
+.sect h2.display{font-size:clamp(33px,3.9vw,50px);margin-bottom:22px;line-height:1.06}
+.story{font-family:var(--f-display);font-size:23px;line-height:1.85;color:var(--ink-2);max-width:64ch}
+.story p{margin-bottom:1.35em}
+.story p:first-of-type::first-letter{font-size:72px;line-height:.85;float:left;padding:8px 14px 0 0;color:var(--ink);font-style:italic}
+.story .aside{font-family:var(--f-ui);font-size:15.5px;color:var(--ink-3);border-left:2px solid var(--hair-2);padding:6px 0 6px 22px;margin:2em 0}
+.quote{font-family:var(--f-display);font-style:italic;font-size:clamp(26px,3.2vw,32px);line-height:1.5;color:var(--ink);max-width:32ch;margin:60px auto;text-align:center;position:relative}
+.quote::before{content:'"';font-size:72px;color:var(--seal);position:absolute;top:-34px;left:50%;transform:translateX(-50%);opacity:.8}
+.quote .who{display:block;font-family:var(--f-ui);font-style:normal;font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-4);margin-top:18px}
+.markable{cursor:pointer;border-radius:2px;transition:background .4s;position:relative}
+.markable:hover{background:rgba(200,55,45,.045)}
+.markable.marked{background:linear-gradient(180deg,transparent 62%,rgba(200,55,45,.17) 62%)}
+.markable.marked::after{content:'富';position:absolute;left:-30px;top:2px;font-family:var(--f-jp);color:var(--seal);font-size:15px;opacity:.85}
+.tip{border-bottom:2px dotted var(--seal);cursor:pointer;position:relative}
+.tip .tipbox{position:absolute;left:50%;bottom:135%;transform:translateX(-50%);width:238px;background:var(--ink);color:var(--paper);font:400 13.5px/1.55 var(--f-ui);padding:13px 15px;border-radius:4px;opacity:0;pointer-events:none;transition:opacity .3s;z-index:30}
+.tip:hover .tipbox,.tip.open .tipbox{opacity:1}
+.tip .tipbox b{color:#fff;font-weight:500}
+figure.fig{margin:54px 0;padding:16px;background:rgba(255,255,255,.55);border:1px solid var(--hair);border-radius:3px;box-shadow:0 1px 0 rgba(20,19,17,.02),0 34px 52px -44px rgba(20,19,17,.4)}
+figure.fig img{display:block;width:100%;border-radius:2px;filter:sepia(.14) saturate(.86) contrast(.97)}
+figure.fig figcaption{padding:14px 6px 4px;font:400 13.5px/1.6 var(--f-ui);color:var(--ink-4)}
+figure.fig figcaption b{color:var(--ink-3);font-weight:500}
+figure.fig.imgfail img{display:none}
+figure.fig.imgfail{padding:34px}
+figure.fig.imgfail figcaption::before{content:'▮ the image rested — ink remembers —';display:block;font-style:italic;margin-bottom:8px;color:var(--ink-4)}
+figure.fig.narrow{max-width:560px;margin-left:auto;margin-right:auto}
+.diag{margin:58px 0}
+.diag svg{display:block;width:100%;height:auto;overflow:visible}
+.diag figcaption{margin-top:14px;font:400 13.5px/1.6 var(--f-ui);color:var(--ink-4);text-align:center}
+.ladder{position:relative;margin:64px auto 22px;max-width:730px}
+.ladder .rail{position:absolute;left:25px;top:8px;bottom:8px;width:3px;background:linear-gradient(180deg,var(--ink-3),var(--ink));border-radius:3px}
+.rung{position:relative;padding-left:88px;margin-bottom:44px;perspective:1300px;min-height:236px}
+.rung .node{position:absolute;left:6px;top:14px;width:42px;height:42px;border-radius:50%;border:2.5px solid var(--ink-3);background:var(--paper);display:flex;align-items:center;justify-content:center;font-family:var(--f-jp);font-weight:700;font-size:18px;color:var(--ink-2);transition:all .5s ease;z-index:2}
+.rung.flip .node{border-color:var(--seal);color:var(--seal);transform:rotate(-6deg) scale(1.07)}
+.rung .flipin{position:relative;transform-style:preserve-3d;transition:transform .95s cubic-bezier(.58,0,.26,1)}
+.rung.flip .flipin{transform:rotateY(180deg)}
+.rung .face{backface-visibility:hidden;-webkit-backface-visibility:hidden;border:1px solid var(--hair);border-radius:4px;background:rgba(255,255,255,.58);box-shadow:0 1px 0 rgba(20,19,17,.02),0 30px 48px -42px rgba(20,19,17,.38);padding:30px 34px;cursor:pointer}
+.rung .face.front .amt{font-family:var(--f-display);font-size:38px;color:var(--ink);line-height:1.05}
+.rung .face.front .zt{font:500 13px/1 var(--f-ui);letter-spacing:.22em;text-transform:uppercase;color:var(--seal);margin:10px 0 14px}
+.rung .face.front .brief{font-size:16px;color:var(--ink-3);line-height:1.7;font-family:var(--f-ui)}
+.rung .face.front .flipnote{position:absolute;right:22px;bottom:14px;font:italic 400 13px/1 var(--f-display);color:var(--ink-4)}
+.rung .face.back{position:absolute;inset:0;transform:rotateY(180deg);background:var(--ink);border-color:var(--ink);overflow:auto}
+.rung .face.back h4{font:500 11px/1 var(--f-ui);letter-spacing:.28em;text-transform:uppercase;color:rgba(251,250,246,.48);margin:14px 0 7px}
+.rung .face.back p{font:400 14.5px/1.65 var(--f-ui);color:rgba(251,250,246,.9)}
+.rung .face.back .ret{margin-top:16px;font:italic 400 13px/1 var(--f-display);color:rgba(251,250,246,.55)}
+@media (prefers-reduced-motion:reduce){.rung .flipin{transition:none}.rung.flip .flipin{transform:none}.rung .face.back{position:relative;transform:none;display:none}.rung.flip .face.back{display:block}}
+.checks{margin-top:22px}
+.chk{display:flex;align-items:center;gap:18px;padding:13px 6px;cursor:pointer;user-select:none}
+.chk .box{flex:none;width:26px;height:26px;border:2px solid rgba(20,19,17,.4);border-radius:2px;position:relative}
+.chk .box svg{position:absolute;inset:-4px;width:30px;height:30px}
+.chk .box svg path{stroke:var(--seal);stroke-width:3.4;fill:none;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .5s ease}
+.chk.done .box svg path{stroke-dashoffset:0}
+.chk .txt{font-size:16.5px;color:var(--ink-2);transition:color .5s}
+.chk.done .txt{color:var(--ink-4);text-decoration:line-through;text-decoration-color:rgba(200,55,45,.5)}
+.endrow{display:flex;align-items:center;gap:20px;margin-top:52px}
+.srcnote{margin-top:74px;padding-top:26px;border-top:1px solid var(--hair);font:400 13px/1.7 var(--f-ui);color:var(--ink-4)}
+.srcnote a{color:var(--ink-3)}
+.care{margin-top:26px;padding:18px 22px;border:1px solid var(--hair-2);border-radius:3px;background:rgba(255,255,255,.5);font:400 14px/1.7 var(--f-ui);color:var(--ink-3)}
+.care b{color:var(--seal);font-weight:500}
+@media (max-width:760px){
+  .chapter-rail{display:none}
+  .scroll-wrap{padding:72px 22px 40vh}
+  .story{font-size:20.5px}
+  .enso-wrap{opacity:.35}
+  .markable.marked::after{left:-8px;top:-14px}
+  .rung{padding-left:0;padding-top:64px;min-height:250px}
+  .rung .node{left:2px;top:8px}
+  .ladder .rail{left:20px}
+  .tip .tipbox{left:auto;right:-10px;transform:none;width:210px}
+}
+</style>
+</head>
+<body>
+
+<div class="paper-bg" aria-hidden="true">
+  <div class="mottle"></div>
+  <svg class="grain" xmlns="http://www.w3.org/2000/svg">
+    <filter id="washi"><feTurbulence type="fractalNoise" baseFrequency="0.82" numOctaves="2" seed="11" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 0.56  0 0 0 0 0.52  0 0 0 0 0.44  0 0 0 0.055 0"/></filter>
+    <rect width="100%" height="100%" filter="url(#washi)"/>
+  </svg>
+</div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="rough"><feTurbulence type="fractalNoise" baseFrequency="0.045" numOctaves="3" seed="7" result="t"/>
+      <feDisplacementMap in="SourceGraphic" in2="t" scale="5"/></filter>
+    <filter id="rough2"><feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" seed="23" result="t"/>
+      <feDisplacementMap in="SourceGraphic" in2="t" scale="6"/></filter>
+    <filter id="rough3"><feTurbulence type="fractalNoise" baseFrequency="0.06" numOctaves="3" seed="41" result="t"/>
+      <feDisplacementMap in="SourceGraphic" in2="t" scale="7"/></filter>
+  </defs>
+</svg>
+
+
+
+<aside class="chapter-rail" aria-label="chapter progress">
+  <span class="vert">Chapter Thirteen · 賭</span>
+  <div class="seal-stamp" title="press the seal">賭</div>
+  <div class="railline"><div class="raildrop" id="raildrop"></div></div>
+</aside>
+
+<main>
+<div class="scroll-wrap">
+
+  <header class="cover settle">
+    <div class="enso-wrap" aria-hidden="true">
+      <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+        <path d="M150,42 C92,44 46,92 44,152 C42,214 92,258 152,258 C210,258 254,214 256,154 C258,102 222,62 176,50"
+          fill="none" stroke="#141311" stroke-width="17" stroke-linecap="round" filter="url(#rough2)" opacity=".9"/>
+        <circle cx="228" cy="236" r="17" fill="#c8372d" opacity=".92"/>
+      </svg>
+    </div>
+    <p class="eyebrow">The Kata Scroll · Book IV — The Wealth · Chapter Thirteen</p>
+    <h1 class="display">How to Take Risk<br><em>Like Rich People Do</em></h1>
+    <p class="lead">The risk masterclass — GTO and cheap experiments, staged risk from seed to Series D, the two-year worksheet, <b>deep optionality</b>, loss aversion as a management tool, and the multi-way variance of crowded rooms. The chapter that teaches the machinery of the wealth zones you're about to enter.</p>
+    <div class="meta-row">
+      <span class="fine">from Varun Mayya's Kata 9 · read in full and expanded</span>
+      <svg class="brush seal-brush" style="flex:1;max-width:160px" viewBox="0 0 300 26" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M4,16 C60,8 130,22 190,12 S270,10 296,15" filter="url(#rough)"/></svg>
+    </div>
+  </header>
+
+  <nav class="toc settle" aria-label="in this chapter">
+    <h2>In this chapter</h2>
+    <ol>
+      <li><a href="#sec-1"><span class="n">i.</span> The source of wealth is always risk</a></li>
+      <li><a href="#sec-2"><span class="n">ii.</span> Everything is risk</a></li>
+      <li><a href="#sec-3"><span class="n">iii.</span> Timeless nature, permanent shifts</a></li>
+      <li><a href="#sec-4"><span class="n">iv.</span> Think in percentages</a></li>
+      <li><a href="#sec-5"><span class="n">v.</span> GTO — cheap experiments, staged risk</a></li>
+      <li><a href="#sec-6"><span class="n">vi.</span> Information disparity</a></li>
+      <li><a href="#sec-7"><span class="n">vii.</span> The two-year worksheet</a></li>
+      <li><a href="#sec-8"><span class="n">viii.</span> Incentives & irreversible consequences</a></li>
+      <li><a href="#sec-9"><span class="n">ix.</span> Real optionality & shock absorbers</a></li>
+      <li><a href="#sec-10"><span class="n">x.</span> Three stories of randomness</a></li>
+      <li><a href="#sec-11"><span class="n">xi.</span> Loss aversion & the portfolio</a></li>
+      <li><a href="#sec-12"><span class="n">xii.</span> Practice — your kata</a></li>
+      <li><a href="#sec-13"><span class="n">xiii.</span> Sit with these</a></li>
+    </ol>
+  </nav>
+
+  <figure class="fig narrow settle">
+    <img src="https://i.ytimg.com/vi/EWFn-RgxZ5M/maxresdefault.jpg" alt="Kata 9 — How To Take Risk Like Rich People Do, the original masterclass" loading="lazy"
+      onerror="this.closest('figure').classList.add('imgfail')">
+    <figcaption><b>The source.</b> Varun Mayya teaching Kata 9 — the science of risk. <a style="color:var(--ink-3)" href="https://www.youtube.com/watch?v=EWFn-RgxZ5M" target="_blank" rel="noopener">watch on YouTube ↗</a></figcaption>
+  </figure>
+
+  <section class="sect settle" id="sec-1">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">i.</span></div>
+    <h2 class="display">The source of wealth<br><em>is always risk</em></h2>
+    <div class="story">
+      <p class="markable">The chapter opens with the claim the whole book has been circling: <b>a very significant chunk of success is risk-taking ability.</b> Everyone you've ever seen become successful — either they took the risk, or they're the child of somebody who did. <b>At some point, the source of wealth is always risk.</b> Some who took crazy risks went bust and went to zero; others made a lot of money — the laborer test from chapter ten settles the direction: hard work alone never generated the fortunes. The skill the kata claims to teach — "I wasn't very good at this in my twenties" — is <b>learnable.</b></p>
+      <p class="markable">And its first inversion sets the tone for everything after: <b>people think an entrepreneur's job is to take risk. The kata's view is the opposite — an entrepreneur's job is to REDUCE risk.</b> Do what looks obvious to you, very likely to win, <b>very cheaply, until it wins</b> — and let outsiders, who can't see inside your industry, call it a risk afterward. The confession that humanizes it: in games — Dota, Counter-Strike, poker — Varun takes stupid risks, because risk is <em>fun</em>. In real life, he is the complete opposite. The whole chapter is about installing that switch.</p>
+    </div>
+    <svg class="mountain" viewBox="0 0 300 64" preserveAspectRatio="none" aria-hidden="true">
+      <path pathLength="1" d="M6,56 L64,22 L104,44 L150,12 L196,40 L238,26 L294,54" filter="url(#rough3)"/>
+    </svg>
+  </section>
+
+  <section class="sect settle" id="sec-2">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">ii.</span></div>
+    <h2 class="display">Everything is <em>risk</em></h2>
+    <div class="story">
+      <p class="markable">First, the definition repair. Most people believe risk equals <b>new, unproven idea</b> — the untried thing. Wrong: <b>everything you ever do in life is risk.</b> You eat food, it's a risk — people choke and die; people get diarrhea and die; <b>more people die per year from diarrhea than from shark attacks and terrorist attacks combined.</b> So how do you decide whether to eat the unfamiliar dish in Germany? You look around: <b>are other people eating it?</b> Humans crowd-source their risk-taking — which is why the IIT entrance exam, a hugely risky endeavor on pure probability, is an <em>acceptable</em> risk in India: everybody else is taking it. Breathing Delhi air: a risk — but everyone's doing it, so it feels fine. The conclusion, and the job description: <b>there is nothing that is safe in life. Our job is to estimate the risk of everything.</b></p>
+      <p class="markable">And the personal inflection point, quietly placed here: Varun's business success rate was poor when young — and <b>sharply increased after he started creating content.</b> Because content <b>dampens the effect of luck</b>: the cost of running ads drops to zero, new things can be tested cheaply and instantly with a post — and you're no longer buffeted by "will this go viral?"; you can <em>make</em> it go viral, and watch whether people actually use, download, and pay. Distribution, again, is the risk-reduction machine.</p>
+    </div>
+    <div class="quote">"There is nothing that is safe in life. Our job is to estimate the risk of everything."<span class="who">— the kata's constitution</span></div>
+    <svg class="brush" viewBox="0 0 900 26" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M6,14 C140,5 260,21 420,11 S680,9 780,16 894,11" filter="url(#rough2)"/></svg>
+  </section>
+
+  <section class="sect settle" id="sec-3">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">iii.</span></div>
+    <h2 class="display">Timeless nature,<br><em>permanent shifts</em></h2>
+    <div class="story">
+      <p class="markable">When do you take which risk? The answer runs through human nature, and the kata names its physics: <b>the brain hasn't structurally changed in 300,000 years</b> — prefrontal cortex, amygdala, hippocampus, all of it. People think from greed and fear, always have. Content at scale taught the same lesson sideways: <b>what people say they like (stated preference) and what they really like (revealed preference) are totally different things</b> — especially in India, where nobody is honest about what they actually think. And the one more property that matters most to risk: <b>behaviors rarely change — but when they do change, they are permanent.</b> Three years ago, none of you used AI; today you use it for everything, and it is never going back in the box. The internet survived its own bubble burst the same way. These shifts are rare — and must be noted: <b>the best time and place to take a risk is when a behavior has radically changed and nobody believes in it yet</b> — because the incumbents can't adapt as fast as you.</p>
+      <p class="markable">The reference shelf behind this: Morgan Housel's <em>Same as Ever</em> — timeless lessons on risk, opportunity, and living — and the kata runs the trait inventory from it. Turn each card for the trait, and the risk exploit hiding inside it. Two anchors hold the section up: <b>Snickers was the best-selling candy bar in 1962, and it still is</b> — tastes, habits, emotions constant — while the consumer tech hit of 1962, <b>the pocket transistor radio, is gone.</b> The one place behavior changes is technology — <b>which is exactly where the most money is made.</b> And the modern example of short-sightedness: <b>AI token prices</b> — the top model's price when God in a Box launched has fallen to <b>1% of itself</b>, the graph keeps pointing down, and still most people plan as if AI stays expensive forever. A smart career adapts the tools while staying grounded in the timeless wants — a great manager in 2025, as in 1925, knows people crave autonomy, mastery, and purpose. What humans want doesn't change. What they use to get it does.</p>
+    </div>
+
+    <div class="ladder" id="ladder">
+      <div class="rail" aria-hidden="true"></div>
+
+      <div class="rung">
+        <div class="node">一</div>
+        <div class="flipin">
+          <div class="face front">
+            <div class="amt">Greedy</div>
+            <div class="zt">the trait nobody admits</div>
+            <p class="brief">Ask an Instagram comment section who's greedy — every hand stays down. Everybody's greedy.</p>
+            <span class="flipnote">turn the card ↻</span>
+          </div>
+          <div class="face back">
+            <h4>the risk read</h4>
+            <p>Whatever people are greedy for — attention, money, status — is the direction the money flows. Chapter fourteen's entire map of the wealthy runs on this one trait.</p>
+            <h4>the exploit</h4>
+            <p>Price your offerings against the greed, not against the virtue. Stated preference lies; revealed preference pays.</p>
+            <p class="ret">↺ return to the front</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="rung">
+        <div class="node">二</div>
+        <div class="flipin">
+          <div class="face front">
+            <div class="amt">Fearful</div>
+            <div class="zt">the collective flinch</div>
+            <p class="brief">Unless something's wrong with your brain, you feel fear. A meteor incoming — all of us scared together.</p>
+            <span class="flipnote">turn the card ↻</span>
+          </div>
+          <div class="face back">
+            <h4>the risk read</h4>
+            <p>Recency bias: we fear terrorist attacks and sharks because they're on TV — probability microscopic. Fear is loud, not accurate.</p>
+            <h4>the exploit</h4>
+            <p>Howard Marks' second-level thinking: <b>when everyone is panicking, risk is actually lower</b> — the competition is thinning out. The room empties exactly when the entry gets cheap.</p>
+            <p class="ret">↺ return to the front</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="rung">
+        <div class="node">三</div>
+        <div class="flipin">
+          <div class="face front">
+            <div class="amt">Overconfident</div>
+            <div class="zt">including you</div>
+            <p class="brief">Every single person. Even the commenter writing "this person is overconfident" is being overconfident by writing it.</p>
+            <span class="flipnote">turn the card ↻</span>
+          </div>
+          <div class="face back">
+            <h4>the risk read</h4>
+            <p>At 21, Varun overestimated his chances of success at everything. Your first assigned probabilities will be wrong — that's not a reason to skip them; it's the reason experience is the calibration.</p>
+            <h4>the exploit</h4>
+            <p>Write the percentage down anyway. An overconfident number on paper loses to reality fast — and you get recalibrated. A feeling in your head never does.</p>
+            <p class="ret">↺ return to the front</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="rung">
+        <div class="node">四</div>
+        <div class="flipin">
+          <div class="face front">
+            <div class="amt">Tribalist</div>
+            <div class="zt">risk by consensus</div>
+            <p class="brief">We take risk the way the group takes risk: if everyone thinks something's acceptable, we do it; otherwise we don't.</p>
+            <span class="flipnote">turn the card ↻</span>
+          </div>
+          <div class="face back">
+            <h4>the risk read</h4>
+            <p>The IIT exam, Delhi air, the app-startup on Twitter — acceptable because crowded. Crowded risk is expensive risk.</p>
+            <h4>the exploit</h4>
+            <p>Every Aeos business was a <b>no-go business</b> — "video editing? services? India can't make a game" — and no-go businesses come with no competition. The herd's acceptance is a price signal, not a safety signal.</p>
+            <p class="ret">↺ return to the front</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="rung">
+        <div class="node">五</div>
+        <div class="flipin">
+          <div class="face front">
+            <div class="amt">Short-sighted</div>
+            <div class="zt">tomorrow, maybe next week</div>
+            <p class="brief">We look at tomorrow, the day after, a week. A three-year view is vanishingly rare — see: everyone pricing AI as expensive forever while token prices fall 99%.</p>
+            <span class="flipnote">turn the card ↻</span>
+          </div>
+          <div class="face back">
+            <h4>the risk read</h4>
+            <p>The two-year worksheet in section vii exists because this trait makes the default decision the worst one — the 60k offer over the 30k one, judged on this month's salary.</p>
+            <h4>the exploit</h4>
+            <p>Force the two-year horizon on paper. The crowd can't; that's the edge. And note Snickers still outsells the transistor radio: what people <i>want</i> is the long-term asset.</p>
+            <p class="ret">↺ return to the front</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sect settle" id="sec-4">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">iv.</span></div>
+    <h2 class="display">Think in <em>percentages</em></h2>
+    <div class="story">
+      <p class="markable">The skill that upgrades risk-taking from gambling to engineering: <b>probabilistic thinking.</b> Normies see every new opportunity as success-or-failure, binary. Professional poker players — and the way the kata wants you to think — see <b>20% success, 80% failure.</b> It's very hard to give things numbers; nobody in the room has put numbers on anything they're doing. But it can be tried, and the modern assist is real: <b>put your variables into ChatGPT</b> — this career decision versus that one — and it will return something imperfect but comparable: which outcome the model holds higher confidence in. The numbers will be wrong; the ranking is still information. And the honesty about the learning curve: <b>every assigned probability early in your career will be wrong — experience is what makes them better.</b> The 21-year-old Varun overestimated everything; the current one is more accurate about what works.</p>
+      <p class="markable">And the epistemic humility that frames all of it, in one line the kata quotes as law: <b>risk is what's left over after you think you've thought of everything.</b> You cannot probabilistically price a Galgotias-style scandal into your degree. Sometimes you just live the outcome and ask: <i>now what?</i></p>
+    </div>
+    <div class="quote">"Risk is what's left over after you think you've thought of everything."<span class="who">— the residual, defined</span></div>
+  </section>
+
+  <section class="sect settle" id="sec-5">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">v.</span></div>
+    <h2 class="display">GTO — cheap experiments,<br><em>staged risk</em></h2>
+    <div class="story">
+      <p class="markable">Now the mechanism — game theory optimal, ported from poker to life, and the kata's summary of it is four words: <b>cheap experiment, high payoff.</b> The value of a cheap experiment is that <b>you can shut it down</b> — a heavy experiment carries sunk costs that make shutdown impossible. The hiring version: a candidate with five checkmarks and an estimated 80% success probability gets real money spent on them; a 10% candidate gets a cheap trial — <b>pay the full price only after six, eight, ten months, once it's proven out.</b></p>
+      <p class="markable">And the world's largest institutional version of this logic — <b>the entire idea of startups, which the kata says everyone has forgotten:</b> the funding stages exist <b>to stage risk.</b> Seed: 2 crores buys 50% at a 4-crore valuation — because the investor doesn't know if it works, the 50% may be worth zero, so the price demands a crazy outcome. Series A: nothing material has changed — revenue still near zero — but <b>risks have been ticked off</b> (can this founder build a team? a product? get users?) and the valuation jumps to 30 crores; the next 2 crores buys only 5%. Series B: millions proven. Series D and E: <b>valuation becomes a revenue multiple</b> — $5 million times ten — because late-stage private equity doesn't like risk at all. Each stage buys the same information at a higher price and a lower multiple. The kata's own arc as an angel investor mirrors it exactly: two years ago, seed bets off FOMO ("Sequoia's in, fine, I'll put 5–10 lakhs") that shut down within a year; today, after Lumio and Temple — checkpoints first: team built, prior success, revenue already coming — less of the company, much less of the risk. "I'm not doing suicidal risk-taking like last year." And the accusation that lands on the reader: <b>none of you stage your lives.</b> Five lakhs in the bank, "pura penny stock me dal dunga," hoping for 10x — when even that play wants portfolio math: 80–90% safe, 10% crazy.</p>
+      <p class="markable">The bootstrap's revenge closes the section: without investor capital, every Aeos experiment was run <b>extraordinarily frugally</b> — co-founders took equity instead of cash — and the outcome rule was <b>ego-less and emotion-less: worked → spend more; didn't → shut it down.</b> Be attached to the business, never to the product. In India, pivots get laughed at — <em>ek product kar raha tha, ab kuch aur</em> — "and that's the absolutely wrong way to look at the world." Nobody knows why a product fails; OpenAI might build it tomorrow. Shut it down and stay alive.</p>
+    </div>
+
+    <figure class="diag settle">
+      <svg viewBox="0 0 780 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The staged risk ladder: seed at 4 crores for the crazy outcome, Series A at 30 crores with risks ticked, Series B with revenue proven, Series D valued on revenue multiples">
+        <g stroke="#141311" stroke-width="5" fill="none" stroke-linecap="round" filter="url(#rough2)" opacity=".88">
+          <path d="M60,230 L60,196 M210,230 L210,168 M360,230 L360,140 M510,230 L510,112 M660,230 L660,84"/>
+        </g>
+        <g fill="#141311" filter="url(#rough)">
+          <circle cx="60" cy="188" r="14"/><circle cx="210" cy="160" r="16"/><circle cx="360" cy="132" r="18"/><circle cx="510" cy="104" r="20"/><circle cx="660" cy="76" r="22" fill="#c8372d"/>
+        </g>
+        <g font-family="Zen Kaku Gothic New, sans-serif" font-size="13.5" fill="#34312c">
+          <text x="60" y="256" text-anchor="middle">seed</text>
+          <text x="70" y="272" text-anchor="middle" fill="#66625a">4 Cr for 50%</text>
+          <text x="210" y="256" text-anchor="middle">Series A</text>
+          <text x="210" y="272" text-anchor="middle" fill="#66625a">30 Cr · risks ticked: team, product, users</text>
+          <text x="360" y="256" text-anchor="middle">Series B</text>
+          <text x="360" y="272" text-anchor="middle" fill="#66625a">millions proven</text>
+          <text x="510" y="256" text-anchor="middle">Series D/E</text>
+          <text x="510" y="272" text-anchor="middle" fill="#66625a">revenue × multiple — PE hates risk</text>
+          <text x="660" y="256" text-anchor="middle" fill="#c8372d">your life</text>
+          <text x="660" y="272" text-anchor="middle" fill="#c8372d">none of you stage it</text>
+          <text x="380" y="40" text-anchor="middle" fill="#66625a">same information, higher price, lower multiple at every rung</text>
+        </g>
+      </svg>
+      <figcaption><b>The staged-risk ladder.</b> Venture capital is GTO at institutional scale — each rung buys proof. The kata's charge: you have the same ladder available for your own decisions, and you've never used it.</figcaption>
+    </figure>
+  </section>
+
+  <section class="sect settle" id="sec-6">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">vi.</span></div>
+    <h2 class="display">Information <em>disparity</em></h2>
+    <div class="story">
+      <p class="markable">Why does the same bet look obvious to one person and reckless to another? <b>Information disparity</b> — and it cuts both ways. The kata's cleanest example is its own industry: <b>video editing</b> — in the kata's estimate, a career where you can <em>guarantee</em> a few lakhs a year and reach double digits quickly — while India doesn't believe it: too good to be true, and <b>not socially acceptable</b> — not a hundred people posting "I make 40–50 LPA editing." Software, meanwhile, is the socially acceptable risk — <b>even though it's the genuinely risky one now</b>: funding for pure software is declining while the engineer supply keeps rising. And the number that should recalibrate every career decision: <b>YouTube paid out about ₹19,000 crores</b> to Indian creators, with the channel count still climbing.</p>
+      <p class="markable">The other direction of the disparity is the outsider's tax: <b>sitting outside an industry, you cannot judge its risks.</b> The engineer who says "I'll start in finance" — <em>I'll pick it up</em> — is promising to spend the first two years just learning what the risks even are. The founders who build AI video-editing tools for editors, having never edited: they can't tell the difference between a video and a slideshow — the stitching, the narrative between parts, the art. <b>Two years inside an industry is what it takes to see the nuance — which is exactly why the inside player's "obvious" bet looks like risk to everyone else.</b> The smart risk is the one that looks high-probability to you and reckless to the crowd — because you're the one who can see it.</p>
+    </div>
+    <div class="quote">"It's very hard, sitting from outside an industry, to really judge its risks."<span class="who">— why the crowd-sourced bet is the expensive bet</span></div>
+  </section>
+
+  <section class="sect settle" id="sec-7">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">vii.</span></div>
+    <h2 class="display">The two-year <em>worksheet</em></h2>
+    <div class="story">
+      <p class="markable">Now the exercise the whole chapter trains for — the decision between <b>a finance role at ₹30k a month and a monitor-sales role at ₹60k.</b> The short-sighted answer takes the 60k. The worksheet forces the two-year view, four rows deep. <b>Best case:</b> the monitor company — VP of sales; the finance company — the market keeps growing, you end up heading relationship management across hundreds of clients. <b>Average case:</b> you stay exactly where you are in both — 50k versus 30k. <b>Worst case:</b> monitors are commoditized, the Indian monitor company dies; the finance company gets into fraud — you lose the job, though you're not implicated. <b>Tail risk</b> — the things you're not calculating, per Taleb's <em>Antifragile</em>: the pandemic-scale events, and the personal ones: in your twenties you overspend; at 27–28, almost reliably, a health issue arrives — back pain, something — maybe you're the 30% that escapes it. Factor it in anyway.</p>
+      <p class="markable">Then the step nobody takes: <b>write the four rows for both options side by side — and feed them into ChatGPT with deep research.</b> Out of a hundred finance companies started last year in India, how many shut down, and why? What happened to analyst salaries? The same for monitor companies. <b>It returns a score, and it tells you why</b> — research no human being does on their own career, available for free in an afternoon. You are not excused from the two-year view anymore; the instrument exists.</p>
+    </div>
+    <svg class="brush" viewBox="0 0 900 26" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M8,12 C180,20 340,6 520,15 S760,20 892,10" filter="url(#rough)"/></svg>
+  </section>
+
+  <section class="sect settle" id="sec-8">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">viii.</span></div>
+    <h2 class="display">Incentives & irreversible<br><em>consequences</em></h2>
+    <div class="story">
+      <p class="markable">The worksheet's missing column: <b>everyone else's incentives.</b> Why does any company hire a freelancer? Because <b>they don't want to take the risk of a full-time hire</b> — the project might not be full-time, or it's a small startup that doesn't know if it's alive in three months. Which is exactly why <b>Aeos doesn't work with small startups</b> — not dislike, math: Coca-Cola is reliably around next year (1% tail), while 99% of small startups die; the risk can't be modeled. So the question the kata fires back at every freelancer working with small startups: <em>when I won't absorb that risk with all my data, why are you?</em> The honest answer — "they're the only ones who'll work with me" — is fine, but then <b>know what you're getting into: the two-year outcome is the startup dies, and you've burned the years</b> — unless you diversify across 5–15 clients and climb to the bigger companies fast. And the deeper incentive truth: if you don't matter to them, don't expect care when things get hard.</p>
+      <p class="markable">Then the one-way doors of professional life: <b>beware irreversible consequences — burned bridges.</b> Leave a company angry, badmouth them — and you've locked off <b>a section of capital flow into your life</b>: that company, its customers, its whole ecosystem, permanently. The kata's own arc: at 20, bridges burned — <em>who cares, I'll never work with them again</em>; in his 30s, <b>even when wronged, relationships are maintained — because you never know where that person goes; people mature and build big companies.</b> The final calibration on the way out: tail risks are real but <b>also overestimated</b> — the planning mind that refuses all bets because a pandemic might come has confused paranoia with prudence. Productive paranoia is section eleven; this is just paralysis wearing its costume.</p>
+    </div>
+    <div class="quote">"Never burn bridges — you never know where that person can go."<span class="who">— the capital-flow law</span></div>
+  </section>
+
+  <section class="sect settle" id="sec-9">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">ix.</span></div>
+    <h2 class="display">Real optionality &<br><em>shock absorbers</em></h2>
+    <div class="story">
+      <p class="markable">The chapter's centerpiece concept, and its sharpest distinction. <b>Fake optionality:</b> "I'll interview at ten places just to know whether they want me" — you haven't quit; the offers may not be serious; you won't survive six months at any of them. Validation theater, not optionality. <b>Real optionality:</b> <b>deep optionality</b> — a term from Hans Rollin's Substack, quoted close: <em>"in the way of a master martial artist, a system endowed with deep optionality reacts to potentially disruptive events with a response tailored to the problem at hand."</em> And the kata's example is perfect because it's under your nose: <b>humans can walk on almost any surface.</b> Mud, bean bags, hot ground — balance, hop, adapt. Thousands of falls, practiced until it's unconscious. <b>Why don't you have this with your career?</b></p>
+      <p class="markable">The answer, and the training program: it comes <b>from being indispensable — through repetition and mastery.</b> Run a company, shut it down; run one, fail; run one, get acquired; run one, small outcome — so many cycles that now <b>any surface is walkable</b>: cohorts, services, game dev. And the transferable skill set the kata lists is notably <em>not</em> hard skills: <b>learning to take risk accurately (this chapter); hiring good people; wealth-sharing — equity instead of cash when money is scarce; and distribution — the ability to try ten products until one works.</b> Because of the one asymmetry that separates life from poker: <b>in poker, the next all-in can bust you; in life, if you go all in and are right ONCE, it pays for all your thousands of experiments</b> — as long as you weren't foolish enough to bet the food money. Hard skills are at best a temporary version of this ("I'm an engineer, I'm invulnerable" — until the technology pulls the rug). Second-level thinking completes the kit — <b>when everyone's panicking, risk is lower; when the herd is euphoric, high off its own supply, risk is very high</b> — Buffett's fear-and-greed dial as a life rule.</p>
+      <p class="markable">And the floor under all of it — <b>shock absorbers: cash and broad skills.</b> Before freelancing or founding anything: <b>at least 10 lakhs in the bank</b> — a year of very cheap living (the Jobspire dungeon: three founders, one 3BHK in Delhi, ₹15,000 a month, running on FD-money). It is <b>suicidal to take risk without shock absorption.</b> The scaled versions prove the architecture: Unleash the Avatar is built so that even failure <b>cannot kill Aeos on its way out</b> — while a robotics startup absolutely could (the capex would take hundreds of millions to survive), so it waits for a bigger cushion. L&T, TCS, Infosys — <b>50,000 crores in the bank: they can take any risk, and take none</b> — because at their scale the risk is reputational, and the market dips on a failed app. And the Justin Kan pattern — Twitch exits, the legal startup fails completely, and personally, nothing happens: cash-wise immune, reputation bruised. That is what a portfolio of past wins buys: <b>the right to keep playing.</b></p>
+    </div>
+    <div class="quote">"In life, if you go all in and you're right once — it's enough. It pays for thousands of experiments."<span class="who">— the asymmetry poker doesn't have</span></div>
+    <svg class="mountain" viewBox="0 0 300 64" preserveAspectRatio="none" aria-hidden="true">
+      <path pathLength="1" d="M6,58 L58,28 L98,48 L152,10 L200,42 L246,24 L294,52" filter="url(#rough3)"/>
+    </svg>
+  </section>
+
+  <section class="sect settle" id="sec-10">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">x.</span></div>
+    <h2 class="display">Three stories of <em>randomness</em></h2>
+    <div class="story">
+      <p class="markable"><b>One: the furniture man.</b> Business class to Bombay — everyone's chatty — and the neighbor runs a furniture franchise: small revenue, unremarkable margins, fifty years old. So how is he flying business, and what's the net worth? <b>"Hundreds of crores."</b> At 23, he and his friends bought some random cheap property; the government eventually needed it and paid a few hundred crores; no kids, so he's just spending it now. The source of wealth is not furniture. <em>"And this, by the way, is the story of many people's lives."</em> Most successful businesses are just <b>three friends with a cool plan saying "chalo karenge"</b> — never a planned 1-2-3-4-5 (Aeos's Disney-like plan ran 60–70% to spec — rare, and even Varun admits it). The lesson isn't to skip the gambles — <b>you still need to put 5–10% of your portfolio into crazy risks</b> — and note the diversification math: real estate didn't require his time; his time went into the furniture. One thing that works, plus money where your time isn't.</p>
+      <p class="markable"><b>Two: the Infosys shares.</b> Narayan Murthy tells a friend to buy; the friend buys as a favor, unsure; today the holding is massive — <b>the next five generations run on it.</b> And its in-house echo: Aeos talent who took exposure instead of a ₹10,000 salary bump — the outcome surprised them, and the elevation was permanent: <em>they can no longer relate to the person who didn't take risk.</em> <b>Three: the founders' angel ring.</b> Venture-funded founders in India take reasonable salaries and then — perfectly legally — <b>invest in each other's companies</b>: a hundred founders, all holding pieces of each other. Early-stage is 100x-or-bust, so some of these rings are now worth <b>more than the founders' own companies</b> — and the kata refuses to call it a bad thing: you don't control whether your company works; the hedge is rational. Even the "I'm going all in on my company" founders do it.</p>
+    </div>
+    <div class="quote">"Most successful businesses are three friends with a cool plan saying chalo karenge."<span class="who">— the origin story, honest version</span></div>
+  </section>
+
+  <section class="sect settle" id="sec-11">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">xi.</span></div>
+    <h2 class="display">Loss aversion<br><em>& the portfolio</em></h2>
+    <div class="story">
+      <p class="markable">The psychology that sabotages all of the above: <b>loss aversion — a loss hurts roughly twice as much as a win feels good.</b> The kata's own fresh wound: 15 lakhs invested from Combinator, the company up 2–3x — <b>and they feel bad about it</b>, because the chance to invest had existed a year earlier at a better price. Had they lost the 15 lakhs instead, the sentence would have been "such a bad decision — we should never do this again." Wins fade; losses write rules. So the management applications, learned the hard way: <b>no feel-good promotions</b> (the title delights for a week; taking it away later makes them curse you forever), <b>no ballpark projections</b> (people fall short of the estimate and feel loss even while out-earning everyone), <b>no perks unless well thought out</b> (the Gully Labs shoe collab — the people who almost got them felt genuinely bad), and remember that <b>a reward below expectation registers as a loss.</b></p>
+      <p class="markable">And the portfolio that houses it all: <b>80–90% ultra safe, 10% allowed to go crazy.</b> Aeos runs it exactly — the vast majority of revenue from services, single digits from cohorts, and the 10% is Unleash the Avatar. For your money: never 100% into the penny stock; stage it. And the exit discipline of professionals: the investor who puts in one crore, watches it become four, <b>sells 25% — takes the original corpus back out</b> — keeps three crores riding; nine crores later, takes three, keeps six. Always extract the original stake when the opportunity offers. <b>The PE investors who refused every secondary out of "high conviction" and watched the company die</b> — because the longer you stay alive, the more tail risk accumulates: founders tire, pandemics come — prove the rule from the graveyard side. It's not low conviction. It's the right way to play risk.</p>
+      <p class="markable">Then the three closing laws. <b>Medium risk kills:</b> Taleb's black swans are unpredictable, but medium risk is chosen — six lakhs in the bank, three to start the company, the first customer takes eight months instead of three, the runway evaporates and every priority collapses into "get a job now." The rule: <b>whatever the estimate, have double</b> — 2 crores to retire? Have 3. 10 lakhs to start? Have 20. <b>Productive paranoia:</b> the best founders are paranoid in good times — Aeos is having its best year, and Varun is the most paranoid person in it, keeping excess deal flow ready for the client that eventually leaves — and it's saved the company repeatedly. The best offset for bad things is always <b>leads</b>: "when you come with customers, you're telling the company — I am your runway. I am your VC." Hence the 8-2 flip: at 25 he spent 8 of 10 rupees on product and 2 on marketing; today it's <b>8 on marketing, 2 on product</b> — with equity dilution making the 2 act like 10 — because the Nykaas of the world aren't product rocket science; staying in the news every day is. Two domains: high randomness (apps, viral content, venture) → many small parallel shots, double down on the winner, shut the rest; skill-based (surgery, editing) → deliberate, massive practice. And the antidote to it all — <b>multi-way variance:</b> at a nine-handed poker table, someone almost surely has better cards; heads-up, one pair wins. Less competition means you don't need the best product — you get time to build it. Enter the non-competitive market with a good product and the seal sets itself: anyone starting today is where Yaas was two years ago, and the customer needs results in six months, not five years. The formula, final form: a market that will expand, that not enough people are doing — the NAS that gets 2x productivity, the catered office meals competing only with 20-year-old tiffin businesses — the underrated problems, where the only cost is that nobody will clap for you at the start.</p>
+    </div>
+  </section>
+
+  <section class="sect settle" id="sec-12">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">xii.</span></div>
+    <h2 class="display">Practice —<br><em>this is your kata</em></h2>
+    <div class="story">
+      <p class="markable">Risk is a skill with reps. This month's repetitions:</p>
+    </div>
+    <div class="checks">
+      <div class="chk"><span class="box"><svg viewBox="0 0 30 30" aria-hidden="true"><path pathLength="1" d="M6,17 L13,23 L25,7"/></svg></span><span class="txt">Write the two-year worksheet for your live decision — best, average, worst, tail — then run it through deep research and read the score.</span></div>
+      <div class="chk"><span class="box"><svg viewBox="0 0 30 30" aria-hidden="true"><path pathLength="1" d="M6,17 L13,23 L25,7"/></svg></span><span class="txt">Stage one bet you were about to make wholesale: cut it to the cheap experiment, define what "proven" looks like, and only then commit the corpus.</span></div>
+      <div class="chk"><span class="box"><svg viewBox="0 0 30 30" aria-hidden="true"><path pathLength="1" d="M6,17 L13,23 L25,7"/></svg></span><span class="txt">Audit your portfolio honestly: is 80–90% of your income and time actually safe — or are you living in medium risk without noticing?</span></div>
+      <div class="chk"><span class="box"><svg viewBox="0 0 30 30" aria-hidden="true"><path pathLength="1" d="M6,17 L13,23 L25,7"/></svg></span><span class="txt">Count your shock absorbers: months of runway in the bank, transferable skills, leads in the pipeline — then add one unit to the weakest.</span></div>
+      <div class="chk"><span class="box"><svg viewBox="0 0 30 30" aria-hidden="true"><path pathLength="1" d="M6,17 L13,23 L25,7"/></svg></span><span class="txt">Find one no-go market you secretly understand — a market that will expand, that nobody respectable is doing — and put the 10% there instead of the crowd's table.</span></div>
+    </div>
+    <svg class="brush" viewBox="0 0 900 26" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M8,14 C160,22 330,8 500,16 S720,20 892,12" filter="url(#rough2)"/></svg>
+  </section>
+
+  <section class="sect settle" id="sec-13">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">xiii.</span></div>
+    <h2 class="display">Sit with <em>these</em></h2>
+    <div class="story">
+      <p class="markable">— Where did my family's last real risk come from — and how long ago was the last one I took myself?</p>
+      <p class="markable">— Which of my current bets is actually medium risk wearing a plan's costume?</p>
+      <p class="markable">— What surface could I walk on if I had practiced it as many times as I've practiced walking?</p>
+      <p class="markable">— And the hand the whole book is leading to: which table am I sitting at — nine players, four, or heads-up — and do I have the cards that table actually requires?</p>
+    </div>
+    <div class="endrow">
+      <div class="seal-stamp" style="width:58px;height:58px;font-size:26px" title="press to close the chapter">終</div>
+      <span class="fine">end of chapter thirteen · next — <a href="ch14-think-like-rich-people.html" style="color:var(--ink-3)">the finale: chapter fourteen, Think Like Rich People</a> · <a href="index.html" style="color:var(--ink-3)">or return to the cover</a></span>
+    </div>
+    <p class="srcnote">The Kata Scroll — chapter thirteen, Book IV, written from a complete read of the transcript of
+    <a href="https://www.youtube.com/watch?v=EWFn-RgxZ5M" target="_blank" rel="noopener">Varun Mayya's "How To Take Risk Like Rich People Do (1 Hour Masterclass)" (Kata 9)</a>,
+    ~13,800 words, expanded for study. The source-of-wealth claim and the reduce-risk doctrine, the diarrhea statistic and crowd-sourced risk, the IIT and Delhi-air examples, content dampening luck, stated vs revealed preference, the 300,000-year brain and permanent behavioral shifts, "Same as Ever," Snickers and the transistor radio, AI token prices, the five timeless traits, probabilistic thinking with ChatGPT, GTO and cheap experiments, the staged-risk ladder and the angel evolution (Lumio, Temple), the bootstrap frugality and ego-less shutdowns, information disparity (video editing vs software, the 19,000-crore payout, the slideshow tools), the two-year worksheet with deep research, the freelancer incentive analysis, the Coca-Cola vs small-startup math, never burn bridges, fake vs deep optionality (Hans Rollin's Substack, walking on any surface), the transferable skill set and being right once, second-level thinking, shock absorbers and the 10-lakh floor, the Jobspire dungeon, Unleash the Avatar's containment, robotics and L&T/TCS reputational risk, Justin Kan, the furniture man, the Infosys shares, the founders' angel ring, loss aversion with the 15-lakh Combinator wound and the Gully Labs shoes, the 80-10 portfolio, staged exits and the original corpus, medium risk and the six-lakh runway, productive paranoia and leads ("I am your VC"), the 8-2 marketing flip, the two domains, and multi-way variance with the Yaas seal and the NAS/catered-meals opportunities are all from the session. Chapter thumbnail via YouTube. Diagrams are original. The Kata Scroll is an independent study companion, not affiliated with Varun Mayya or Aeos.</p>
+  </section>
+
+</div>
+</main>
+
+<script>
+(function(){
+  'use strict';
+  const io=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('revealed');io.unobserve(e.target);}});
+  },{threshold:.12});
+  document.querySelectorAll('.settle, .brush, .mountain').forEach(function(el){io.observe(el);});
+  document.querySelectorAll('.markable').forEach(function(p){
+    p.addEventListener('dblclick',function(){p.classList.toggle('marked');});
+    p.title='double-tap to mark this line';
+  });
+  document.querySelectorAll('.rung').forEach(function(r){
+    r.querySelector('.flipin').addEventListener('click',function(){r.classList.toggle('flip');});
+  });
+  document.querySelectorAll('.chk').forEach(function(c){
+    c.addEventListener('click',function(){c.classList.toggle('done');});
+  });
+  document.querySelectorAll('.tip').forEach(function(t){
+    t.addEventListener('click',function(ev){ev.stopPropagation();t.classList.toggle('open');});
+  });
+  document.addEventListener('click',function(ev){
+    document.querySelectorAll('.tip.open').forEach(function(t){if(!t.contains(ev.target))t.classList.remove('open');});
+  });
+  const drop=document.getElementById('raildrop');
+  const rail=document.querySelector('.chapter-rail .railline');
+  function onScroll(){
+    if(!drop||!rail)return;
+    var h=document.documentElement;
+    var p=Math.min(1,Math.max(0,h.scrollTop/((h.scrollHeight-h.clientHeight)||1)));
+    var max=rail.clientHeight-16;
+    drop.style.top=(2+p*max)+'px';
+  }
+  addEventListener('scroll',onScroll,{passive:true});
+  addEventListener('resize',onScroll);
+  onScroll();
+  document.querySelectorAll('.seal-stamp').forEach(function(s){
+    s.addEventListener('click',function(){
+      s.style.transform='rotate(-4deg) scale(.9)';
+      setTimeout(function(){s.style.transform='';},160);
+    });
+  });
+})();
+</script>
+<script>
+/* reading memory — the book remembers your place, your marks, your practice */
+(function(){
+  'use strict';
+  var KEY='kata:'+(location.pathname.split('/').pop()||'index.html');
+  function load(){try{var s=JSON.parse(localStorage.getItem(KEY)||'null');return (s&&typeof s==='object')?s:null;}catch(e){return null;}}
+  function save(s){s.ts=Date.now();try{localStorage.setItem(KEY,JSON.stringify(s));}catch(e){}}
+  function snap(){
+    var s=load()||{marks:[],checks:[],pos:0};
+    s.marks=collect('.markable','marked');
+    s.checks=collect('.chk','done');
+    save(s);
+  }
+  function collect(sel,cls){
+    var out=[];
+    Array.prototype.forEach.call(document.querySelectorAll(sel),function(el,i){if(el.classList.contains(cls))out.push(i);});
+    return out;
+  }
+  var st=load();
+  if(st){
+    (st.marks||[]).forEach(function(i){var p=document.querySelectorAll('.markable')[i];if(p)p.classList.add('marked');});
+    (st.checks||[]).forEach(function(i){var c=document.querySelectorAll('.chk')[i];if(c)c.classList.add('done');});
+  }
+  document.addEventListener('dblclick',function(){snap();});
+  document.addEventListener('click',function(ev){
+    if(ev.target&&ev.target.closest&&ev.target.closest('.chk'))snap();
+  });
+  function pos(){var h=document.documentElement;return h.scrollHeight>h.clientHeight?h.scrollTop/(h.scrollHeight-h.clientHeight):0;}
+  function savePos(){var s=load()||{marks:[],checks:[],pos:0};s.pos=pos();save(s);}
+  var t=null;
+  addEventListener('scroll',function(){if(t)return;t=setTimeout(function(){t=null;savePos();},400);},{passive:true});
+  addEventListener('pagehide',savePos);
+  function restore(){
+    if(location.hash)return;
+    var s=load();if(!s||!(s.pos>0.02))return;
+    var h=document.documentElement;
+    var y=s.pos*(h.scrollHeight-h.clientHeight);
+    if(y>0){h.style.scrollBehavior='auto';scrollTo(0,y);setTimeout(function(){h.style.scrollBehavior='';},80);}
+  }
+  if(document.readyState==='complete')restore();else addEventListener('load',restore);
+  setTimeout(restore,900);
+  if('serviceWorker' in navigator&&location.protocol==='https:'){
+    addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});
+  }
+})();
+</script>
+</body>
+</html>

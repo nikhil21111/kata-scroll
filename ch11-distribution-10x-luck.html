@@ -1,0 +1,633 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 11 · How Distribution Can 10× Your Luck, Career & Income — The Kata Scroll</title>
+<meta name="description" content="The luck-engineering kata — the luck stat, the lightning catcher, what distribution actually is, the touch-point math behind every purchase, and why founders do content when managers won't. From Varun Mayya's Kata 10.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="The Kata Scroll">
+<meta property="og:title" content="Chapter 11 · How Distribution Can 10× Your Luck, Career & Income">
+<meta property="og:description" content="The luck-engineering kata — the luck stat, the lightning catcher, what distribution actually is, the touch-point math behind every purchase, and why founders do content when managers won't. From Varun Mayya's Kata 10.">
+<meta property="og:image" content="https://i.ytimg.com/vi/TGKgCLVxRCk/maxresdefault.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#fbfaf6">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Zen+Kaku+Gothic+New:wght@400;500&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* ═════════ THE KATA SCROLL · CHAPTER 04 · inkwash ═════════ */
+:root{
+  --paper:#fbfaf6; --ink:#141311; --ink-2:#34312c; --ink-3:#66625a; --ink-4:#a19c92;
+  --hair:rgba(20,19,17,.12); --hair-2:rgba(20,19,17,.22);
+  --seal:#c8372d;
+  --f-display:'Cormorant Garamond',Georgia,serif;
+  --f-ui:'Zen Kaku Gothic New',Inter,system-ui,sans-serif;
+  --f-jp:'Shippori Mincho','Noto Serif JP',serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink-2);font-family:var(--f-ui);font-size:17px;line-height:1.75;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:rgba(200,55,45,.22)}
+img{max-width:100%}
+.paper-bg{position:fixed;inset:0;z-index:0;pointer-events:none}
+.paper-bg .mottle{position:absolute;inset:0;background:
+  radial-gradient(60% 50% at 18% 22%,rgba(214,206,190,.16),transparent 70%),
+  radial-gradient(50% 45% at 86% 78%,rgba(214,206,190,.14),transparent 70%),
+  radial-gradient(120% 100% at 50% 50%,transparent 62%,rgba(150,138,112,.10) 100%)}
+.paper-bg svg.grain{position:absolute;inset:0;width:100%;height:100%;mix-blend-mode:multiply;opacity:.92}
+main{position:relative;z-index:1}
+.vert{writing-mode:vertical-rl;font:500 13px/1 var(--f-ui);letter-spacing:.42em;text-transform:uppercase;color:var(--ink-4)}
+.seal-stamp{display:inline-flex;align-items:center;justify-content:center;background:var(--seal);color:var(--paper);
+  font-family:var(--f-jp);font-weight:700;border-radius:5px;transform:rotate(-4deg);
+  box-shadow:inset 0 0 10px rgba(0,0,0,.28),0 1px 0 rgba(0,0,0,.08);user-select:none;cursor:pointer;transition:transform .18s ease}
+.seal-stamp:active{transform:rotate(-4deg) scale(.92)}
+.eyebrow{display:inline-flex;align-items:center;gap:16px;font:500 14px/1 var(--f-ui);letter-spacing:.3em;text-transform:uppercase;color:var(--ink-3)}
+.eyebrow::before{content:'';width:34px;height:2px;background:var(--seal)}
+.display{font-family:var(--f-display);font-weight:500;color:var(--ink);letter-spacing:-.012em;line-height:1.02}
+.display em{font-style:italic;color:var(--seal)}
+.lead{font:400 19px/1.8 var(--f-ui);color:var(--ink-3);max-width:52ch}
+.lead b{color:var(--ink);font-weight:500}
+.fine{font:400 14px/1.6 var(--f-ui);color:var(--ink-4);letter-spacing:.02em}
+.brush{display:block;width:100%;height:26px;overflow:visible}
+.brush path{stroke:var(--ink);stroke-width:5;fill:none;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.7s cubic-bezier(.6,0,.3,1)}
+.brush.seal-brush path{stroke:var(--seal)}
+.brush.revealed path{stroke-dashoffset:0}
+.mountain{display:block;width:min(300px,70%);height:64px;margin:34px auto;overflow:visible;opacity:.9}
+.mountain path{stroke:var(--ink-3);fill:none;stroke-width:3.4;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 2.4s ease}
+.mountain.revealed path{stroke-dashoffset:0}
+.settle{opacity:0;filter:blur(6px);transform:translateY(14px);transition:opacity 1.05s ease,filter 1.05s ease,transform 1.05s ease}
+.settle.revealed{opacity:1;filter:blur(0);transform:none}
+@media (prefers-reduced-motion:reduce){.settle{transition:none;opacity:1;filter:none;transform:none}.brush path,.mountain path{transition:none;stroke-dashoffset:0}}
+.scroll-wrap{max-width:840px;margin:0 auto;padding:96px 28px 42vh;position:relative}
+.chapter-rail{position:fixed;left:26px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;gap:18px;z-index:6}
+.chapter-rail .seal-stamp{width:52px;height:52px;font-size:24px}
+.chapter-rail .railline{width:3px;height:220px;background:var(--hair);border-radius:3px;position:relative;overflow:visible}
+.chapter-rail .raildrop{position:absolute;left:50%;top:0;width:13px;height:19px;background:var(--seal);border-radius:50% 50% 50% 50%/62% 62% 38% 38%;transform:translate(-50%,-2px);transition:top .22s linear}
+.cover{min-height:82vh;display:flex;flex-direction:column;justify-content:center;position:relative}
+.cover h1.display{font-size:clamp(46px,6.4vw,84px);margin:22px 0 26px}
+.cover .jp-side{position:absolute;right:-4px;top:10%;height:224px}
+.cover .meta-row{display:flex;align-items:center;gap:18px;margin-top:42px;flex-wrap:wrap}
+.enso-wrap{position:absolute;right:2%;top:6%;width:clamp(150px,20vw,240px);opacity:.8;pointer-events:none}
+.toc{margin:74px 0 30px;padding:34px 38px;background:rgba(255,255,255,.5);border:1px solid var(--hair);border-radius:3px}
+.toc h2{font:500 13px/1 var(--f-ui);letter-spacing:.3em;text-transform:uppercase;color:var(--ink-3);margin-bottom:20px}
+.toc ol{list-style:none;columns:2;column-gap:52px}
+.toc li{break-inside:avoid;margin-bottom:11px}
+.toc a{display:flex;gap:14px;align-items:baseline;text-decoration:none;color:var(--ink-2);font-size:15.5px;transition:color .3s}
+.toc a .n{font-family:var(--f-display);font-style:italic;color:var(--seal);min-width:26px}
+.toc a:hover{color:var(--seal)}
+.toc a:hover .n{color:var(--ink)}
+@media (max-width:640px){.toc ol{columns:1}}
+.sect{padding-top:66px;margin-top:58px;position:relative;scroll-margin-top:40px}
+.sect .washx{position:absolute;inset:-46px -70px;background:radial-gradient(42% 52% at 32% 42%,rgba(20,19,17,.05),transparent 72%);opacity:0;transform:scale(.95);transition:opacity 1.3s ease,transform 1.3s ease;pointer-events:none;border-radius:50%}
+.sect.revealed .washx{opacity:1;transform:scale(1)}
+.sect .kicker{display:flex;align-items:baseline;gap:16px;margin-bottom:18px}
+.sect .kicker .no{font-family:var(--f-display);font-style:italic;font-size:30px;color:var(--seal)}
+.sect h2.display{font-size:clamp(33px,3.9vw,50px);margin-bottom:22px;line-height:1.06}
+.story{font-family:var(--f-display);font-size:23px;line-height:1.85;color:var(--ink-2);max-width:64ch}
+.story p{margin-bottom:1.35em}
+.story p:first-of-type::first-letter{font-size:72px;line-height:.85;float:left;padding:8px 14px 0 0;color:var(--ink);font-style:italic}
+.story .aside{font-family:var(--f-ui);font-size:15.5px;color:var(--ink-3);border-left:2px solid var(--hair-2);padding:6px 0 6px 22px;margin:2em 0}
+.quote{font-family:var(--f-display);font-style:italic;font-size:clamp(26px,3.2vw,32px);line-height:1.5;color:var(--ink);max-width:32ch;margin:60px auto;text-align:center;position:relative}
+.quote::before{content:'"';font-size:72px;color:var(--seal);position:absolute;top:-34px;left:50%;transform:translateX(-50%);opacity:.8}
+.quote .who{display:block;font-family:var(--f-ui);font-style:normal;font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-4);margin-top:18px}
+.markable{cursor:pointer;border-radius:2px;transition:background .4s;position:relative}
+.markable:hover{background:rgba(200,55,45,.045)}
+.markable.marked{background:linear-gradient(180deg,transparent 62%,rgba(200,55,45,.17) 62%)}
+.markable.marked::after{content:'富';position:absolute;left:-30px;top:2px;font-family:var(--f-jp);color:var(--seal);font-size:15px;opacity:.85}
+.tip{border-bottom:2px dotted var(--seal);cursor:pointer;position:relative}
+.tip .tipbox{position:absolute;left:50%;bottom:135%;transform:translateX(-50%);width:238px;background:var(--ink);color:var(--paper);font:400 13.5px/1.55 var(--f-ui);padding:13px 15px;border-radius:4px;opacity:0;pointer-events:none;transition:opacity .3s;z-index:30}
+.tip:hover .tipbox,.tip.open .tipbox{opacity:1}
+.tip .tipbox b{color:#fff;font-weight:500}
+figure.fig{margin:54px 0;padding:16px;background:rgba(255,255,255,.55);border:1px solid var(--hair);border-radius:3px;box-shadow:0 1px 0 rgba(20,19,17,.02),0 34px 52px -44px rgba(20,19,17,.4)}
+figure.fig img{display:block;width:100%;border-radius:2px;filter:sepia(.14) saturate(.86) contrast(.97)}
+figure.fig figcaption{padding:14px 6px 4px;font:400 13.5px/1.6 var(--f-ui);color:var(--ink-4)}
+figure.fig figcaption b{color:var(--ink-3);font-weight:500}
+figure.fig.imgfail img{display:none}
+figure.fig.imgfail{padding:34px}
+figure.fig.imgfail figcaption::before{content:'▮ the image rested — ink remembers —';display:block;font-style:italic;margin-bottom:8px;color:var(--ink-4)}
+figure.fig.narrow{max-width:560px;margin-left:auto;margin-right:auto}
+.diag{margin:58px 0}
+.diag svg{display:block;width:100%;height:auto;overflow:visible}
+.diag figcaption{margin-top:14px;font:400 13.5px/1.6 var(--f-ui);color:var(--ink-4);text-align:center}
+.ladder{position:relative;margin:64px auto 22px;max-width:730px}
+.ladder .rail{position:absolute;left:25px;top:8px;bottom:8px;width:3px;background:linear-gradient(180deg,var(--ink-3),var(--ink));border-radius:3px}
+.rung{position:relative;padding-left:88px;margin-bottom:44px;perspective:1300px;min-height:236px}
+.rung .node{position:absolute;left:6px;top:14px;width:42px;height:42px;border-radius:50%;border:2.5px solid var(--ink-3);background:var(--paper);display:flex;align-items:center;justify-content:center;font-family:var(--f-jp);font-weight:700;font-size:18px;color:var(--ink-2);transition:all .5s ease;z-index:2}
+.rung.flip .node{border-color:var(--seal);color:var(--seal);transform:rotate(-6deg) scale(1.07)}
+.rung .flipin{position:relative;transform-style:preserve-3d;transition:transform .95s cubic-bezier(.58,0,.26,1)}
+.rung.flip .flipin{transform:rotateY(180deg)}
+.rung .face{backface-visibility:hidden;-webkit-backface-visibility:hidden;border:1px solid var(--hair);border-radius:4px;background:rgba(255,255,255,.58);box-shadow:0 1px 0 rgba(20,19,17,.02),0 30px 48px -42px rgba(20,19,17,.38);padding:30px 34px;cursor:pointer}
+.rung .face.front .amt{font-family:var(--f-display);font-size:38px;color:var(--ink);line-height:1.05}
+.rung .face.front .zt{font:500 13px/1 var(--f-ui);letter-spacing:.22em;text-transform:uppercase;color:var(--seal);margin:10px 0 14px}
+.rung .face.front .brief{font-size:16px;color:var(--ink-3);line-height:1.7;font-family:var(--f-ui)}
+.rung .face.front .flipnote{position:absolute;right:22px;bottom:14px;font:italic 400 13px/1 var(--f-display);color:var(--ink-4)}
+.rung .face.back{position:absolute;inset:0;transform:rotateY(180deg);background:var(--ink);border-color:var(--ink);overflow:auto}
+.rung .face.back h4{font:500 11px/1 var(--f-ui);letter-spacing:.28em;text-transform:uppercase;color:rgba(251,250,246,.48);margin:14px 0 7px}
+.rung .face.back p{font:400 14.5px/1.65 var(--f-ui);color:rgba(251,250,246,.9)}
+.rung .face.back .ret{margin-top:16px;font:italic 400 13px/1 var(--f-display);color:rgba(251,250,246,.55)}
+@media (prefers-reduced-motion:reduce){.rung .flipin{transition:none}.rung.flip .flipin{transform:none}.rung .face.back{position:relative;transform:none;display:none}.rung.flip .face.back{display:block}}
+.checks{margin-top:22px}
+.chk{display:flex;align-items:center;gap:18px;padding:13px 6px;cursor:pointer;user-select:none}
+.chk .box{flex:none;width:26px;height:26px;border:2px solid rgba(20,19,17,.4);border-radius:2px;position:relative}
+.chk .box svg{position:absolute;inset:-4px;width:30px;height:30px}
+.chk .box svg path{stroke:var(--seal);stroke-width:3.4;fill:none;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .5s ease}
+.chk.done .box svg path{stroke-dashoffset:0}
+.chk .txt{font-size:16.5px;color:var(--ink-2);transition:color .5s}
+.chk.done .txt{color:var(--ink-4);text-decoration:line-through;text-decoration-color:rgba(200,55,45,.5)}
+.endrow{display:flex;align-items:center;gap:20px;margin-top:52px}
+.interlude{margin:110px auto 0;max-width:56ch;text-align:center}
+.interlude .imark{font-family:var(--f-jp);color:var(--seal);font-size:13px;letter-spacing:.34em;margin-bottom:24px}
+.interlude p{font-family:var(--f-display);font-style:italic;font-size:20.5px;line-height:1.92;color:var(--ink-2);margin-bottom:1.15em}
+.interlude p b{color:var(--ink);font-weight:500;font-style:normal}
+.interlude .brush{max-width:190px;margin:0 auto 26px}
+.srcnote{margin-top:74px;padding-top:26px;border-top:1px solid var(--hair);font:400 13px/1.7 var(--f-ui);color:var(--ink-4)}
+.srcnote a{color:var(--ink-3)}
+.care{margin-top:26px;padding:18px 22px;border:1px solid var(--hair-2);border-radius:3px;background:rgba(255,255,255,.5);font:400 14px/1.7 var(--f-ui);color:var(--ink-3)}
+.care b{color:var(--seal);font-weight:500}
+@media (max-width:760px){
+  .chapter-rail{display:none}
+  .scroll-wrap{padding:72px 22px 40vh}
+  .story{font-size:20.5px}
+  .enso-wrap{opacity:.35}
+  .markable.marked::after{left:-8px;top:-14px}
+  .rung{padding-left:0;padding-top:64px;min-height:250px}
+  .rung .node{left:2px;top:8px}
+  .ladder .rail{left:20px}
+  .tip .tipbox{left:auto;right:-10px;transform:none;width:210px}
+}
+</style>
+</head>
+<body>
+
+<div class="paper-bg" aria-hidden="true">
+  <div class="mottle"></div>
+  <svg class="grain" xmlns="http://www.w3.org/2000/svg">
+    <filter id="washi"><feTurbulence type="fractalNoise" baseFrequency="0.82" numOctaves="2" seed="11" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 0.56  0 0 0 0 0.52  0 0 0 0 0.44  0 0 0 0.055 0"/></filter>
+    <rect width="100%" height="100%" filter="url(#washi)"/>
+  </svg>
+</div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="rough"><feTurbulence type="fractalNoise" baseFrequency="0.045" numOctaves="3" seed="7" result="t"/>
+      <feDisplacementMap in="SourceGraphic" in2="t" scale="5"/></filter>
+    <filter id="rough2"><feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" seed="23" result="t"/>
+      <feDisplacementMap in="SourceGraphic" in2="t" scale="6"/></filter>
+    <filter id="rough3"><feTurbulence type="fractalNoise" baseFrequency="0.06" numOctaves="3" seed="41" result="t"/>
+      <feDisplacementMap in="SourceGraphic" in2="t" scale="7"/></filter>
+  </defs>
+</svg>
+
+
+
+<aside class="chapter-rail" aria-label="chapter progress">
+  <span class="vert">Chapter Eleven · 雷</span>
+  <div class="seal-stamp" title="press the seal">雷</div>
+  <div class="railline"><div class="raildrop" id="raildrop"></div></div>
+</aside>
+
+<main>
+<div class="scroll-wrap">
+
+  <header class="cover settle">
+    <div class="enso-wrap" aria-hidden="true">
+      <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+        <path d="M150,42 C92,44 46,92 44,152 C42,214 92,258 152,258 C210,258 254,214 256,154 C258,102 222,62 176,50"
+          fill="none" stroke="#141311" stroke-width="17" stroke-linecap="round" filter="url(#rough2)" opacity=".9"/>
+        <circle cx="228" cy="236" r="17" fill="#c8372d" opacity=".92"/>
+      </svg>
+    </div>
+    <p class="eyebrow">The Kata Scroll · Book III — The Company · Chapter Eleven</p>
+    <h1 class="display">How Distribution Can<br><em>10× Your Luck, Career & Income</em></h1>
+    <p class="lead">A chapter about one decision — whether to raise a rod into the storm. It opens with a number on a character sheet (your <em>luck stat</em>) and a spire on the Empire State Building, and holds one argument all the way down: luck is weather, and surface area is the only thing you control. The doctor on the plane, the superstars made from nobodies, the touch-point arithmetic, the founders going first — all of it is engineering for the rod.</p>
+    <div class="meta-row">
+      <span class="fine">from Varun Mayya's Kata 10 · read in full and expanded</span>
+      <svg class="brush seal-brush" style="flex:1;max-width:160px" viewBox="0 0 300 26" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M4,16 C60,8 130,22 190,12 S270,10 296,15" filter="url(#rough)"/></svg>
+    </div>
+  </header>
+
+  <nav class="toc settle" aria-label="in this chapter">
+    <h2>In this chapter</h2>
+    <ol>
+      <li><a href="#sec-1"><span class="n">i.</span> The luck stat</a></li>
+      <li><a href="#sec-2"><span class="n">ii.</span> The lightning catcher</a></li>
+      <li><a href="#sec-3"><span class="n">iii.</span> The doctor on the plane</a></li>
+      <li><a href="#sec-4"><span class="n">iv.</span> We made superstars</a></li>
+      <li><a href="#sec-5"><span class="n">v.</span> What the rod is made of</a></li>
+      <li><a href="#sec-6"><span class="n">vi.</span> Traffic vs. luck</a></li>
+      <li><a href="#sec-7"><span class="n">vii.</span> What the rod conducts</a></li>
+      <li><a href="#sec-8"><span class="n">viii.</span> How long the rod must be</a></li>
+      <li><a href="#sec-9"><span class="n">ix.</span> Reading the storm</a></li>
+      <li><a href="#sec-10"><span class="n">x.</span> Managers won't, founders will</a></li>
+      <li><a href="#sec-11"><span class="n">xi.</span> The long game</a></li>
+      <li><a href="#sec-12"><span class="n">xii.</span> Practice — your kata</a></li>
+      <li><a href="#sec-13"><span class="n">xiii.</span> Sit with these</a></li>
+    </ol>
+  </nav>
+
+  <figure class="fig narrow settle">
+    <img src="https://i.ytimg.com/vi/TGKgCLVxRCk/maxresdefault.jpg" alt="Kata 10 — How Distribution Can 10x Your Luck, Career and Income, the original masterclass" loading="lazy"
+      onerror="this.closest('figure').classList.add('imgfail')">
+    <figcaption><b>The source.</b> Varun Mayya teaching Kata 10 — distribution as a company's living. <a style="color:var(--ink-3)" href="https://www.youtube.com/watch?v=TGKgCLVxRCk" target="_blank" rel="noopener">watch on YouTube ↗</a></figcaption>
+  </figure>
+
+  <section class="sect settle" id="sec-1">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">i.</span></div>
+    <h2 class="display">The luck <em>stat</em></h2>
+    <div class="story">
+      <p class="markable">The kata takes inventory before it teaches. Hands up — who got lucky landing this job? Most of the room raises them; a few don't — the ones who applied, interviewed, arrived, sure they deserved it. So the questioning tightens. What language do you speak? English. Who put you in the English-medium school — you, or your parents, two decades before you could spell <em>interview</em>? And if you had been born in an uncontacted tribe, what exactly would the merit be worth there? Varun audits himself the same way: he could have met with an accident before adulthood and lost both hands and both legs. Anything can happen in this world. All success is luck, exactly as all the bad stuff is luck — the room only itemizes one of the columns.</p>
+      <p class="markable">Then the claim that organizes the hour. Over the last three years specifically, he has learned a trick: <b>you can engineer luck.</b> Increase your surface area — more people knowing you — and more opportunities have a chance of arriving; and the surface expands enormously: billions of views, other countries, China if needed. His model is a game character. You have a luck stat. Yesterday it read five; a reel went viral, a thousand followers arrived, and the stat ticked to seven. When will I make this much money — when will I get there? Stupid questions; no one can answer them. The only thing that has changed for the man in front of all these successful channels is that his luck stat now reads close to the hundreds. Life depends on the stat. The stat depends on people knowing you.</p>
+    </div>
+    <div class="quote">"All the success you have ever had in life is luck. But you can engineer it."<span class="who">— the kata's two-line physics</span></div>
+  </section>
+
+  <section class="sect settle" id="sec-2">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">ii.</span></div>
+    <h2 class="display">The lightning <em>catcher</em></h2>
+    <div class="story">
+      <p class="markable">Do you know what the tall thing on the Empire State Building is for? The spire. It's a <b>lightning catcher</b> — when a strike comes, the building takes it, so nothing else burns. The kata borrows the image and hands it over: <b>the goal of creating content is to build this for yourself — when lightning hits, you need to be standing where it lands.</b> A lot of success, said without romance, is lightning hitting. All the benefits of content are random and unexpected; you don't schedule the strike. You schedule the altitude.</p>
+      <p class="markable">The proof that luck obeys repetition arrives through its negative. Ride a bike without a helmet, every day, for ten years, down the same roads — everyone knows how that ends. Do it drunk, in the middle of the lanes, and it is near certain. The first ride doesn't crash you; some ride eventually does. That is bad luck compounded on purpose: a decision repeated until it becomes a probability. Invert the rule and the question turns honest — what repeated act compounds the chance of good things finding you? You might not think the opposite of drunk gutter-riding is creating content — but it is, if the goal is increasing the positive things that can possibly happen in your life.</p>
+      <p class="markable">Here is the position you read the rest of this chapter from: a young operator with a luck stat in the single digits, deciding whether to build. The rod is slow to raise; the storm keeps no calendar. Every strike ahead — the embassy email, the deal flow that built a company, the clinic with three hundred patients — arrived looking like luck to everyone not holding the rod. What follows is the construction record: what the rod is worth, what it is made of, what it conducts, how long it must be, and who else stands in storms.</p>
+    </div>
+
+    <figure class="diag settle">
+      <svg viewBox="0 0 760 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The lightning catcher: a building with a spire catching a bolt, while a bike in the gutters compounds bad luck below">
+        <g filter="url(#rough2)" opacity=".9">
+          <rect x="140" y="120" width="180" height="140" fill="none" stroke="#141311" stroke-width="6"/>
+          <path d="M230,120 L230,60 L218,44 L242,44 L230,60" fill="none" stroke="#141311" stroke-width="6" stroke-linejoin="round"/>
+        </g>
+        <path d="M230,40 L230,10 M222,26 L230,10 L238,26" stroke="#c8372d" stroke-width="6" fill="none" stroke-linecap="round" filter="url(#rough3)"/>
+        <g stroke="#141311" stroke-width="3" fill="none" opacity=".5">
+          <path d="M165,150 L195,150 M165,170 L195,170 M165,190 L195,190 M265,150 L295,150 M265,170 L295,170 M265,190 L295,190"/>
+        </g>
+        <g font-family="Zen Kaku Gothic New, sans-serif" font-size="14.5" fill="#34312c">
+          <text x="230" y="286" text-anchor="middle">the spire — be in position when lightning hits</text>
+          <text x="560" y="120" text-anchor="middle" fill="#66625a">the inversion:</text>
+          <text x="560" y="144" text-anchor="middle" fill="#66625a">drunk, helmetless, daily —</text>
+          <text x="560" y="168" text-anchor="middle" fill="#66625a">bad luck, compounded</text>
+        </g>
+        <path d="M500,200 C530,170 600,180 620,210 C640,240 590,255 560,245 C530,235 480,230 500,200 Z" fill="none" stroke="#141311" stroke-width="5" filter="url(#rough)" opacity=".8"/>
+        <g font-family="Shippori Mincho, serif" font-weight="700" font-size="18" fill="#a19c92">
+          <text x="230" y="110" text-anchor="middle">雷</text>
+        </g>
+      </svg>
+      <figcaption><b>The lightning catcher (雷).</b> Same mathematics, two directions: repeated reckless riding compounds the accident; repeated published work compounds the strike.</figcaption>
+    </figure>
+  </section>
+
+  <section class="sect settle" id="sec-3">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">iii.</span></div>
+    <h2 class="display">The doctor on the <em>plane</em></h2>
+    <div class="story">
+      <p class="markable">First, the case for wanting the spire, as arithmetic rather than opinion: <b>distribution is ten times more valuable than product.</b> And the claim inverts cleanly — with distribution you can also build a great product, because distribution attracts the good talent, capital and customers, and those resources build the better product. Causality runs through distribution first. The man making it is not a guru; he runs a trade, fourteen, fifteen years deep, and the rest of the chapter is what it has learned.</p>
+      <p class="markable">The evidence rides in the next seat: recently, on a plane, Varun sat beside a well-known doctor — 200,000 followers, a clinic of his own. Distribution of doctors is a new phenomenon; until now it belonged to celebrity fields and cricket. The numbers, when they came up, were hard to believe: <b>300 patients a day</b>, and more doctors hired because seeing thirty himself was a stretch. A doctor with distribution makes ten times more than the next doctors — the opening arithmetic again, in a white coat.</p>
+      <p class="markable">Does it work for plumbers? Absolutely. For the brand selling jeans, the company selling cars, the individual looking for jobs, the guys selling jackets and mobile phones, the biggest AI companies in the world. For every role — distribution is king.</p>
+    </div>
+    <svg class="mountain" viewBox="0 0 300 64" preserveAspectRatio="none" aria-hidden="true">
+      <path pathLength="1" d="M6,56 L64,22 L104,44 L150,12 L196,40 L238,26 L294,54" filter="url(#rough3)"/>
+    </svg>
+  </section>
+
+  <section class="sect settle" id="sec-4">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">iv.</span></div>
+    <h2 class="display">We made <em>superstars</em></h2>
+    <div class="story">
+      <p class="markable">A claim like that needs a factory floor, so the kata shows you theirs. Aeos: over a billion views in English every month, for many months running; ten-million-plus followers of its own, easily twenty million across client channels; hundreds of enterprises in India. (The deck on screen is six months old, says 400 million views — the company has outgrown its slides.) And the one thing the teacher asks credit for, because it is true: <b>we've made superstars.</b> Not taken someone already well-known and made them more well-known — taken nobodies and made them successful on the internet. AV. Full Disclosure. 100x Engineers. Repeatedly, for individual brands and company brands alike.</p>
+      <p class="markable">Exhibit one, as ever, is the man teaching. Nobody knew Varun ten years ago; no one came looking, no one anointed him — the channels came first, and the recognition followed out of them. The claim is that the process is repeatable — the ledger of nobodies-turned-superstars is the evidence — and what follows, he says, is the process.</p>
+    </div>
+    <div class="quote">"We've taken nobodies and made them successful on the internet."<span class="who">— the company's real product</span></div>
+    <svg class="brush" viewBox="0 0 900 26" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M6,14 C140,5 260,21 420,11 S680,9 780,16 894,11" filter="url(#rough2)"/></svg>
+  </section>
+
+  <section class="sect settle" id="sec-5">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">v.</span></div>
+    <h2 class="display">What the rod is <em>made of</em></h2>
+    <div class="story">
+      <p class="markable">Someone in the room is asked to separate the two words and can't quite — content is the material, distribution is the audience, the way to spread it — and the kata refines it on the same lines. A video is a piece of value, and there are exactly two kinds of value in content: <b>utility</b> (I taught this person something) and <b>entertainment.</b> Most people will reject the value outright. Some will watch once — <em>nice value</em> — and move on. But at some point, an audience that has taken enough of your utility or your entertainment wakes up and says: maybe I should follow this person. <b>And that is distribution.</b> The following is the structure; what got deposited underneath it is a little bit of trust.</p>
+      <p class="markable">Trust has gradients, and the kata maps them from the inside. The person who watched one video holds almost none of it. The person who has watched hundreds — the BTS, the cutters, the long-form — holds depth. Then the strangest tier, which still amazes him: people who know him only through short-form, who assembled an impression of what he could possibly be like straight from the shorts — where the face presenting is an AI avatar. That is what distribution actually is: the people who end up following you, who make life decisions — partially, in a small way — based on what you decide and say and how you live. Extended friends. A sounding board.</p>
+      <p class="markable">Influence runs quieter than the industry advertises. Twenty, thirty years ago, entertainers smoked, and audiences walked out of the cinema wanting to smoke exactly like that — hand gestures included. The world runs on memesis: we emulate the people we watch, usually without noticing that we do.</p>
+    </div>
+  </section>
+
+  <section class="sect settle" id="sec-6">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">vi.</span></div>
+    <h2 class="display">Traffic <em>vs. luck</em></h2>
+    <div class="story">
+      <p class="markable">What is the rod for, concretely, this quarter? The traffic answers first, and they're real. Sell t-shirts tomorrow — send the audience at them. Sell energy drinks. A friend breaks his leg without enough money for the surgery — drive traffic to his fundraiser; you are helping your friend get his leg back. Sell yourself: <em>guys, I'm looking for a job</em> — with a large enough audience, someone in it will want to hire you. And the live case: <b>Growquick</b>, one of the first customers on the Yaas YouTube side, making content that gave value first — something genuinely interesting about D2C — and then, every sixth video: <em>here's why you should use Growquick.</em> It worked flawlessly. Value first, pitch on a ratio.</p>
+      <p class="markable">But the kata keeps pulling the use upward, away from traffic and toward the strikes. The ideal use of content is a luck catcher. Tomorrow the American embassy could reach out — <em>can you work with us on ABCD?</em> Tomorrow the biggest finance company in the globe, the same. On screen, as the receipt: the actual embassy email, dated the 19th of May. <em>I don't know what they want.</em> A hundred such opportunities start kicking in, relationships build quickly, and one morning you find fifteen people you know, all wanting the same thing, A. Build business A and they will all pay you. That is exactly how Aeos was built — and why the macro-call lands where it does: <b>the future of business in India is creator-run,</b> because the creator sees all the deal flow first and only has to put a team behind solving it.</p>
+    </div>
+    <div class="quote">"You don't know, man — tomorrow the American embassy could reach out."<span class="who">— the luck catcher, cashed</span></div>
+  </section>
+
+  <section class="sect settle" id="sec-7">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">vii.</span></div>
+    <h2 class="display">What the rod <em>conducts</em></h2>
+    <div class="story">
+      <p class="markable">Underneath the following and the deal flow, one substance is being moved, and the kata measures it directly: <em>is your trust measurable?</em> First the bad news: content has almost no immediate ROI; sales almost never happen off it. The only snap-conversion product in India is the thing under ₹400 sold through ads: the toothbrush, the t-shirt — someone sees it, snaps it up, <em>karia.</em> Everything above that line travels. The ₹2,000–5,000 shoe gets thought about, compared, sat on; even with technology, you check and journey and only then buy. So the exercise begins with a room that all owns Nike shoes.</p>
+      <p class="markable">Trust in Nike, one to ten. Seven. Eight. Nine. Why not ten? <em>They have some issues</em>; <em>late deliveries from the official site</em>; <em>human tendency not to give 10</em>; <em>we know them enough for an eight, but not completely.</em> Why not a three? <em>They've been in our minds a very long time and sustained it</em>; <em>a lot of people use them</em>; <em>big associations.</em> The exercise manufactures its own conclusion, live: you cannot clearly measure how much somebody trusts something — it changes day to day, and nobody remembers which Nike asset made them a fan. There wasn't one. You just kept seeing them. Same with Dyson. Same with Apple. Eventually, a purchase.</p>
+      <p class="markable">Which sets up the question the exercise was built to ask: why would an employer hiring you run a different process? <em>This guy — I just keep seeing him around Twitter, around Instagram.</em> Everybody can be a Nike; every decision is made the way that room just made the Nike decision — slowly, unmeasurably, by accumulated sight. So the operator's move is to show up weekly, banking trust for a job change three years out: you might not need anything today, but you want to be known by then. The kata's irritant is the person who leaves Aeos and starts posting the very next day — everyone can see the urgent trust-building, when it could have been banked quietly all along, in text. For the world of jobs, text is still taken more seriously than video: LinkedIn and Twitter will do more for you than Instagram or YouTube.</p>
+      <p class="markable">The warning that closes the exercise is chapter ten's, re-priced for the individual. When Nike moved from content-and-good-vibes to measurable, can-we-make-three-rupees-back spend, it lost <b>$25 billion of market cap in a day.</b> The minute you go transactional — even in your own life — it ends.</p>
+    </div>
+    <div class="quote">"Everybody can be a Nike — every decision is made the way you just made the Nike decision."<span class="who">— the hiring manager, decoded</span></div>
+    <svg class="brush" viewBox="0 0 900 26" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M8,12 C180,20 340,6 520,15 S760,20 892,10" filter="url(#rough)"/></svg>
+  </section>
+
+  <section class="sect settle" id="sec-8">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">viii.</span></div>
+    <h2 class="display">How long the rod<br>must <em>be</em></h2>
+    <div class="story">
+      <p class="markable">Then a question the room has never thought to ask: how many exact touch points before somebody trusts a brand? The guesses scatter. Eight. Five tweets — is that enough? A hundred pieces of content. One or two, if the association is big enough. Then the rule, which is Google's, for advertising and marketing: to convert a customer into high trust, you reach them on <b>four platforms, through eleven interactions, with seven hours of content consumed.</b> The kata half-remembers the pairing on stage — four touch points, seven, eleven — and promises to correct it on screen; the slide settles it as 7 hours, 11 interactions, 4 locations. Whichever way the digits pair, the unit is the point: hours, not minutes. That is an enormous amount of content, and it breaks down by what you're selling — turn each card.</p>
+    </div>
+
+    <div class="ladder" id="ladder">
+      <div class="rail" aria-hidden="true"></div>
+
+      <div class="rung">
+        <div class="node">一</div>
+        <div class="flipin">
+          <div class="face front">
+            <div class="amt">Low-ticket B2C</div>
+            <div class="zt">under ₹400 · the snap tier</div>
+            <p class="brief">The water bottle, the shirt, the app — products a stranger can buy without a journey.</p>
+            <span class="flipnote">turn the card ↻</span>
+          </div>
+          <div class="face back">
+            <h4>the number</h4>
+            <p><b>5–8 touch points</b> for basic recall and first conversion.</p>
+            <h4>what it means</h4>
+            <p>The one tier where ads work honestly — and the tier everyone wrongly generalizes to every other product.</p>
+            <p class="ret">↺ return to the front</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="rung">
+        <div class="node">二</div>
+        <div class="flipin">
+          <div class="face front">
+            <div class="amt">Mid-ticket B2C</div>
+            <div class="zt">the phone tier · under ₹1,000</div>
+            <p class="brief">The purchase you compare for weeks before the gut decision lands.</p>
+            <span class="flipnote">turn the card ↻</span>
+          </div>
+          <div class="face back">
+            <h4>the number</h4>
+            <p><b>11 touches across 4 channels.</b></p>
+            <h4>what it means</h4>
+            <p>Chapter ten's buyer journey, quantified: the touch points aren't friction — they are the purchase.</p>
+            <p class="ret">↺ return to the front</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="rung">
+        <div class="node">三</div>
+        <div class="flipin">
+          <div class="face front">
+            <div class="amt">High-consideration B2C</div>
+            <div class="zt">courses · insurance · real estate · degrees</div>
+            <p class="brief">The decisions that change years of a life, priced accordingly in trust.</p>
+            <span class="flipnote">turn the card ↻</span>
+          </div>
+          <div class="face back">
+            <h4>the number</h4>
+            <p><b>12–27 touches, 20+ hours of content.</b> Crazy — and true.</p>
+            <h4>the fine print</h4>
+            <p>Friends count as touch points: <em>you should join Manipal</em> — five seconds of a conversation. Multiply it.</p>
+            <p class="ret">↺ return to the front</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="rung">
+        <div class="node">四</div>
+        <div class="flipin">
+          <div class="face front">
+            <div class="amt">Core B2B vendor</div>
+            <div class="zt">the shortlist</div>
+            <p class="brief">The buying committee has already decided to buy. Now it is counting meetings with you.</p>
+            <span class="flipnote">turn the card ↻</span>
+          </div>
+          <div class="face back">
+            <h4>the number</h4>
+            <p><b>17 interactions per vendor</b> inside the buying committee.</p>
+            <h4>the kata's commentary</h4>
+            <p><em>"I'm going to go do Aeos"</em> — and it never happens; <em>"I just can't crack the enterprises."</em> Seventeen times, till you close — maybe the first is a video of yours.</p>
+            <p class="ret">↺ return to the front</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="rung">
+        <div class="node">五</div>
+        <div class="flipin">
+          <div class="face front">
+            <div class="amt">Complex B2B</div>
+            <div class="zt">₹80 lakhs+ a year · ₹7 lakhs a month</div>
+            <p class="brief">The large deals — committees, procurement, signatures that take quarters.</p>
+            <span class="flipnote">turn the card ↻</span>
+          </div>
+          <div class="face back">
+            <h4>the number</h4>
+            <p><b>60 touch points, exceeding 100</b>, before the yes.</p>
+            <h4>the mercy</h4>
+            <p>Not all physical meetings: a video they saw last year is a touch. It counts.</p>
+            <p class="ret">↺ return to the front</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="story" style="margin-top:26px">
+      <p class="markable">How are the numbers calculated? From closes — companies log how many touch points a deal took, and survey firms average those across industries. Roughly right; at least for Aeos, roughly right. The number everything lands on is about 28.9 across industries, which rounds to the operating rule: <b>about 30 videos</b>, thirty different touch points ideally (one very long video is the degraded substitute), before a person reliably works with you, joins you, or buys. And the confession that keeps the math honest: for all his distribution, the teacher doesn't feel he has that repeat value yet; the next steps are more platforms, billboards, even games — <b>multi-pronged, if you really want to win this.</b> One viral video is not a distribution. It's a firework.</p>
+    </div>
+  </section>
+
+  <section class="sect settle" id="sec-9">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">ix.</span></div>
+    <h2 class="display">Reading the <em>storm</em></h2>
+    <div class="story">
+      <p class="markable">How do you know the rod is conducting? Not from the view counter — that is the first lesson in reading weather. A video with a million views and three comments is a dead instrument, and a lot of experienced people can't tell: somewhere an agency is quietly boosting every video into the void, and nobody around the table knows how social media works. The kata's honest instruments go by one name, <b>distribution efficiency.</b> Engagement — likes and comments as a share of views — at 10% is pretty good; Aeos gets there quite often. At 20%+, the algorithm loves you. On Instagram, performance begins at 20 seconds of watch time; 25 is golden; every second below 20 costs you. Nine to ten seconds is what it takes just to reach your existing audience.</p>
+      <p class="markable">The demonstration was live. Varun took out his phone, opened the reels feed, and said: <em>if you get bored, say next.</em> Three seconds. Six. Nobody could hold nine — and nine is the floor for reaching your own followers. The averages still work, because the world blends its scrollers: bathroom-scrollers dropping off at one second, averaged against fans watching the final six of the World Cup without moving. None of us are good at thinking in large numbers; this is how large numbers work.</p>
+      <p class="markable">The receipts: a video on IShowSpeed's streaming infrastructure — <b>3 million views on 56 seconds of watch time.</b> A strong reel's anatomy: a million-plus views carrying <b>263 days of total watch time</b>, 78k likes, 382 comments, 97k shares (a little under 10%), 17k bookmarks, mostly from the reels tab, mostly non-followers, the view-rate climbing after the third second. The rest of the weather map: reach ÷ followers, where 1.2 million followers converting to 200–300K views per video is a healthy 20–30%; platform engagement rates of 4.2%, 2%, 2.5%, 5%, and 1.5% on Facebook, the deader platform with the deader accounts; thumbnail CTR of 4–6% mid-platform and 8–10% for the top channels, scale forgiving the dip, a new channel at 50,000 followers needing 10%+; average view duration at 70%+; and share of branded Google searches — the quarterly share of non-paid clicks carrying the brand, growing 15% year on year if visibility is real.</p>
+      <p class="markable">Last, the stage rule that reconciles all of it with chapter ten: below ₹5 crore revenue, all marketing spend is ROAS — three rupees chasing six, exhausting the quick-snap audience just to survive. Beyond ₹100 crore, all advertising is awareness: the 4-7-11 rule, buying touch points at scale. Nobody buys directly off the thing they just looked at.</p>
+    </div>
+  </section>
+
+  <section class="sect settle" id="sec-10">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">x.</span></div>
+    <h2 class="display">Managers won't,<br><em>founders will</em></h2>
+    <div class="story">
+      <p class="markable">Given all of it — the repeatability, the channels, the arithmetic — why don't more marketing managers do content? The answer is a clock: <b>the average CMO or marketing manager lasts two to three years in a company,</b> and the luck catcher takes longer than that to pay. When the strike comes it is real, but unattributable — someone reaches out to the CEO about a video, and the CEO never goes back and credits the spend; <em>how did you hear about us</em> never gets asked at that altitude. Randomness plus a two-year clock is a bet nobody in that seat takes: run the ads, do the measurable thing, keep the job. Everyone takes short bets. (It is changing, the kata notes — people are getting used to the idea that YouTube and Instagram actually work for this.)</p>
+      <p class="markable">The wave that replaces them is already visible: <b>the best brands in the world are founder-driven and starting YouTube.</b> A marketing manager wouldn't take the risk; founders are arriving at it themselves — <em>if I want to build a long-term company, if I want to build a legacy, I have to do this now, and over the long run, so that I catch some luck over time.</em> The receipts: Nithin Kamath's Zerodha, two years into content, sophisticated about it (Aeos has been helping), no performance marketing at all. <b>01:01 by Zerodha</b> alone has done six crore views, roughly ten crore across the effort; Markets by Zerodha is watched every morning — repeat value, loyal audience. Nikhil's WTFis runs the same pattern.</p>
+    </div>
+    <div class="quote">"If I want to build a legacy, I have to do this now — and catch some luck over time."<span class="who">— the founder's version of the pitch</span></div>
+    <svg class="mountain" viewBox="0 0 300 64" preserveAspectRatio="none" aria-hidden="true">
+      <path pathLength="1" d="M6,58 L58,28 L98,48 L152,10 L200,42 L246,24 L294,52" filter="url(#rough3)"/>
+    </svg>
+  </section>
+
+  <section class="sect settle" id="sec-11">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">xi.</span></div>
+    <h2 class="display">The long <em>game</em></h2>
+    <div class="story">
+      <p class="markable">The forecast beneath all of it: India has always slept on content; China is very sophisticated about how it approaches the stuff — properly done, taken seriously. In the next few years, the kata holds, content becomes the future of marketing, a huge industry, and the signs are already visible; it is why the company keeps growing and hiring for it. It keeps a school for content — <b>Jensen</b> — and hires from it the way it hires from AV, its school for video editors; the first class teaches <em>frame-shifting.</em> There is a book: the content creator handbook.</p>
+      <p class="markable">For your own life, the hour compresses to one number. The touch points you need with any company you want to work at, any business you want to run, is not one or two — it's in the twenties and thirties. <b>The average is about 30.</b> The kata's last words are its plainest: play the long game. The rod goes up in dry weather, and the strike, when it comes, will look from the outside exactly like luck.</p>
+    </div>
+  </section>
+
+  <section class="sect settle" id="sec-12">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">xii.</span></div>
+    <h2 class="display">Practice —<br><em>this is your kata</em></h2>
+    <div class="story">
+      <p class="markable">Luck is engineered by reps. This month's repetitions:</p>
+    </div>
+    <div class="checks">
+      <div class="chk"><span class="box"><svg viewBox="0 0 30 30" aria-hidden="true"><path pathLength="1" d="M6,17 L13,23 L25,7"/></svg></span><span class="txt">Start banking trust before you need it: post about this week's real work, in text — LinkedIn or Twitter — with no ask attached.</span></div>
+      <div class="chk"><span class="box"><svg viewBox="0 0 30 30" aria-hidden="true"><path pathLength="1" d="M6,17 L13,23 L25,7"/></svg></span><span class="txt">Count your touch points with the one company or client you most want to work with — you're likely under 5 of the ~30 you need.</span></div>
+      <div class="chk"><span class="box"><svg viewBox="0 0 30 30" aria-hidden="true"><path pathLength="1" d="M6,17 L13,23 L25,7"/></svg></span><span class="txt">Audit your distribution efficiency honestly: engagement as a share of views, watch time, shares — not the vanity view count.</span></div>
+      <div class="chk"><span class="box"><svg viewBox="0 0 30 30" aria-hidden="true"><path pathLength="1" d="M6,17 L13,23 L25,7"/></svg></span><span class="txt">Run the Growquick ratio: five value-first pieces for every one pitch — in your feed, your channel, your inbox.</span></div>
+      <div class="chk"><span class="box"><svg viewBox="0 0 30 30" aria-hidden="true"><path pathLength="1" d="M6,17 L13,23 L25,7"/></svg></span><span class="txt">Build one week of your lightning catcher: publish daily, note the luck stat you're compounding, and don't check for lightning yet.</span></div>
+    </div>
+    <svg class="brush" viewBox="0 0 900 26" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M8,14 C160,22 330,8 500,16 S720,20 892,12" filter="url(#rough2)"/></svg>
+  </section>
+
+  <section class="sect settle" id="sec-13">
+    <div class="washx" aria-hidden="true"></div>
+    <div class="kicker"><span class="no">xiii.</span></div>
+    <h2 class="display">Sit with <em>these</em></h2>
+    <div class="story">
+      <p class="markable">— If all my success so far is luck, what surface area did it arrive through — and what would doubling it cost, in reps?</p>
+      <p class="markable">— Am I building traffic for this month, or a lightning catcher for the year the strike actually comes?</p>
+      <p class="markable">— Whose trust am I banking now — and whose decision, three years out, am I already quietly inside?</p>
+      <p class="markable">— The honest inventory: of the ~30 touch points it takes for someone to bet on me, how many exist today?</p>
+    </div>
+    <div class="interlude settle">
+      <svg class="brush" viewBox="0 0 900 26" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M6,14 C140,5 260,21 420,11 S680,9 780,16 894,11" filter="url(#rough2)"/></svg>
+      <div class="imark">間 · the pause between books</div>
+      <p>Now the harder confession. While Varun was building companies, I was watching him build companies. Ten years of katas from the man, and my contribution to the genre was notes.</p>
+      <p>You learn what watching does. From the inside it looks like diligence — curated, annotated, ever so well understood. From the outside it is a chair pulled up to someone else's fire. The distribution chapter is the one that finally embarrassed me, because it did the math: thirty touch points, luck multiplied by surface area — <b>and every unit of surface area I had ever created came to zero, because I never shipped anything for it to touch.</b> I wasn't unlucky. I was unexposed. Those are different diagnoses, and only one of them is yours to fix.</p>
+      <p>And the people — Sumit and Dwanch, gone for a ten percent raise — those names land differently when you know you're the one who stayed put. The company man with the bento box and the permanent fear: that was the life I chose by not choosing. It is a fine life. This book exists because I wanted to know what the other one costs.</p>
+      <p>Book Four is the reward half of the shelf — how the wealthy bet, what they actually buy. I wouldn't know; I took notes on that too. But a witness knows one thing a participant sometimes doesn't: <b>what the view costs.</b> That's what the last two chapters are for.</p>
+      <p>Watch me attempt it.</p>
+      <svg class="brush" viewBox="0 0 900 26" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M8,12 C180,20 340,6 520,15 S760,20 892,10" filter="url(#rough)"/></svg>
+    </div>
+    <div class="endrow">
+      <div class="seal-stamp" style="width:58px;height:58px;font-size:26px" title="press to close the chapter">終</div>
+      <span class="fine">end of chapter eleven · next — <a href="ch12-simplifying-everything.html" style="color:var(--ink-3)">chapter twelve, the bridge: How Simplifying Everything Makes You Rich</a> · <a href="index.html" style="color:var(--ink-3)">or return to the cover</a></span>
+    </div>
+    <p class="srcnote">The Kata Scroll — chapter eleven, Book III, written from a complete read of the transcript of
+    <a href="https://www.youtube.com/watch?v=TGKgCLVxRCk" target="_blank" rel="noopener">Varun Mayya's "How Distribution Can 10x Your Luck, Career and Income" (Kata 10)</a>,
+    ~7,200 words, restructured around its spine, the lightning catcher. The luck audit (English medium, the tribe, the accident), the luck stat, the Empire State spire and the drunk-gutter inversion, the doctor on the plane with 200,000 followers and 300 patients a day, the superstars-from-nobodies claim, the friend's leg fundraiser, Growquick's every-sixth-video pitch, the US embassy email, the content-vs-distribution definition, trust gradients, memesis, the ₹400 snap tier, the Nike trust exercise, "everybody can be a Nike," the text-over-video career note, Nike's $25-billion day, the 4-7-11 rule and all five touch-point tiers (5–8, 11, 12–27 with the Manipal aside, 17, 60–100), the ~30-videos rule with Varun's own shortfall, distribution efficiency (10%/20% engagement, the 3-second reels demo, 9–10 seconds, IShowSpeed's 56 seconds, the 263-day anatomy, platform engagement rates, reach÷followers, thumbnail CTR, AVD, branded-search share, the ₹5-crore/₹100-crore stage rule), the CMO tenure math, the Zerodha story (01:01, six crore views, Markets every morning), WTFis, the China comparison, Jensen and frame-shifting, the content creator handbook, and the closing thirty-touch-point number are all from the session. Chapter thumbnail via YouTube. Diagrams are original. The Kata Scroll is an independent study companion, not affiliated with Varun Mayya or Aeos.</p>
+  </section>
+
+</div>
+</main>
+
+<script>
+(function(){
+  'use strict';
+  const io=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('revealed');io.unobserve(e.target);}});
+  },{threshold:.12});
+  document.querySelectorAll('.settle, .brush, .mountain').forEach(function(el){io.observe(el);});
+  document.querySelectorAll('.markable').forEach(function(p){
+    p.addEventListener('dblclick',function(){p.classList.toggle('marked');});
+    p.title='double-tap to mark this line';
+  });
+  document.querySelectorAll('.rung').forEach(function(r){
+    r.querySelector('.flipin').addEventListener('click',function(){r.classList.toggle('flip');});
+  });
+  document.querySelectorAll('.chk').forEach(function(c){
+    c.addEventListener('click',function(){c.classList.toggle('done');});
+  });
+  document.querySelectorAll('.tip').forEach(function(t){
+    t.addEventListener('click',function(ev){ev.stopPropagation();t.classList.toggle('open');});
+  });
+  document.addEventListener('click',function(ev){
+    document.querySelectorAll('.tip.open').forEach(function(t){if(!t.contains(ev.target))t.classList.remove('open');});
+  });
+  const drop=document.getElementById('raildrop');
+  const rail=document.querySelector('.chapter-rail .railline');
+  function onScroll(){
+    if(!drop||!rail)return;
+    var h=document.documentElement;
+    var p=Math.min(1,Math.max(0,h.scrollTop/((h.scrollHeight-h.clientHeight)||1)));
+    var max=rail.clientHeight-16;
+    drop.style.top=(2+p*max)+'px';
+  }
+  addEventListener('scroll',onScroll,{passive:true});
+  addEventListener('resize',onScroll);
+  onScroll();
+  document.querySelectorAll('.seal-stamp').forEach(function(s){
+    s.addEventListener('click',function(){
+      s.style.transform='rotate(-4deg) scale(.9)';
+      setTimeout(function(){s.style.transform='';},160);
+    });
+  });
+})();
+</script>
+<script>
+/* reading memory — the book remembers your place, your marks, your practice */
+(function(){
+  'use strict';
+  var KEY='kata:'+(location.pathname.split('/').pop()||'index.html');
+  function load(){try{var s=JSON.parse(localStorage.getItem(KEY)||'null');return (s&&typeof s==='object')?s:null;}catch(e){return null;}}
+  function save(s){s.ts=Date.now();try{localStorage.setItem(KEY,JSON.stringify(s));}catch(e){}}
+  function snap(){
+    var s=load()||{marks:[],checks:[],pos:0};
+    s.marks=collect('.markable','marked');
+    s.checks=collect('.chk','done');
+    save(s);
+  }
+  function collect(sel,cls){
+    var out=[];
+    Array.prototype.forEach.call(document.querySelectorAll(sel),function(el,i){if(el.classList.contains(cls))out.push(i);});
+    return out;
+  }
+  var st=load();
+  if(st){
+    (st.marks||[]).forEach(function(i){var p=document.querySelectorAll('.markable')[i];if(p)p.classList.add('marked');});
+    (st.checks||[]).forEach(function(i){var c=document.querySelectorAll('.chk')[i];if(c)c.classList.add('done');});
+  }
+  document.addEventListener('dblclick',function(){snap();});
+  document.addEventListener('click',function(ev){
+    if(ev.target&&ev.target.closest&&ev.target.closest('.chk'))snap();
+  });
+  function pos(){var h=document.documentElement;return h.scrollHeight>h.clientHeight?h.scrollTop/(h.scrollHeight-h.clientHeight):0;}
+  function savePos(){var s=load()||{marks:[],checks:[],pos:0};s.pos=pos();save(s);}
+  var t=null;
+  addEventListener('scroll',function(){if(t)return;t=setTimeout(function(){t=null;savePos();},400);},{passive:true});
+  addEventListener('pagehide',savePos);
+  function restore(){
+    if(location.hash)return;
+    var s=load();if(!s||!(s.pos>0.02))return;
+    var h=document.documentElement;
+    var y=s.pos*(h.scrollHeight-h.clientHeight);
+    if(y>0){h.style.scrollBehavior='auto';scrollTo(0,y);setTimeout(function(){h.style.scrollBehavior='';},80);}
+  }
+  if(document.readyState==='complete')restore();else addEventListener('load',restore);
+  setTimeout(restore,900);
+  if('serviceWorker' in navigator&&location.protocol==='https:'){
+    addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});
+  }
+})();
+</script>
+</body>
+</html>

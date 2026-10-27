@@ -1,0 +1,4 @@
+# The Kata Scroll — Netlify headers
+# sw.js must always be revalidated so book updates reach returning readers immediately
+/sw.js
+  Cache-Control: no-cache

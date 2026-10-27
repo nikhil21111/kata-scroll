@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Kata Scroll — Varun Mayya's 16 Katas, re-sequenced as a book</title>
+<meta name="description" content="An interactive, story-driven book built from Varun Mayya's 16-Kata masterclass series — re-sequenced as a journey from the first swing to the wealth zones.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Kata Scroll">
+<meta property="og:title" content="The Kata Scroll — fourteen katas, one journey">
+<meta property="og:description" content="An interactive, story-driven book built from Varun Mayya's 16-Kata masterclass series — re-sequenced as a journey from the first swing to the wealth zones.">
+<meta property="og:image" content="https://i.ytimg.com/vi/mPjj7-eHw1s/maxresdefault.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#fbfaf6">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Zen+Kaku+Gothic+New:wght@400;500&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#fbfaf6; --ink:#141311; --ink-2:#34312c; --ink-3:#66625a; --ink-4:#a19c92;
+  --hair:rgba(20,19,17,.12); --hair-2:rgba(20,19,17,.22); --seal:#c8372d;
+  --f-display:'Cormorant Garamond',Georgia,serif;
+  --f-ui:'Zen Kaku Gothic New',Inter,system-ui,sans-serif;
+  --f-jp:'Shippori Mincho','Noto Serif JP',serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink-2);font-family:var(--f-ui);font-size:17px;line-height:1.75;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:rgba(200,55,45,.22)}
+.paper-bg{position:fixed;inset:0;z-index:0;pointer-events:none}
+.paper-bg .mottle{position:absolute;inset:0;background:
+  radial-gradient(60% 50% at 18% 22%,rgba(214,206,190,.16),transparent 70%),
+  radial-gradient(50% 45% at 86% 78%,rgba(214,206,190,.14),transparent 70%),
+  radial-gradient(120% 100% at 50% 50%,transparent 62%,rgba(150,138,112,.10) 100%)}
+.paper-bg svg.grain{position:absolute;inset:0;width:100%;height:100%;mix-blend-mode:multiply;opacity:.9}
+main{position:relative;z-index:1}
+.wrap{max-width:880px;margin:0 auto;padding:88px 28px 30vh}
+.vert{writing-mode:vertical-rl;font:500 13px/1 var(--f-ui);letter-spacing:.42em;text-transform:uppercase;color:var(--ink-4)}
+.seal-stamp{display:inline-flex;align-items:center;justify-content:center;background:var(--seal);color:var(--paper);
+  font-family:var(--f-jp);font-weight:700;border-radius:5px;transform:rotate(-4deg);
+  box-shadow:inset 0 0 10px rgba(0,0,0,.28),0 1px 0 rgba(0,0,0,.08);user-select:none}
+.eyebrow{display:inline-flex;align-items:center;gap:16px;font:500 14px/1 var(--f-ui);letter-spacing:.3em;text-transform:uppercase;color:var(--ink-3)}
+.eyebrow::before{content:'';width:34px;height:2px;background:var(--seal)}
+.display{font-family:var(--f-display);font-weight:500;color:var(--ink);letter-spacing:-.012em;line-height:1.02}
+.display em{font-style:italic;color:var(--seal)}
+.lead{font:400 19px/1.8 var(--f-ui);color:var(--ink-3);max-width:56ch}
+.lead b{color:var(--ink);font-weight:500}
+.fine{font:400 14px/1.6 var(--f-ui);color:var(--ink-4)}
+.brush{display:block;width:100%;height:26px;overflow:visible}
+.brush path{stroke:var(--ink);stroke-width:5;fill:none;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.7s cubic-bezier(.6,0,.3,1)}
+.brush.seal-brush path{stroke:var(--seal)}
+.brush.revealed path{stroke-dashoffset:0}
+.settle{opacity:0;filter:blur(6px);transform:translateY(14px);transition:opacity 1.05s ease,filter 1.05s ease,transform 1.05s ease}
+.settle.revealed{opacity:1;filter:blur(0);transform:none}
+@media (prefers-reduced-motion:reduce){.settle{transition:none;opacity:1;filter:none;transform:none}.brush path{transition:none;stroke-dashoffset:0}}
+
+.cover{min-height:86vh;display:flex;flex-direction:column;justify-content:center;position:relative}
+.cover h1.display{font-size:clamp(58px,8.4vw,110px);margin:24px 0 28px}
+.cover .jp-side{position:absolute;right:-4px;top:9%;height:230px}
+.enso-wrap{position:absolute;right:3%;top:4%;width:clamp(160px,22vw,260px);opacity:.85;pointer-events:none}
+.meta-row{display:flex;align-items:center;gap:18px;margin-top:44px;flex-wrap:wrap}
+
+.part{margin-top:96px}
+.part-head{display:flex;align-items:baseline;gap:20px;margin-bottom:8px}
+.part-head .pn{font-family:var(--f-display);font-style:italic;font-size:30px;color:var(--seal)}
+.part-head h2{font-family:var(--f-display);font-weight:500;font-size:clamp(30px,3.4vw,42px);color:var(--ink);letter-spacing:-.01em}
+.part .fine.role{margin-bottom:22px;font-style:italic}
+.chaplist{list-style:none}
+.chap{display:flex;gap:22px;align-items:baseline;padding:20px 6px 20px 2px;border-bottom:1px solid var(--hair);text-decoration:none;transition:background .3s;position:relative}
+.chap:first-child{border-top:1px solid var(--hair)}
+.chap .num{font-family:var(--f-display);font-style:italic;font-size:22px;color:var(--seal);min-width:44px}
+.chap .body{flex:1}
+.chap .t{font-family:var(--f-display);font-size:24px;color:var(--ink);line-height:1.25;display:block}
+.chap .d{font:400 14.5px/1.6 var(--f-ui);color:var(--ink-3);display:block;margin-top:5px}
+.chap .kata{font:400 12px/1 var(--f-ui);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-4);white-space:nowrap}
+.chap:hover{background:rgba(200,55,45,.04)}
+.chap:hover .t{color:var(--seal)}
+.chap.wip{cursor:default}
+.chap.wip .t{color:var(--ink-3)}
+.chap .inkmark{position:absolute;right:8px;top:50%;transform:translateY(-50%) rotate(-3deg);font:italic 400 12.5px/1 var(--f-display);color:var(--ink-4)}
+a.chap .inkmark{display:none}
+.chap .readseal{display:inline-block;margin-left:10px;font-family:var(--f-jp);color:var(--seal);font-size:12px;transform:rotate(-6deg);opacity:.85}
+.method{list-style:none;margin-top:26px}
+.method li{padding:16px 0 16px 30px;border-bottom:1px solid var(--hair);position:relative;font:400 15px/1.75 var(--f-ui);color:var(--ink-3)}
+.method li:first-child{border-top:1px solid var(--hair)}
+.method li::before{content:'';position:absolute;left:4px;top:24px;width:8px;height:11px;background:var(--seal);border-radius:50% 50% 50% 50%/62% 62% 38% 38%;opacity:.8}
+.method li b{color:var(--ink);font-weight:500}
+.mountain{display:block;width:min(300px,70%);height:64px;margin:40px auto 8px;overflow:visible;opacity:.9}
+.mountain path{stroke:var(--ink-3);fill:none;stroke-width:3.4;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 2.4s ease}
+.mountain.revealed path{stroke-dashoffset:0}
+.srcnote{margin-top:80px;padding-top:26px;border-top:1px solid var(--hair);font:400 13px/1.7 var(--f-ui);color:var(--ink-4)}
+.srcnote a{color:var(--ink-3)}
+@media (max-width:700px){.chap .kata{display:none}.enso-wrap{opacity:.35}.chap .t{font-size:21px}}
+</style>
+</head>
+<body>
+<div class="paper-bg" aria-hidden="true">
+  <div class="mottle"></div>
+  <svg class="grain" xmlns="http://www.w3.org/2000/svg">
+    <filter id="washi"><feTurbulence type="fractalNoise" baseFrequency="0.82" numOctaves="2" seed="11" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 0.56  0 0 0 0 0.52  0 0 0 0 0.44  0 0 0 0.055 0"/></filter>
+    <rect width="100%" height="100%" filter="url(#washi)"/>
+  </svg>
+</div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="rough"><feTurbulence type="fractalNoise" baseFrequency="0.045" numOctaves="3" seed="7" result="t"/>
+      <feDisplacementMap in="SourceGraphic" in2="t" scale="5"/></filter>
+    <filter id="rough2"><feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" seed="23" result="t"/>
+      <feDisplacementMap in="SourceGraphic" in2="t" scale="6"/></filter>
+  </defs>
+</svg>
+
+<main>
+<div class="wrap">
+
+  <header class="cover settle">
+    <div class="enso-wrap" aria-hidden="true">
+      <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+        <path d="M150,42 C92,44 46,92 44,152 C42,214 92,258 152,258 C210,258 254,214 256,154 C258,102 222,62 176,50"
+          fill="none" stroke="#141311" stroke-width="17" stroke-linecap="round" filter="url(#rough2)" opacity=".9"/>
+        <circle cx="228" cy="236" r="17" fill="#c8372d" opacity=".92"/>
+      </svg>
+    </div>
+    <p class="eyebrow">The Kata Scroll · a narrative study companion after Varun Mayya's 16 katas</p>
+    <h1 class="display">The Kata<br><em>Scroll</em></h1>
+    <p class="lead">Fourteen katas, re-sequenced as one journey — from the first swing a young operator never takes, through the craft, the company, and the climb, to the way the wealthy actually think. <b>Unroll it like a scroll. Practice it like a martial art.</b></p>
+    <div class="meta-row">
+      <div class="seal-stamp" style="width:52px;height:52px;font-size:23px">型</div>
+      <span class="fine">~146,900 words of transcripts · distilled & expanded · 14 chapters · complete</span>
+      <svg class="brush seal-brush" style="flex:1;max-width:150px" viewBox="0 0 300 26" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M4,16 C60,8 130,22 190,12 S270,10 296,15" filter="url(#rough)"/></svg>
+    </div>
+    <span class="vert jp-side" aria-hidden="true">修行 · the practice</span>
+  </header>
+
+  <section class="part settle">
+    <div class="part-head"><span class="pn">Book I</span><h2>The Mind</h2></div>
+    <p class="fine role">before you build anything — why you haven't swung, which door to walk through, and the weight the culture puts on your shoulders</p>
+    <ul class="chaplist">
+      <li><a class="chap" href="ch01-why-indians-dont-attempt.html">
+        <span class="num">01</span>
+        <span class="body"><span class="t">Why Indians Don't Attempt</span>
+        <span class="d">Scouters and power levels — the five levels of competence, why the country misreads them, and how one visible swing reprices you forever.</span></span>
+        <span class="kata">from Kata 4</span>
+      </a></li>
+      <li><a class="chap" href="ch02-career-advice-lost.html">
+        <span class="num">02</span>
+        <span class="body"><span class="t">Career Advice for People Who Feel Lost</span>
+        <span class="d">Confusion versus diversification — one-way doors, 60-day sprints, the Rule of Three, and why deciding puts you ahead of 99%.</span></span>
+        <span class="kata">from Kata 7</span>
+      </a></li>
+      <li><a class="chap" href="ch03-social-pressure-depression.html">
+        <span class="num">03</span>
+        <span class="body"><span class="t">Harsh Truths About India's Social Pressure</span>
+        <span class="d">The secret kata — chronic social defeat, serotonin, rank-pressure culture, and how leaders regulate the mood of a room.</span></span>
+        <span class="kata">from Secret Kata 1</span>
+      </a></li>
+    </ul>
+  </section>
+
+  <section class="part settle">
+    <div class="part-head"><span class="pn">Book II</span><h2>The Craft</h2></div>
+    <p class="fine role">getting in, getting leverage, and getting things done — the skills that compound inside any company</p>
+    <ul class="chaplist">
+      <li><a class="chap" href="ch04-get-hired-faster.html">
+        <span class="num">04</span>
+        <span class="body"><span class="t">How to Get Hired Faster Than Everyone Else</span>
+        <span class="d">The four gates between you and the offer — the Avengers principle, portfolios over paper, the referral economy, and the live prompt test.</span></span>
+        <span class="kata">from Kata 8</span>
+      </a></li>
+      <li><a class="chap" href="ch05-how-i-use-ai.html">
+        <span class="num">05</span>
+        <span class="body"><span class="t">How I Use AI</span>
+        <span class="d">The genie problem — why writing is thinking, prompting is writing, and clarity is the leader's real product.</span></span>
+        <span class="kata">from Kata 3</span>
+      </a></li>
+      <li><a class="chap" href="ch06-most-valuable-skill-after-ai.html">
+        <span class="num">06</span>
+        <span class="body"><span class="t">The Most Valuable Skill After AI</span>
+        <span class="d">When everything can be made with one prompt, what survives is the world — the anatomy of brands as believable worlds: ritual, shame, lore, and the story machine.</span></span>
+        <span class="kata">from Kata 14</span>
+      </a></li>
+      <li><a class="chap" href="ch07-manage-projects-end-to-end.html">
+        <span class="num">07</span>
+        <span class="body"><span class="t">How I Manage Projects End To End</span>
+        <span class="d">The project formula for 2026 — the blurry photograph, sure-shot vs R&D, the three alphas, and why the playbook is the org chart.</span></span>
+        <span class="kata">from Kata 12</span>
+      </a></li>
+    </ul>
+  </section>
+
+  <section class="part settle">
+    <div class="part-head"><span class="pn">Book III</span><h2>The Company</h2></div>
+    <p class="fine role">building something that outlives you — bootstrapping, coordination, truth, and being seen</p>
+    <ul class="chaplist">
+      <li><a class="chap" href="ch08-scaling-zero-funding.html">
+        <span class="num">08</span>
+        <span class="body"><span class="t">Guide to Scaling a Startup with Zero Funding</span>
+        <span class="d">The origin story — the deck in the house, the bets opposite to Reddit, the world's largest editing school, the bento box, and permanent fear.</span></span>
+        <span class="kata">from Kata 1</span>
+      </a></li>
+      <li><a class="chap" href="ch09-companies-break-after-50-people.html">
+        <span class="num">09</span>
+        <span class="body"><span class="t">Why 90% of Companies Break After 50 People</span>
+        <span class="d">The Lightning Way — coordination costs, the leader as current generator, the mastery hierarchy, and the clear-writing cheat code.</span></span>
+        <span class="kata">from Kata 2</span>
+      </a></li>
+      <li><a class="chap" href="ch10-why-startups-unprofitable.html">
+        <span class="num">10</span>
+        <span class="body"><span class="t">Why Indian Startups Are Unprofitable</span>
+        <span class="d">The attribution disease — Nike's 25-billion-dollar day, the ROAS death spiral, the buyer's real journey, and shares as the only metric of intent.</span></span>
+        <span class="kata">from Kata 6</span>
+      </a></li>
+      <li><a class="chap" href="ch11-distribution-10x-luck.html">
+        <span class="num">11</span>
+        <span class="body"><span class="t">How Distribution Can 10× Your Luck, Career & Income</span>
+        <span class="d">The luck-engineering kata — the lightning catcher, the touch-point math behind every purchase, and why founders do content when managers won't.</span></span>
+        <span class="kata">from Kata 10</span>
+      </a></li>
+    </ul>
+  </section>
+
+  <section class="part settle">
+    <div class="part-head"><span class="pn">Bridge</span><h2>The Quiet Chapter</h2></div>
+    <p class="fine role">after the complexity of building — the knife that cuts it away</p>
+    <ul class="chaplist">
+      <li><a class="chap" href="ch12-simplifying-everything.html">
+        <span class="num">12</span>
+        <span class="body"><span class="t">How Simplifying Everything Makes You Rich</span>
+        <span class="d">The quiet chapter — Jobs's seventy-to-four, one man who wanted everyone to edit on iPads, and complexity as a crutch for missing PMF.</span></span>
+        <span class="kata">from Kata 11</span>
+      </a></li>
+    </ul>
+  </section>
+
+  <section class="part settle">
+    <div class="part-head"><span class="pn">Book IV</span><h2>The Wealth</h2></div>
+    <p class="fine role">the reward, and the minds that hold it — how they bet, and how they think</p>
+    <ul class="chaplist">
+      <li><a class="chap" href="ch13-risk-like-rich-people.html">
+        <span class="num">13</span>
+        <span class="body"><span class="t">How to Take Risk Like Rich People Do</span>
+        <span class="d">The risk masterclass — GTO and cheap experiments, the two-year worksheet, deep optionality, loss aversion, and multi-way variance.</span></span>
+        <span class="kata">from Kata 9</span>
+      </a></li>
+      <li><a class="chap" href="ch14-think-like-rich-people.html">
+        <span class="num">14</span>
+        <span class="body"><span class="t">Think Like Rich People</span>
+        <span class="d">The finale — blinking into other minds, the four wealth zones from ₹1 crore to ₹1,000 crore, and what each one actually buys.</span></span>
+        <span class="kata">from Kata 13</span>
+      </a></li>
+    </ul>
+  </section>
+
+  <svg class="mountain settle" viewBox="0 0 300 64" preserveAspectRatio="none" aria-hidden="true">
+    <path pathLength="1" d="M6,58 L64,24 L108,46 L152,12 L202,42 L246,26 L294,56" filter="url(#rough2)"/>
+  </svg>
+
+  <section class="part settle" id="how-made" style="margin-top:118px">
+    <div class="part-head"><span class="pn">後記</span><h2>How this book was made</h2></div>
+    <p class="fine role">the method, the credits, and the care — for readers who want to know what they're holding</p>
+    <p class="fine" style="font-style:italic;margin-bottom:22px">Why "scroll": an emaki (絵巻) is a Japanese narrative picture scroll, unrolled as it's read — story and teaching moving together on paper. This book's ink, paper, and unrolling page are built on that tradition.</p>
+    <ul class="method">
+      <li><b>Every chapter was written from a complete read of its transcript.</b> No skimming, no sampling — every named story, framework, and number from the session is preserved, then expanded rather than summarized: the story first, the meaning beneath it, and only then how to practice it.</li>
+      <li><b>The sequence is a hero's journey, not the playlist order.</b> Fourteen katas re-sequenced from the first swing a young operator never takes, through craft and company, to the minds that hold wealth. The original playlist is linked below, unaltered.</li>
+      <li><b>Every chapter links back to its source video</b> and credits it in full. This is an independent study companion — not affiliated with Varun Mayya or Aeos — built with respect for the material, and it exists to send readers back to the original.</li>
+      <li><b>Self-contained by design.</b> Each chapter is a single HTML file — no build, no tracking, no accounts. The book remembers your place, your ink marks, and your practice lists on this device; installed from your browser, it reads entirely offline.</li>
+    </ul>
+  </section>
+
+  <p class="srcnote">The Kata Scroll — an independent study companion built from the public transcripts of
+  <a href="https://www.youtube.com/playlist?list=PLSAVyiM48sqvzLBEbPqD8TZpfu5UyzO9t" target="_blank" rel="noopener">Varun Mayya's Katas playlist</a>,
+  re-sequenced for narrative. Not affiliated with Varun Mayya or Aeos. Chapters are self-contained single files;
+  open any of them anywhere. Install it from your browser — Share → Add to Home Screen on iOS, the install prompt on Android and desktop — and it reads entirely offline. Fonts via Google Fonts; images from YouTube thumbnails and free-license sources.</p>
+
+</div>
+</main>
+
+<script>
+(function(){
+  'use strict';
+  const io=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('revealed');io.unobserve(e.target);}});
+  },{threshold:.12});
+  document.querySelectorAll('.settle, .brush, .mountain').forEach(function(el){io.observe(el);});
+})();
+</script>
+<script>
+/* the living shelf — the book remembers your reading across chapters */
+(function(){
+  'use strict';
+  try{
+    var latest=null;
+    Array.prototype.forEach.call(document.querySelectorAll('a.chap'),function(a){
+      var f=a.getAttribute('href');
+      var s=null;try{s=JSON.parse(localStorage.getItem('kata:'+f)||'null');}catch(e){}
+      if(!s)return;
+      if(s.pos>0.8){
+        var b=a.querySelector('.body');
+        if(b&&!b.querySelector('.readseal')){var m=document.createElement('span');m.className='readseal';m.textContent='読';b.appendChild(m);}
+      }
+      if(s.pos>0.03&&(!latest||(s.ts||0)>latest.s.ts))latest={a:a,s:s};
+    });
+    if(latest){
+      var row=document.querySelector('.cover .meta-row');
+      if(row){
+        var p=document.createElement('p');
+        p.className='fine';
+        p.style.marginTop='16px';
+        var label=latest.s.pos>=0.98?'you finished — begin again:':'continue reading —';
+        p.innerHTML='↻ '+label+' <a href="'+latest.a.getAttribute('href')+'" style="color:var(--ink-3)">'+latest.a.querySelector('.t').textContent+'</a>'+(latest.s.pos<0.98?' · '+Math.round(latest.s.pos*100)+'% in':'');
+        row.parentNode.insertBefore(p,row.nextSibling);
+      }
+    }
+  }catch(e){}
+  if('serviceWorker' in navigator&&location.protocol==='https:'){
+    addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});
+  }
+})();
+</script>
+</body>
+</html>
