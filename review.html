@@ -204,7 +204,7 @@ main{position:relative;z-index:1}
   FIRST_FIVE.forEach(function(item,idx){
     var row=document.createElement('div');
     row.className='ffitem';
-    row.innerHTML='<span class="n">'+(idx+1)+'</span><span class="t"><span class="ftxt">loading…</span><span class="why"></span>from <a href="'+item.f+'">chapter '+item.ch.n+' — '+item.t+'</a></span>';
+    row.innerHTML='<span class="n">'+(idx+1)+'</span><span class="t"><span class="ftxt">loading…</span><span class="why"></span>from <a href="'+item.f+'">chapter '+item.ch.n+' — '+item.ch.t+'</a></span>';
     ffList.appendChild(row);
     fetch(item.f).then(function(r){return r.text();}).then(function(html){
       var doc=new DOMParser().parseFromString(html,'text/html');
